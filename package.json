@@ -16,13 +16,17 @@
     "bashStart": "bash bashstart.sh",
     "clean": "cd android && ./gradlew.bat clean",
     "cleanrun": "cd android && ./gradlew.bat clean && cd.. && react-native run-android",
-    "emulator": "emulator -avd Pixel_2_XL_API_28 -partition-size 512 -feature WindowsHypervisorPlatform -dns-server 8.8.8.8"
+    "emulator": "emulator -avd Pixel_2_XL_API_28 -partition-size 512 -feature WindowsHypervisorPlatform -dns-server 8.8.8.8",
+    "emulator-cold-boot": "emulator -avd Pixel_2_XL_API_28 -partition-size 512 -feature WindowsHypervisorPlatform -dns-server 8.8.8.8 -no-snapshot-load"
   },
   "jest": {
     "preset": "react-native"
   },
   "dependencies": {
     "react": "16.3.1",
-    "react-native": "~0.55.2"
+    "react-native": "~0.55.2",
+    "react-native-vector-icons": "^5.0.0",
+    "react-navigation": "^2.9.3",
+    "react-navigation-material-bottom-tabs": "^0.3.0"
   }
 }
