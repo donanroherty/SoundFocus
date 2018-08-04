@@ -4,9 +4,9 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/Ionicons'
 
 //Screens
-import Timer from '../screens/Timer'
-import Ambiance from '../screens/Ambiance'
-import Settings from '../screens/Settings'
+import Timer from 'screens/Timer'
+import Ambiance from 'screens/Ambiance'
+import Settings from 'screens/Settings'
 
 const TabBar = createMaterialBottomTabNavigator(
   {

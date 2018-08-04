@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const defaultProps = {
   intervalTime: 1500 /* 1500 = 25mins*/
@@ -43,7 +44,12 @@ class Clock extends Component {
   }
 
   tick = () => {
-    this.setState(state => ({ remaining: state.remaining - 1 }))
+    this.setState(state => {
+      if (state.remaining - 1 <= 0) {
+        this.onTimerComplete()
+      }
+      return { remaining: state.remaining - 1 }
+    })
   }
 
   onTimerComplete = () => {
@@ -70,51 +76,72 @@ class Clock extends Component {
     }
   }
 
+  handleResetTimer = () => {
+    console.log('timer reset')
+    if (this.timer) {
+      clearInterval(this.timer)
+      this.paused = true
+      this.setState({
+        remaining: this.props.intervalTime
+      })
+    }
+  }
+
   render() {
     const remaining = this.formatSeconds(this.state.remaining)
 
     const underAMinuteLeft = Math.floor(this.state.remaining / 60) <= 0
 
     return (
-      <TouchableOpacity style={styles.clockContainer} onPress={this.handleTimerPress}>
-        {underAMinuteLeft ? (
+      <View style={styles.wrapper}>
+        <TouchableOpacity onPress={this.handleResetTimer}>
+          <Icon name="md-refresh" size={30} /*color="black"*/ />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.clockContainer} onPress={this.handleTimerPress}>
+          {underAMinuteLeft ? (
+            <View />
+          ) : (
+            <View style={styles.minutesContainer}>
+              <Text style={styles.baseText}>{remaining.minutes}</Text>
+            </View>
+          )}
+
           <View />
-        ) : (
-          <View style={styles.minutesContainer}>
-            <Text style={styles.baseText}>{remaining.minutes}</Text>
+
+          {underAMinuteLeft ? (
+            <View />
+          ) : (
+            <View style={styles.colonContainer}>
+              <Text style={styles.baseText}>:</Text>
+            </View>
+          )}
+
+          <View
+            style={
+              underAMinuteLeft
+                ? [styles.secondsContainer, { justifyContent: 'center', alignItems: 'center' }]
+                : styles.secondsContainer
+            }
+          >
+            <Text style={styles.baseText}>{remaining.seconds}</Text>
           </View>
-        )}
-
-        <View />
-
-        {underAMinuteLeft ? (
-          <View />
-        ) : (
-          <View style={styles.colonContainer}>
-            <Text style={styles.baseText}>:</Text>
-          </View>
-        )}
-
-        <View
-          style={
-            underAMinuteLeft
-              ? [styles.secondsContainer, { justifyContent: 'center', alignItems: 'center' }]
-              : styles.secondsContainer
-          }
-        >
-          <Text style={styles.baseText}>{remaining.seconds}</Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
   clockContainer: {
     // flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    flexDirection: 'row'
+    // justifyContent: 'center'
+    // alignItems: 'center'
   },
   minutesContainer: {
     // width: 150,
