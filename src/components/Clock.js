@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 const Clock = props => {
-  handleToggleTimerActive = () => {
+  handleTap = () => {
     props.toggleTimerActive()
   }
 
@@ -33,13 +33,7 @@ const Clock = props => {
     </View>
   )
 
-  return (
-    <View>
-      <TouchableOpacity style={styles.clockContainer} onPress={handleToggleTimerActive}>
-        {content}
-      </TouchableOpacity>
-    </View>
-  )
+  return <View style={styles.clockContainer}>{content}</View>
 }
 
 const styles = StyleSheet.create({
@@ -59,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   baseText: {
-    fontSize: 75,
+    fontSize: 80,
     fontWeight: 'normal'
   }
 })

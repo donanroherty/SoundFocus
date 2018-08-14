@@ -1,92 +1,66 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Clock from 'components/Clock'
+import IntervalCounter from 'components/IntervalCounter'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {
+  timerReset,
+  timerResume,
+  timerPause,
+  timerToggleActive,
+  timerTick,
+  timerSetupInterval,
+  continuousMode
+} from 'actions'
 
-const defaultProps = {
-  intervalTime: 5 /* 1500 = 25mins*/
-}
 class Timer extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      remaining: this.props.intervalTime,
-      timerIsActive: false
-    }
-
     this.timer = null
   }
 
+  componentDidMount() {
+    this.props.timerSetupInterval()
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.remaining > 0 && this.state.remaining === 0) {
-      this.onTimerComplete()
+    // Handle timer active state changed
+    if (prevProps.timerIsActive !== this.props.timerIsActive) {
+      if (this.props.timerIsActive) {
+        // start interval loop
+        this.timer = setInterval(this.props.timerTick, 1000)
+      } else {
+        clearInterval(this.timer)
+
+        // Handle timer complete
+        if (this.props.remaining <= 0) {
+          this.props.timerSetupInterval()
+        }
+      }
     }
-  }
-
-  toggleTimerActive = () => {
-    if (this.state.timerIsActive) {
-      this.stopTimer()
-    } else {
-      this.startTimer()
-    }
-  }
-
-  startTimer = () => {
-    if (this.state.timerIsActive) {
-      return
-    }
-
-    console.log('startTimer')
-
-    this.setState({
-      timerIsActive: true
-    })
-
-    this.timer = setInterval(this.tick, 1000)
-  }
-
-  stopTimer = () => {
-    if (!this.state.timerIsActive) {
-      return
-    }
-
-    console.log('stopTimer')
-    clearInterval(this.timer)
-    this.setState({ timerIsActive: false })
-  }
-
-  tick = () => {
-    this.setState(state => {
-      return { remaining: state.remaining - 1 }
-    })
-  }
-
-  handleResetTimer = () => {
-    console.log('timer reset')
-    if (this.timer) {
-      clearInterval(this.timer)
-
-      this.setState({
-        remaining: this.props.intervalTime,
-        timerIsActive: false
-      })
-    }
-  }
-
-  onTimerComplete = () => {
-    console.log('timerComplete')
-    clearInterval(this.timer)
-    this.setState({ timerIsActive: false })
   }
 
   render() {
     return (
       <View style={styles.wrapper}>
-        <TouchableOpacity onPress={this.handleResetTimer}>
+        <TouchableOpacity onPress={this.props.timerReset}>
           <Icon name="md-refresh" size={30} />
         </TouchableOpacity>
-        <Clock remaining={this.state.remaining} toggleTimerActive={this.toggleTimerActive} />
+
+        <TouchableOpacity onPress={this.props.timerToggleActive}>
+          <Clock remaining={this.props.remaining} />
+        </TouchableOpacity>
+
+        <IntervalCounter
+          maxIntervals={this.props.intervalCountPerCycle}
+          currentInterval={this.props.intervalsCompleted}
+        />
       </View>
     )
   }
@@ -95,13 +69,36 @@ class Timer extends Component {
 const styles = StyleSheet.create({
   wrapper: { flexDirection: 'column', alignItems: 'center' },
   clock: {
-    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   }
 })
 
-Timer.defaultProps = defaultProps
+const mapStateToProps = state => ({
+  remaining: state.timer.remaining,
+  timerIsActive: state.timer.timerIsActive,
+  timerMode: state.timerMode,
+  intervalCountPerCycle: state.intervalCountPerCycle,
+  intervalsCompleted: state.intervalsCompleted
+})
 
-export default Timer
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      timerReset: timerReset,
+      timerResume: timerResume,
+      timerPause: timerPause,
+      timerToggleActive: timerToggleActive,
+      timerTick: timerTick,
+      timerSetupInterval: timerSetupInterval,
+      continuousMode: continuousMode
+    },
+    dispatch
+  )
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Timer)
