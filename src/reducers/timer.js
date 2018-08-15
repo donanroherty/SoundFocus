@@ -34,8 +34,6 @@ const initialState = {
 const timer = (state = initialState, action) => {
   switch (action.type) {
     case TIMER_SETUP_INTERVAL:
-      console.log('Intervals complete: ', state.intervalsCompleted)
-
       const newTimerMode =
         state.timerMode !== TIMER_MODE.WORK
           ? TIMER_MODE.WORK
