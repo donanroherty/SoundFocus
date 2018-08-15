@@ -78,9 +78,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   remaining: state.timer.remaining,
   timerIsActive: state.timer.timerIsActive,
-  timerMode: state.timerMode,
-  intervalCountPerCycle: state.intervalCountPerCycle,
-  intervalsCompleted: state.intervalsCompleted
+  intervalCountPerCycle: state.timer.intervalCountPerCycle,
+  intervalsCompleted: state.timer.intervalsCompleted
 })
 
 const mapDispatchToProps = dispatch => {
