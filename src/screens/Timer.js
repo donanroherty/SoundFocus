@@ -58,7 +58,7 @@ class Timer extends Component {
         </TouchableOpacity>
 
         <IntervalCounter
-          maxIntervals={this.props.intervalCountPerCycle}
+          maxIntervals={this.props.intervalCount}
           currentInterval={this.props.intervalsCompleted}
         />
       </View>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   remaining: state.timer.remaining,
   timerIsActive: state.timer.timerIsActive,
-  intervalCountPerCycle: state.timer.intervalCountPerCycle,
+  intervalCount: state.timer.intervalCount,
   intervalsCompleted: state.timer.intervalsCompleted
 })
 

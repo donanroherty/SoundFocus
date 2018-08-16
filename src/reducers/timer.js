@@ -4,7 +4,9 @@ import {
   TIMER_RESUME,
   TIMER_PAUSE,
   TIMER_TOGGLE_ACTIVE,
-  TIMER_TICK
+  TIMER_TICK,
+  SET_INTERVAL_LENGTH,
+  SET_INTERVALS_PER_SESSION
 } from 'actions/actionTypes'
 
 export const TIMER_MODE = Object.freeze({
@@ -17,13 +19,13 @@ export const TIMER_MODE = Object.freeze({
 /**
  * Work = 1500 = 25mins
  * Short break = 300 = 5mins
- * Long break - 1200 = 20mins
+ * Long break = 1200 = 20mins
  */
 const initialState = {
   intervalSeconds: 6,
   shortBreakSeconds: 2,
   longBreakSeconds: 10,
-  intervalCountPerCycle: 4,
+  intervalCount: 4,
   timerMode: TIMER_MODE.NONE,
   remaining: 5,
   intervalsCompleted: 0,
@@ -37,7 +39,7 @@ const timer = (state = initialState, action) => {
       const newTimerMode =
         state.timerMode !== TIMER_MODE.WORK
           ? TIMER_MODE.WORK
-          : state.intervalsCompleted % state.intervalCountPerCycle === 0
+          : state.intervalsCompleted % state.intervalCount === 0
             ? TIMER_MODE.LONG_BREAK
             : TIMER_MODE.SHORT_BREAK
 
@@ -92,6 +94,12 @@ const timer = (state = initialState, action) => {
               : state.intervalsCompleted
         }
       }
+
+    case SET_INTERVAL_LENGTH:
+      return { ...state, intervalSeconds: actions.val }
+
+    case SET_INTERVALS_PER_SESSION:
+      return { ...state, intervalCount: actions.val }
 
     default:
       return state

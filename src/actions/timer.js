@@ -1,5 +1,6 @@
 import * as types from 'actions/actionTypes'
 
+/** Timer functions */
 // Resets all timer values to default
 export const timerReset = () => ({ type: types.TIMER_RESET })
 // Starts or resumes an interval
@@ -12,3 +13,7 @@ export const timerToggleActive = () => ({ type: types.TIMER_TOGGLE_ACTIVE })
 export const timerTick = () => ({ type: types.TIMER_TICK })
 // Initializes values for an upcoming interval
 export const timerSetupInterval = () => ({ type: types.TIMER_SETUP_INTERVAL })
+
+/** Settings */
+export const setIntervalLength = val => ({ type: types.SET_INTERVAL_LENGTH, val: val })
+export const setIntervalsPerSession = val => ({ type: types.SET_INTERVALS_PER_SESSION, val: val })

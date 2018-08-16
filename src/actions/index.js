@@ -1,4 +1,5 @@
 export {
+  // Timer functions
   timerReset,
   timerResume,
   timerPause,
@@ -6,5 +7,8 @@ export {
   timerTick,
   timerResumeShortBreak,
   timerResumeLongBreak,
-  timerSetupInterval
+  timerSetupInterval,
+  // Settings
+  setIntervalLength,
+  setIntervalsPerSession
 } from 'actions/timer'
