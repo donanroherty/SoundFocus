@@ -8,7 +8,9 @@ export {
   timerResumeShortBreak,
   timerResumeLongBreak,
   timerSetupInterval,
-  // Settings
+  // Timer settings
   setIntervalLength,
   setIntervalsPerSession
 } from 'actions/timer'
+
+export { openSettingModal, closeSettingModal } from 'actions/settings'

@@ -1,7 +1,9 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-// import Dash from 'react-native-dash'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import Theme from 'theme'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { openSettingModal } from 'actions'
 
 const defaultProps = {
   name: 'setting name',
@@ -14,24 +16,24 @@ const defaultProps = {
   action: {}
 }
 
-const SettingListItem = props => (
-  <View style={styles.wrapper}>
-    <Text style={[styles.label, styles.text]}>{props.name}</Text>
-    <View style={styles.divider} />
+const SettingListItem = props => {
+  const handlePress = () => {
+    props.openSettingModal()
+  }
 
-    {/* <Dash
-      style={styles.divider}
-      dashGap={8}
-      dashLength={15}
-      dashThickness={3}
-      dashColor="darkgrey"
-      dashStyle={styles.dashStyle}
-    /> */}
+  return (
+    <View style={styles.wrapper}>
+      <Text style={[styles.label, styles.text]}>{props.name}</Text>
+      <View style={styles.divider} />
 
-    <Text style={[styles.text, styles.linkText, styles.value]}>{props.value}</Text>
-    <Text style={[styles.text, styles.linkText, styles.unit]}>{props.unit}</Text>
-  </View>
-)
+      <TouchableOpacity onPress={handlePress}>
+        <Text style={[styles.text, styles.linkText, styles.value]}>
+          {props.value} {props.unit}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -47,8 +49,9 @@ const styles = StyleSheet.create({
   },
   label: {},
   value: { paddingRight: 5 },
-  unit: {},
-  linkText: { color: Theme.linkColor },
+
+  linkText: { color: Theme.linkColor, textDecorationLine: 'underline' },
+
   divider: {
     flexGrow: 1
   }
@@ -56,4 +59,16 @@ const styles = StyleSheet.create({
 
 SettingListItem.defaultProps = defaultProps
 
-export default SettingListItem
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      openSettingModal: openSettingModal
+    },
+    dispatch
+  )
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SettingListItem)

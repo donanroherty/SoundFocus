@@ -30,7 +30,8 @@ const initialState = {
   remaining: 5,
   intervalsCompleted: 0,
   timerIsActive: false,
-  continuousMode: true
+  continuousMode: true,
+  settingsModalIsOpen: false
 }
 
 const timer = (state = initialState, action) => {

@@ -1,8 +1,10 @@
 import { combineReducers, createStore, compose } from 'redux'
 import timer from 'reducers/timer'
+import settings from 'reducers/settings'
 
 const rootReducer = combineReducers({
-  timer
+  timer,
+  settings
 })
 
 let composeEnhancers = compose

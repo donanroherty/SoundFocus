@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import SettingListItem from 'components/SettingListItem'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setIntervalLength, setIntervalsPerSession } from 'actions'
+import { setIntervalLength, setIntervalsPerSession, openSettingModal } from 'actions'
 
 class SettingsList extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
       <View style={styles.wrapper}>
@@ -18,6 +22,7 @@ class SettingsList extends Component {
           max={180}
           value={this.props.intervalSeconds}
           action={this.props.setIntervalLength}
+          openSettingModal={this.props.openSettingModal}
         />
         <SettingListItem
           name="Interval Count"
@@ -27,6 +32,7 @@ class SettingsList extends Component {
           max={10}
           value={this.props.intervalCount}
           action={this.props.setIntervalsPerSession}
+          openSettingModal={this.props.openSettingModal}
         />
       </View>
     )
@@ -48,6 +54,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
+      openSettingModal: openSettingModal,
       setIntervalLength: setIntervalLength,
       setIntervalsPerSession: setIntervalsPerSession
     },
