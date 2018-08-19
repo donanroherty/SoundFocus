@@ -30,7 +30,7 @@ const TabBar = createMaterialBottomTabNavigator(
     }
   },
   {
-    initialRouteName: 'Settings',
+    initialRouteName: 'Timer',
     shifting: true,
     activeTintColor: '#2699FB',
     inactiveTintColor: '#777777',

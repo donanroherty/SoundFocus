@@ -3,63 +3,28 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Clock from 'components/Clock'
 import IntervalCounter from 'components/IntervalCounter'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import {
-  timerReset,
-  timerResume,
-  timerPause,
-  timerToggleActive,
-  timerTick,
-  timerSetupInterval,
-  continuousMode
-} from 'actions'
+import { inject, observer } from 'mobx-react'
 
+@inject('store')
+@observer
 class Timer extends Component {
-  constructor(props) {
-    super(props)
-    this.timer = null
-  }
-
-  componentDidMount() {
-    // this.props.timerSetupInterval()
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer)
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // Handle timer active state changed
-    // if (prevProps.timerIsActive !== this.props.timerIsActive) {
-    //   if (this.props.timerIsActive) {
-    //     // start interval loop
-    //     this.timer = setInterval(this.props.timerTick, 1000)
-    //   } else {
-    //     clearInterval(this.timer)
-    //     // Handle timer complete
-    //     if (this.props.remaining <= 0) {
-    //       this.props.timerSetupInterval()
-    //     }
-    //   }
-    // }
-  }
-
   render() {
+    const { timer, settings } = this.props.store
+
     return (
       <View style={styles.wrapper}>
-        {/* <TouchableOpacity onPress={this.props.timerReset}>
+        <TouchableOpacity onPress={timer.reset}>
           <Icon name="md-refresh" size={30} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.props.timerToggleActive}>
-          <Clock remaining={this.props.remaining} />
+        <TouchableOpacity onPress={timer.toggleActive}>
+          <Clock remaining={timer.remaining} />
         </TouchableOpacity>
 
         <IntervalCounter
-          maxIntervals={this.props.intervalCount}
-          currentInterval={this.props.intervalsCompleted}
-        /> */}
+          maxIntervals={settings.intervalCount}
+          currentInterval={timer.intervalsCompleted}
+        />
       </View>
     )
   }
@@ -74,30 +39,4 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => ({
-  remaining: state.timer.remaining,
-  timerIsActive: state.timer.timerIsActive,
-  intervalCount: state.timer.intervalCount,
-  intervalsCompleted: state.timer.intervalsCompleted
-})
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      timerReset: timerReset,
-      timerResume: timerResume,
-      timerPause: timerPause,
-      timerToggleActive: timerToggleActive,
-      timerTick: timerTick,
-      timerSetupInterval: timerSetupInterval,
-      continuousMode: continuousMode
-    },
-    dispatch
-  )
-}
 export default Timer
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Timer)

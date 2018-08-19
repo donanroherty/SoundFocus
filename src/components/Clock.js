@@ -33,8 +33,7 @@ const Clock = props => {
     </View>
   )
 
-  // return <View style={styles.clockContainer}>{content}</View>
-  return <View />
+  return <View style={styles.clockContainer}>{content}</View>
 }
 
 const styles = StyleSheet.create({

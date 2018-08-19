@@ -12,7 +12,11 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Provider store={this.rootStore}>
+      <Provider
+        store={this.rootStore}
+        timerStore={this.rootStore.timerStore}
+        settingsStore={this.rootStore.settingsStore}
+      >
         <Navigator />
       </Provider>
     )

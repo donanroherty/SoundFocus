@@ -3,7 +3,7 @@ import TimerStore from 'stores/TimerStore'
 
 export default class Store {
   constructor() {
-    this.settingsStore = new SettingsStore(this)
-    this.timerStore = new TimerStore(this)
+    this.settings = new SettingsStore(this)
+    this.timer = new TimerStore(this)
   }
 }

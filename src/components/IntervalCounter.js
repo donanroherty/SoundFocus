@@ -12,8 +12,7 @@ const IntervalCounter = props => {
     )
   })
 
-  // return <View style={styles.wrapper}>{content}</View>
-  return <View />
+  return <View style={styles.wrapper}>{content}</View>
 }
 
 const styles = StyleSheet.create({
