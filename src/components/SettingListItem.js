@@ -1,10 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import Theme from 'theme'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { openSettingModal } from 'actions'
-import SettingModal from 'components/SettingModal'
 
 const defaultProps = {
   name: 'setting name',
@@ -31,14 +27,14 @@ const SettingListItem = props => {
 
   return (
     <View style={styles.wrapper}>
-      {/* <Text style={[styles.label, styles.text]}>{props.name}</Text>
+      <Text style={[styles.label, styles.text]}>{props.name}</Text>
       <View style={styles.divider} />
 
       <TouchableOpacity onPress={handlePress}>
         <Text style={[styles.text, styles.linkText, styles.value]}>
           {props.value} {props.unit}
         </Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   )
 }
@@ -67,16 +63,4 @@ const styles = StyleSheet.create({
 
 SettingListItem.defaultProps = defaultProps
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      openSettingModal: openSettingModal
-    },
-    dispatch
-  )
-}
 export default SettingListItem
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(SettingListItem)

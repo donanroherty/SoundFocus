@@ -36,25 +36,21 @@ export default class TimerStore {
   setupInterval = () => {
     const { settings } = this.rootStore
 
-    const newTimerMode =
+    this.timerMode =
       this.timerMode !== TIMER_MODE.WORK
         ? TIMER_MODE.WORK
         : this.intervalsCompleted % settings.intervalCount === 0
           ? TIMER_MODE.LONG_BREAK
           : TIMER_MODE.SHORT_BREAK
 
-    const newRemaining =
-      newTimerMode === TIMER_MODE.WORK
+    this.remaining =
+      this.timerMode === TIMER_MODE.WORK
         ? settings.intervalSeconds
-        : newTimerMode === TIMER_MODE.SHORT_BREAK
+        : this.timerMode === TIMER_MODE.SHORT_BREAK
           ? settings.shortBreakSeconds
           : settings.longBreakSeconds
 
-    const shouldAutoPlayNextInterval = settings.continuousMode && this.timerMode !== TIMER_MODE.NONE
-
-    this.remaining = newRemaining
-    this.timerMode = newTimerMode
-    if (shouldAutoPlayNextInterval) {
+    if (settings.continuousMode && this.timerMode !== TIMER_MODE.NONE) {
       this.resume()
     }
   }

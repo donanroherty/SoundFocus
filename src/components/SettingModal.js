@@ -1,19 +1,19 @@
 import React from 'react'
 import { Text, View, Modal, TouchableOpacity, StyleSheet } from 'react-native'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { closeSettingModal } from 'actions'
+import { inject, observer } from 'mobx-react'
 
 const SettingModal = props => {
+  const { settings } = props.store
+
   const handleCloseDialog = () => {
-    props.closeSettingModal()
+    settings.closeSettingModal()
   }
 
   return (
     <View>
-      {/* <Modal
+      <Modal
         style={styles.wrapper}
-        visible={props.settingModalIsOpen}
+        visible={settings.settingModalIsOpen}
         transparent={true}
         onRequestClose={() => {
           alert('Modal has been closed')
@@ -25,7 +25,7 @@ const SettingModal = props => {
             <Text>Hide Modal</Text>
           </TouchableOpacity>
         </View>
-      </Modal> */}
+      </Modal>
     </View>
   )
 }
@@ -36,21 +36,4 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => ({
-  settingModalIsOpen: state.settings.settingModalIsOpen,
-  settingModalData: state.timer.settingModalData
-})
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      closeSettingModal: closeSettingModal
-    },
-    dispatch
-  )
-export default SettingModal
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(SettingModal)
+export default inject('store')(observer(SettingModal))
