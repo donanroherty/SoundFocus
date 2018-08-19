@@ -1,13 +1,18 @@
 import React from 'react'
 import Navigator from 'screens/Navigator'
 
-import { Provider } from 'react-redux'
-import configStore from 'reducers'
+import { Provider } from 'mobx-react'
+import Store from 'stores'
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.rootStore = new Store()
+  }
+
   render() {
     return (
-      <Provider store={configStore()}>
+      <Provider store={this.rootStore}>
         <Navigator />
       </Provider>
     )

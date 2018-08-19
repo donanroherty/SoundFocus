@@ -22,7 +22,7 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    this.props.timerSetupInterval()
+    // this.props.timerSetupInterval()
   }
 
   componentWillUnmount() {
@@ -31,25 +31,24 @@ class Timer extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // Handle timer active state changed
-    if (prevProps.timerIsActive !== this.props.timerIsActive) {
-      if (this.props.timerIsActive) {
-        // start interval loop
-        this.timer = setInterval(this.props.timerTick, 1000)
-      } else {
-        clearInterval(this.timer)
-
-        // Handle timer complete
-        if (this.props.remaining <= 0) {
-          this.props.timerSetupInterval()
-        }
-      }
-    }
+    // if (prevProps.timerIsActive !== this.props.timerIsActive) {
+    //   if (this.props.timerIsActive) {
+    //     // start interval loop
+    //     this.timer = setInterval(this.props.timerTick, 1000)
+    //   } else {
+    //     clearInterval(this.timer)
+    //     // Handle timer complete
+    //     if (this.props.remaining <= 0) {
+    //       this.props.timerSetupInterval()
+    //     }
+    //   }
+    // }
   }
 
   render() {
     return (
       <View style={styles.wrapper}>
-        <TouchableOpacity onPress={this.props.timerReset}>
+        {/* <TouchableOpacity onPress={this.props.timerReset}>
           <Icon name="md-refresh" size={30} />
         </TouchableOpacity>
 
@@ -60,7 +59,7 @@ class Timer extends Component {
         <IntervalCounter
           maxIntervals={this.props.intervalCount}
           currentInterval={this.props.intervalsCompleted}
-        />
+        /> */}
       </View>
     )
   }
@@ -96,8 +95,9 @@ const mapDispatchToProps = dispatch => {
     dispatch
   )
 }
+export default Timer
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Timer)
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Timer)

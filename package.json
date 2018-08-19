@@ -23,7 +23,7 @@
     "preset": "react-native"
   },
   "dependencies": {
-    "mobx": "^5.0.3",
+    "mobx": "^4.3.1",
     "mobx-react": "^5.2.5",
     "react": "16.3.1",
     "react-native": "~0.55.2",

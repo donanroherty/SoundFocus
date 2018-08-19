@@ -13,7 +13,7 @@ class SettingsList extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
-        <SettingListItem
+        {/* <SettingListItem
           name="Interval Length"
           shortName="intervalLength"
           type="integer"
@@ -33,7 +33,7 @@ class SettingsList extends Component {
           value={this.props.intervalCount}
           action={this.props.setIntervalsPerSession}
           openSettingModal={this.props.openSettingModal}
-        />
+        /> */}
       </View>
     )
   }
@@ -61,8 +61,8 @@ const mapDispatchToProps = dispatch => {
     dispatch
   )
 }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingsList)
+export default SettingsList
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(SettingsList)

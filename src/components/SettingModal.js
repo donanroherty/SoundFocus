@@ -10,21 +10,23 @@ const SettingModal = props => {
   }
 
   return (
-    <Modal
-      style={styles.wrapper}
-      visible={props.settingModalIsOpen}
-      transparent={true}
-      onRequestClose={() => {
-        alert('Modal has been closed')
-      }}
-    >
-      <View style={{ marginTop: 22 }}>
-        <Text>Hello</Text>
-        <TouchableOpacity onPress={handleCloseDialog}>
-          <Text>Hide Modal</Text>
-        </TouchableOpacity>
-      </View>
-    </Modal>
+    <View>
+      {/* <Modal
+        style={styles.wrapper}
+        visible={props.settingModalIsOpen}
+        transparent={true}
+        onRequestClose={() => {
+          alert('Modal has been closed')
+        }}
+      >
+        <View style={{ marginTop: 22 }}>
+          <Text>Hello</Text>
+          <TouchableOpacity onPress={handleCloseDialog}>
+            <Text>Hide Modal</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal> */}
+    </View>
   )
 }
 
@@ -46,8 +48,9 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   )
+export default SettingModal
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingModal)
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(SettingModal)

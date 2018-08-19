@@ -31,25 +31,14 @@ const SettingListItem = props => {
 
   return (
     <View style={styles.wrapper}>
-      {/* <SettingModal
-        name={props.name}
-        shortName={props.shortName}
-        type={props.type}
-        unit={props.unit}
-        min={props.min}
-        max={props.max}
-        value={props.value}
-        action={props.action}
-      /> */}
-
-      <Text style={[styles.label, styles.text]}>{props.name}</Text>
+      {/* <Text style={[styles.label, styles.text]}>{props.name}</Text>
       <View style={styles.divider} />
 
       <TouchableOpacity onPress={handlePress}>
         <Text style={[styles.text, styles.linkText, styles.value]}>
           {props.value} {props.unit}
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   )
 }
@@ -86,8 +75,8 @@ const mapDispatchToProps = dispatch => {
     dispatch
   )
 }
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(SettingListItem)
+export default SettingListItem
+// export default connect(
+//   null,
+//   mapDispatchToProps
+// )(SettingListItem)
