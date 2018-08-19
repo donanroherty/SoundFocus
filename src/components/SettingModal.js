@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-  settingModalIsOpen: state.settings.settingModalIsOpen
+  settingModalIsOpen: state.settings.settingModalIsOpen,
+  settingModalData: state.timer.settingModalData
 })
 
 const mapDispatchToProps = dispatch =>

@@ -4,6 +4,7 @@ import Theme from 'theme'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { openSettingModal } from 'actions'
+import SettingModal from 'components/SettingModal'
 
 const defaultProps = {
   name: 'setting name',
@@ -12,17 +13,35 @@ const defaultProps = {
   unit: 'mins',
   min: 0,
   max: 1,
-  value: 0,
-  action: {}
+  value: 0
 }
 
 const SettingListItem = props => {
   const handlePress = () => {
-    props.openSettingModal()
+    props.openSettingModal({
+      name: props.name,
+      shortName: props.shortName,
+      type: props.type,
+      unit: props.unit,
+      min: props.min,
+      max: props.max,
+      value: props.value
+    })
   }
 
   return (
     <View style={styles.wrapper}>
+      {/* <SettingModal
+        name={props.name}
+        shortName={props.shortName}
+        type={props.type}
+        unit={props.unit}
+        min={props.min}
+        max={props.max}
+        value={props.value}
+        action={props.action}
+      /> */}
+
       <Text style={[styles.label, styles.text]}>{props.name}</Text>
       <View style={styles.divider} />
 

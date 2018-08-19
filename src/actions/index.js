@@ -13,4 +13,4 @@ export {
   setIntervalsPerSession
 } from 'actions/timer'
 
-export { openSettingModal, closeSettingModal } from 'actions/settings'
+export { openSettingModal, closeSettingModal, updateUserSetting } from 'actions/settings'
