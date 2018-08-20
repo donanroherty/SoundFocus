@@ -1,29 +1,55 @@
 import React from 'react'
-import { Text, View, Modal, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
 import { inject, observer } from 'mobx-react'
+import Modal from 'react-native-modal'
 
 const SettingModal = props => {
-  const { settings } = props.store
+  const {
+    settingModalData,
+    modalValuePlaceholder,
+    settingModalIsOpen,
+    closeSettingModal,
+    setModalValuePlaceholder
+  } = props.settingStore
 
   const handleCloseDialog = () => {
-    settings.closeSettingModal()
+    closeSettingModal()
+  }
+
+  const handleModalValueChanged = val => {
+    setModalValuePlaceholder(val)
+  }
+
+  const handleSubmit = () => {
+    settingModalData.action(modalValuePlaceholder)
+    closeSettingModal()
   }
 
   return (
-    <View>
+    <View style={styles.wrapper}>
       <Modal
-        style={styles.wrapper}
-        visible={settings.settingModalIsOpen}
-        transparent={true}
-        onRequestClose={() => {
-          alert('Modal has been closed')
-        }}
+        isVisible={settingModalIsOpen}
+        onBackdropPress={handleCloseDialog}
+        onBackButtonPress={handleCloseDialog}
+        avoidKeyboard={false}
       >
-        <View style={{ marginTop: 22 }}>
-          <Text>Hello</Text>
-          <TouchableOpacity onPress={handleCloseDialog}>
-            <Text>Hide Modal</Text>
-          </TouchableOpacity>
+        <View style={styles.modal}>
+          <Text style={styles.headingText}>{settingModalData.name}</Text>
+          <TextInput
+            keyboardType="numeric"
+            placeholder={String(settingModalData.value)}
+            maxLength={3}
+            selectTextOnFocus={true}
+            autoFocus={true}
+            value={modalValuePlaceholder}
+            onChangeText={handleModalValueChanged}
+            clearTextOnFocus={true}
+            style={styles.inputField}
+          />
+          <View style={styles.buttonContainer}>
+            <Button title="cancel" onPress={handleCloseDialog} style={styles.button} />
+            <Button title="ok" onPress={handleSubmit} style={styles.button} />
+          </View>
         </View>
       </Modal>
     </View>
@@ -32,8 +58,25 @@ const SettingModal = props => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: 'white'
+    flex: 1
+  },
+  modal: {
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  headingText: {
+    fontSize: 24
+  },
+  inputField: {
+    fontSize: 22
+  },
+  buttonContainer: {
+    flexDirection: 'row'
+  },
+  button: {
+    margin: 5
   }
 })
 
-export default inject('store')(observer(SettingModal))
+export default inject('settingStore')(observer(SettingModal))

@@ -7,7 +7,7 @@ export const TIMER_MODE = Object.freeze({
   LONG_BREAK: 'LONG_BREAK'
 })
 
-export default class TimerStore {
+class TimerStore {
   constructor(rootStore) {
     this.rootStore = rootStore
     this.timer = null
@@ -34,33 +34,33 @@ export default class TimerStore {
 
   @action
   setupInterval = () => {
-    const { settings } = this.rootStore
+    const { settingStore } = this.rootStore
 
     this.timerMode =
       this.timerMode !== TIMER_MODE.WORK
         ? TIMER_MODE.WORK
-        : this.intervalsCompleted % settings.intervalCount === 0
+        : this.intervalsCompleted % settingStore.workIntervalCount === 0
           ? TIMER_MODE.LONG_BREAK
           : TIMER_MODE.SHORT_BREAK
 
     this.remaining =
       this.timerMode === TIMER_MODE.WORK
-        ? settings.intervalSeconds
+        ? settingStore.workDuration
         : this.timerMode === TIMER_MODE.SHORT_BREAK
-          ? settings.shortBreakSeconds
-          : settings.longBreakSeconds
+          ? settingStore.shortBreakDuration
+          : settingStore.longBreakDuration
 
-    if (settings.continuousMode && this.timerMode !== TIMER_MODE.NONE) {
+    if (settingStore.continuousMode && this.timerMode !== TIMER_MODE.NONE) {
       this.resume()
     }
   }
 
   @action
   reset = () => {
-    const { settings } = this.rootStore
+    const { settingStore } = this.rootStore
 
     this.pause()
-    this.remaining = settings.intervalSeconds
+    this.remaining = settingStore.workDuration
     this.timerMode = TIMER_MODE.WORK
     this.intervalsCompleted = 0
   }
@@ -98,3 +98,5 @@ export default class TimerStore {
     }
   }
 }
+
+export default TimerStore

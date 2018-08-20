@@ -26,9 +26,11 @@
   "dependencies": {
     "mobx": "^4.3.1",
     "mobx-react": "^5.2.5",
+    "mobx-remotedev": "^0.2.8",
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-dash": "^0.0.9",
+    "react-native-modal": "^6.5.0",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.9.3",
     "react-navigation-material-bottom-tabs": "^0.3.0",

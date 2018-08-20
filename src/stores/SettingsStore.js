@@ -1,50 +1,63 @@
 import { observable, action } from 'mobx'
 
-export default class SettingsStore {
+class SettingsStore {
   constructor(rootStore) {
     this.rootStore = rootStore
   }
 
   @observable
-  intervalSeconds = 6
+  workDuration = 6
   @action
-  setIntervalSeconds = val => {
-    this.intervalSeconds = val
+  setWorkDuration = val => {
+    this.workDuration = val
   }
 
   @observable
-  shortBreakSeconds = 2
+  shortBreakDuration = 2
   @action
-  setShortBreakSeconds = val => {
-    this.shortBreakSeconds = val
+  setShortBreakDuration = val => {
+    this.shortBreakDuration = val
   }
 
   @observable
-  longBreakSeconds = 10
+  longBreakDuration = 10
   @action
-  setLongBreakSeconds = val => {
-    this.longBreakSeconds = val
+  setLongBreakDuration = val => {
+    this.longBreakDuration = val
   }
 
   @observable
-  intervalCount = 4
+  workIntervalCount = 4
   @action
-  setIntervalCount = val => {
-    this.intervalCount = val
+  setWorkIntervalCount = val => {
+    this.workIntervalCount = val
   }
 
   @observable
   continuousMode = true
   @action
-  setContinuousMode = val => {
-    this.continuousMode = val
+  toggleContinuousMode = () => {
+    this.continuousMode = !this.continuousMode
   }
 
   @observable
   settingModalIsOpen = false
 
+  @observable
+  settingModalData = {}
+
+  @observable
+  modalValuePlaceholder = ''
+
+  @action
+  setModalValuePlaceholder = val => {
+    this.modalValuePlaceholder = val
+  }
+
   @action
   openSettingModal = settingData => {
+    this.settingModalData = settingData
+    this.setModalValuePlaceholder('')
     this.settingModalIsOpen = true
   }
 
@@ -53,3 +66,5 @@ export default class SettingsStore {
     this.settingModalIsOpen = false
   }
 }
+
+export default SettingsStore

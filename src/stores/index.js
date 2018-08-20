@@ -1,9 +1,9 @@
 import SettingsStore from 'stores/SettingsStore'
 import TimerStore from 'stores/TimerStore'
 
-export default class Store {
+export default class AppStore {
   constructor() {
-    this.settings = new SettingsStore(this)
-    this.timer = new TimerStore(this)
+    this.settingStore = new SettingsStore(this)
+    this.timerStore = new TimerStore(this)
   }
 }
