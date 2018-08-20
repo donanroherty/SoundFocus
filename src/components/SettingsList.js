@@ -1,42 +1,63 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import SettingListItem from 'components/SettingListItem'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { setIntervalLength, setIntervalsPerSession, openSettingModal } from 'actions'
+import { inject, observer } from 'mobx-react'
+import shortId from 'shortid'
 
-class SettingsList extends Component {
-  constructor(props) {
-    super(props)
+const SettingsList = props => {
+  const settingDefinitions = {
+    workDuration: {
+      name: 'Work Duration',
+      type: 'integer',
+      unit: 'mins',
+      min: 1,
+      max: 180,
+      value: props.settingStore.workDuration,
+      action: props.settingStore.setWorkDuration
+    },
+    shortBreakDuration: {
+      name: 'Short Break Duration',
+      type: 'integer',
+      unit: 'mins',
+      min: 1,
+      max: 180,
+      value: props.settingStore.shortBreakDuration,
+      action: props.settingStore.setShortBreakDuration
+    },
+    longBreakDuration: {
+      name: 'Long Break Duration',
+      type: 'integer',
+      unit: 'mins',
+      min: 1,
+      max: 180,
+      value: props.settingStore.longBreakDuration,
+      action: props.settingStore.setLongBreakDuration
+    },
+    workIntervalCount: {
+      name: 'Work Interval Count',
+      type: 'integer',
+      unit: '',
+      min: 1,
+      max: 60,
+      value: props.settingStore.workIntervalCount,
+      action: props.settingStore.setWorkIntervalCount
+    },
+    continuousMode: {
+      name: 'Continous Mode',
+      type: 'boolean',
+      unit: '',
+      min: 0,
+      max: 0,
+      value: props.settingStore.continuousMode,
+      action: props.settingStore.toggleContinuousMode
+    }
   }
 
-  render() {
-    return (
-      <View style={styles.wrapper}>
-        <SettingListItem
-          name="Interval Length"
-          shortName="intervalLength"
-          type="integer"
-          unit="mins"
-          min={1}
-          max={180}
-          value={this.props.intervalSeconds}
-          action={this.props.setIntervalLength}
-          openSettingModal={this.props.openSettingModal}
-        />
-        <SettingListItem
-          name="Interval Count"
-          shortName="intervalCount"
-          type="integer"
-          min={1}
-          max={10}
-          value={this.props.intervalCount}
-          action={this.props.setIntervalsPerSession}
-          openSettingModal={this.props.openSettingModal}
-        />
-      </View>
-    )
-  }
+  const content = Object.keys(settingDefinitions).map((val, i) => {
+    return <SettingListItem key={shortId.generate()} settingDefinition={settingDefinitions[val]} />
+  })
+
+  return <View style={styles.wrapper}>{content}</View>
 }
 
 const styles = StyleSheet.create({
@@ -46,23 +67,4 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => ({
-  intervalSeconds: state.timer.intervalSeconds,
-  intervalCount: state.timer.intervalCount
-})
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      openSettingModal: openSettingModal,
-      setIntervalLength: setIntervalLength,
-      setIntervalsPerSession: setIntervalsPerSession
-    },
-    dispatch
-  )
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingsList)
+export default inject('settingStore')(observer(SettingsList))

@@ -1,53 +1,82 @@
 import React from 'react'
-import { Text, View, Modal, TouchableOpacity, StyleSheet } from 'react-native'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { closeSettingModal } from 'actions'
+import { Text, View, StyleSheet, Button, TextInput } from 'react-native'
+import { inject, observer } from 'mobx-react'
+import Modal from 'react-native-modal'
 
 const SettingModal = props => {
+  const {
+    settingModalData,
+    modalValuePlaceholder,
+    settingModalIsOpen,
+    closeSettingModal,
+    setModalValuePlaceholder
+  } = props.settingStore
+
   const handleCloseDialog = () => {
-    props.closeSettingModal()
+    closeSettingModal()
+  }
+
+  const handleModalValueChanged = val => {
+    setModalValuePlaceholder(val)
+  }
+
+  const handleSubmit = () => {
+    settingModalData.action(modalValuePlaceholder)
+    closeSettingModal()
   }
 
   return (
-    <Modal
-      style={styles.wrapper}
-      visible={props.settingModalIsOpen}
-      transparent={true}
-      onRequestClose={() => {
-        alert('Modal has been closed')
-      }}
-    >
-      <View style={{ marginTop: 22 }}>
-        <Text>Hello</Text>
-        <TouchableOpacity onPress={handleCloseDialog}>
-          <Text>Hide Modal</Text>
-        </TouchableOpacity>
-      </View>
-    </Modal>
+    <View style={styles.wrapper}>
+      <Modal
+        isVisible={settingModalIsOpen}
+        onBackdropPress={handleCloseDialog}
+        onBackButtonPress={handleCloseDialog}
+        avoidKeyboard={false}
+      >
+        <View style={styles.modal}>
+          <Text style={styles.headingText}>{settingModalData.name}</Text>
+          <TextInput
+            keyboardType="numeric"
+            placeholder={String(settingModalData.value)}
+            maxLength={3}
+            selectTextOnFocus={true}
+            autoFocus={true}
+            value={modalValuePlaceholder}
+            onChangeText={handleModalValueChanged}
+            clearTextOnFocus={true}
+            style={styles.inputField}
+          />
+          <View style={styles.buttonContainer}>
+            <Button title="cancel" onPress={handleCloseDialog} style={styles.button} />
+            <Button title="ok" onPress={handleSubmit} style={styles.button} />
+          </View>
+        </View>
+      </Modal>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: 'white'
+    flex: 1
+  },
+  modal: {
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  headingText: {
+    fontSize: 24
+  },
+  inputField: {
+    fontSize: 22
+  },
+  buttonContainer: {
+    flexDirection: 'row'
+  },
+  button: {
+    margin: 5
   }
 })
 
-const mapStateToProps = state => ({
-  settingModalIsOpen: state.settings.settingModalIsOpen,
-  settingModalData: state.timer.settingModalData
-})
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      closeSettingModal: closeSettingModal
-    },
-    dispatch
-  )
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingModal)
+export default inject('settingStore')(observer(SettingModal))

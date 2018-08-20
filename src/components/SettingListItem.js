@@ -1,55 +1,46 @@
 import React from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Switch } from 'react-native'
 import Theme from 'theme'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { openSettingModal } from 'actions'
-import SettingModal from 'components/SettingModal'
+import { inject, observer } from 'mobx-react'
 
 const defaultProps = {
-  name: 'setting name',
-  shortName: 'settingName',
-  type: 'integer',
-  unit: 'mins',
-  min: 0,
-  max: 1,
-  value: 0
+  settingDefinition: {
+    name: 'Work Interval Count',
+    type: 'integer',
+    unit: '',
+    min: 1,
+    max: 60,
+    value: 0,
+    action: null
+  }
 }
 
 const SettingListItem = props => {
   const handlePress = () => {
-    props.openSettingModal({
-      name: props.name,
-      shortName: props.shortName,
-      type: props.type,
-      unit: props.unit,
-      min: props.min,
-      max: props.max,
-      value: props.value
-    })
+    props.settingStore.openSettingModal(props.settingDefinition)
   }
+
+  const handleSwitch = () => {
+    props.settingDefinition.action()
+  }
+
+  const setter =
+    props.settingDefinition.type === 'boolean' ? (
+      <Switch value={props.settingDefinition.value} onValueChange={handleSwitch} />
+    ) : (
+      <TouchableOpacity onPress={handlePress}>
+        <Text style={[styles.text, styles.linkText, styles.value]}>
+          {props.settingDefinition.value} {props.settingDefinition.unit}
+        </Text>
+      </TouchableOpacity>
+    )
 
   return (
     <View style={styles.wrapper}>
-      {/* <SettingModal
-        name={props.name}
-        shortName={props.shortName}
-        type={props.type}
-        unit={props.unit}
-        min={props.min}
-        max={props.max}
-        value={props.value}
-        action={props.action}
-      /> */}
-
-      <Text style={[styles.label, styles.text]}>{props.name}</Text>
+      <Text style={[styles.label, styles.text]}>{props.settingDefinition.name}</Text>
       <View style={styles.divider} />
 
-      <TouchableOpacity onPress={handlePress}>
-        <Text style={[styles.text, styles.linkText, styles.value]}>
-          {props.value} {props.unit}
-        </Text>
-      </TouchableOpacity>
+      {setter}
     </View>
   )
 }
@@ -78,16 +69,4 @@ const styles = StyleSheet.create({
 
 SettingListItem.defaultProps = defaultProps
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      openSettingModal: openSettingModal
-    },
-    dispatch
-  )
-}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(SettingListItem)
+export default inject('settingStore')(observer(SettingListItem))
