@@ -45,10 +45,10 @@ class TimerStore {
 
     this.remaining =
       this.timerMode === TIMER_MODE.WORK
-        ? settingStore.workDuration
+        ? settingStore.workDuration * 60
         : this.timerMode === TIMER_MODE.SHORT_BREAK
-          ? settingStore.shortBreakDuration
-          : settingStore.longBreakDuration
+          ? settingStore.shortBreakDuration * 60
+          : settingStore.longBreakDuration * 60
 
     if (settingStore.continuousMode && this.timerMode !== TIMER_MODE.NONE) {
       this.resume()
@@ -60,7 +60,7 @@ class TimerStore {
     const { settingStore } = this.rootStore
 
     this.pause()
-    this.remaining = settingStore.workDuration
+    this.remaining = settingStore.workDuration * 60
     this.timerMode = TIMER_MODE.WORK
     this.intervalsCompleted = 0
   }
