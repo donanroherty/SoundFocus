@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { inject, observer } from 'mobx-react'
 import shortId from 'shortid'
 
 const IntervalCounter = props => {
-  const content = new Array(props.maxIntervals).fill(undefined).map((val, i) => {
-    const color = i < props.currentInterval + 1 ? 'darkgray' : 'lightgray'
-    const icon = i < props.currentInterval ? 'md-add' : 'md-remove'
+  const content = new Array(props.settingStore.workIntervalCount).fill(undefined).map((val, i) => {
+    const color = i < props.timerStore.intervalsCompleted + 1 ? 'darkgray' : 'lightgray'
+    const icon = i < props.timerStore.intervalsCompleted ? 'md-add' : 'md-remove'
     return (
       <Icon key={shortId.generate()} name={icon} size={25} color={color} style={styles.marker} />
     )
@@ -24,4 +25,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default IntervalCounter
+export default inject('settingStore')(inject('timerStore')(observer(IntervalCounter)))

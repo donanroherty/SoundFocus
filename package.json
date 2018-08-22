@@ -36,5 +36,10 @@
     "react-navigation-material-bottom-tabs": "^0.3.0",
     "react-timer-mixin": "^0.13.4",
     "shortid": "^2.2.12"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }
