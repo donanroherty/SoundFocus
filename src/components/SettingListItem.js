@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    // width: '100%',
     justifyContent: 'space-between',
     padding: 10
   },
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
   label: {},
   value: { paddingRight: 5 },
 
-  linkText: { color: Theme.linkColor, textDecorationLine: 'underline' },
+  linkText: { color: Theme.textColor, textDecorationLine: 'underline' },
 
   divider: {
     flexGrow: 1

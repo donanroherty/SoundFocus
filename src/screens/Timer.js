@@ -12,13 +12,10 @@ const Timer = props => (
     </TouchableOpacity>
 
     <TouchableOpacity onPress={props.timerStore.toggleActive}>
-      <Clock remaining={props.timerStore.remaining} />
+      <Clock size={100} />
     </TouchableOpacity>
 
-    <IntervalCounter
-      maxIntervals={props.settingStore.workIntervalCount}
-      currentInterval={props.timerStore.intervalsCompleted}
-    />
+    <IntervalCounter />
   </View>
 )
 
@@ -30,4 +27,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default inject('settingStore')(inject('timerStore')(observer(Timer)))
+export default inject('timerStore')(observer(Timer))
