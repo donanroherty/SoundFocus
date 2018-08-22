@@ -36,6 +36,8 @@ class TimerStore {
   setupInterval = () => {
     const { settingStore } = this.rootStore
 
+    const prevTimerMode = this.timerMode
+
     this.timerMode =
       this.timerMode !== TIMER_MODE.WORK
         ? TIMER_MODE.WORK
@@ -50,7 +52,7 @@ class TimerStore {
           ? settingStore.shortBreakDuration * 60
           : settingStore.longBreakDuration * 60
 
-    if (settingStore.continuousMode && this.timerMode !== TIMER_MODE.NONE) {
+    if (settingStore.continuousMode && prevTimerMode !== TIMER_MODE.NONE) {
       this.resume()
     }
   }

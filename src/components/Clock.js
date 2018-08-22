@@ -52,8 +52,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   baseText: {
+    fontFamily: 'Roboto',
     fontSize: 80,
-    fontWeight: 'normal'
+    fontWeight: '100'
   }
 })
 

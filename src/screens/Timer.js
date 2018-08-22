@@ -26,8 +26,7 @@ const styles = StyleSheet.create({
   wrapper: { flexDirection: 'column', alignItems: 'center' },
   clock: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'center'
   }
 })
 
