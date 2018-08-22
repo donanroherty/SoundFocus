@@ -4,40 +4,43 @@ import Theme from 'theme'
 import { inject, observer } from 'mobx-react'
 
 const defaultProps = {
-  settingDefinition: {
-    name: 'Work Interval Count',
-    type: 'integer',
-    unit: '',
-    min: 1,
-    max: 60,
-    value: 0,
-    action: null
-  }
+  settingID: ''
 }
 
 const SettingListItem = props => {
+  const {
+    openSettingModal,
+    getUserPropertySetter,
+    getUserPropertyValue,
+    getSettingDefinition
+  } = props.settingStore
+
   const handlePress = () => {
-    props.settingStore.openSettingModal(props.settingDefinition)
+    if (settingDefinition.type === 'boolean') {
+      getUserPropertySetter(props.settingID)()
+    } else {
+      openSettingModal(props.settingID)
+    }
   }
 
-  const handleSwitch = () => {
-    props.settingDefinition.action()
-  }
+  const settingDefinition = getSettingDefinition(props.settingID)
+  const settingValue = getUserPropertyValue(props.settingID)
 
+  // Change setting interaction based on setting type
   const setter =
-    props.settingDefinition.type === 'boolean' ? (
-      <Switch value={props.settingDefinition.value} onValueChange={handleSwitch} />
+    settingDefinition.type === 'boolean' ? (
+      <Switch value={settingValue} onValueChange={handlePress} />
     ) : (
       <TouchableOpacity onPress={handlePress}>
         <Text style={[styles.text, styles.linkText, styles.value]}>
-          {props.settingDefinition.value} {props.settingDefinition.unit}
+          {settingValue} {settingDefinition.unit}
         </Text>
       </TouchableOpacity>
     )
 
   return (
     <View style={styles.wrapper}>
-      <Text style={[styles.label, styles.text]}>{props.settingDefinition.name}</Text>
+      <Text style={[styles.label, styles.text]}>{settingDefinition.name}</Text>
       <View style={styles.divider} />
 
       {setter}

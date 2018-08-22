@@ -5,50 +5,49 @@ import Modal from 'react-native-modal'
 
 const SettingModal = props => {
   const {
-    settingModalData,
-    modalValuePlaceholder,
+    modalSettingID,
+    getSettingDefinition,
+    getUserPropertyValue,
+    settingModalHasValidData,
+    modalValue,
     settingModalIsOpen,
     closeSettingModal,
-    setModalValuePlaceholder
+    setModalValue,
+    submitModal
   } = props.settingStore
 
-  const handleCloseDialog = () => {
-    closeSettingModal()
+  if (!settingModalHasValidData) {
+    return <View />
   }
 
-  const handleModalValueChanged = val => {
-    setModalValuePlaceholder(val)
-  }
-
-  const handleSubmit = () => {
-    settingModalData.action(modalValuePlaceholder)
-    closeSettingModal()
-  }
+  const modalSettingDef = getSettingDefinition(modalSettingID)
 
   return (
     <View style={styles.wrapper}>
       <Modal
         isVisible={settingModalIsOpen}
-        onBackdropPress={handleCloseDialog}
-        onBackButtonPress={handleCloseDialog}
+        onBackdropPress={closeSettingModal}
+        onBackButtonPress={closeSettingModal}
         avoidKeyboard={false}
       >
         <View style={styles.modal}>
-          <Text style={styles.headingText}>{settingModalData.name}</Text>
+          <Text style={styles.headingText}>{modalSettingDef.name}</Text>
+
           <TextInput
             keyboardType="numeric"
-            placeholder={String(settingModalData.value)}
+            placeholder={String(getUserPropertyValue(modalSettingID))}
             maxLength={3}
             selectTextOnFocus={true}
             autoFocus={true}
-            value={modalValuePlaceholder}
-            onChangeText={handleModalValueChanged}
+            value={modalValue}
+            onChangeText={setModalValue}
             clearTextOnFocus={true}
             style={styles.inputField}
           />
+
           <View style={styles.buttonContainer}>
-            <Button title="cancel" onPress={handleCloseDialog} style={styles.button} />
-            <Button title="ok" onPress={handleSubmit} style={styles.button} />
+            <Button title="cancel" onPress={closeSettingModal} style={styles.button} />
+            <Button title="ok" onPress={submitModal} style={styles.button} />
           </View>
         </View>
       </Modal>
