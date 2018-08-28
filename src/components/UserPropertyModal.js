@@ -13,7 +13,7 @@ const defaultProps = {
   setPropertyValue: () => {}
 }
 
-export default class PropertyModal extends Component {
+export default class UserPropertyModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -90,4 +90,4 @@ const styles = StyleSheet.create({
   }
 })
 
-PropertyModal.defaultProps = defaultProps
+UserPropertyModal.defaultProps = defaultProps

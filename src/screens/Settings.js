@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import SettingsList from 'components/SettingsList'
+import UserPropertyList from 'components/UserPropertyList'
 import ScreenHeader from 'components/ScreenHeader'
 import { inject, observer } from 'mobx-react'
 
@@ -9,7 +9,7 @@ const Settings = props => {
     <View>
       <View style={styles.wrapper}>
         <ScreenHeader screenName="Settings" />
-        <SettingsList />
+        <UserPropertyList />
       </View>
     </View>
   )
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
 })
 
 // export default Settings
-export default inject('settingStore')(observer(Settings))
+export default inject('userPropertyStore')(observer(Settings))

@@ -1,64 +1,64 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import SettingListItem from 'components/SettingListItem'
+import UserPropertyListItem from 'components/UserPropertyListItem'
 import { inject, observer } from 'mobx-react'
 
-const SettingsList = props => {
+const UserPropertyList = props => {
   return (
     <View style={styles.wrapper}>
-      <SettingListItem
+      <UserPropertyListItem
         shortName="workDuration"
         name="Work Duration"
         type="integer"
         unit="mins"
         min={1}
         max={180}
-        value={props.settingStore.workDuration}
-        setPropertyValue={props.settingStore.setWorkDuration}
+        value={props.userPropertyStore.workDuration}
+        setPropertyValue={props.userPropertyStore.setWorkDuration}
       />
 
-      <SettingListItem
+      <UserPropertyListItem
         shortName="shortBreakDuration"
         name="Short Break Duration"
         type="integer"
         unit="mins"
         min={1}
         max={180}
-        value={props.settingStore.shortBreakDuration}
-        setPropertyValue={props.settingStore.setShortBreakDuration}
+        value={props.userPropertyStore.shortBreakDuration}
+        setPropertyValue={props.userPropertyStore.setShortBreakDuration}
       />
 
-      <SettingListItem
+      <UserPropertyListItem
         shortName="longBreakDuration"
         name="Long Break Duration"
         type="integer"
         unit="mins"
         min={1}
         max={180}
-        value={props.settingStore.longBreakDuration}
-        setPropertyValue={props.settingStore.setLongBreakDuration}
+        value={props.userPropertyStore.longBreakDuration}
+        setPropertyValue={props.userPropertyStore.setLongBreakDuration}
       />
 
-      <SettingListItem
+      <UserPropertyListItem
         shortName="workIntervalCount"
         name="Work Interval Count"
         type="integer"
         unit="mins"
         min={1}
         max={180}
-        value={props.settingStore.workIntervalCount}
-        setPropertyValue={props.settingStore.setWorkIntervalCount}
+        value={props.userPropertyStore.workIntervalCount}
+        setPropertyValue={props.userPropertyStore.setWorkIntervalCount}
       />
 
-      <SettingListItem
+      <UserPropertyListItem
         shortName="continuousMode"
         name="Continous Mode"
         type="boolean"
         unit="mins"
         min={0}
         max={0}
-        value={props.settingStore.continuousMode}
-        setPropertyValue={props.settingStore.toggleContinuousMode}
+        value={props.userPropertyStore.continuousMode}
+        setPropertyValue={props.userPropertyStore.toggleContinuousMode}
       />
     </View>
   )
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default inject('settingStore')(observer(SettingsList))
+export default inject('userPropertyStore')(observer(UserPropertyList))

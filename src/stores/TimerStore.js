@@ -34,35 +34,35 @@ class TimerStore {
 
   @action
   setupInterval = () => {
-    const { settingStore } = this.rootStore
+    const { userPropertyStore } = this.rootStore
 
     const prevTimerMode = this.timerMode
 
     this.timerMode =
       this.timerMode !== TIMER_MODE.WORK
         ? TIMER_MODE.WORK
-        : this.intervalsCompleted % settingStore.workIntervalCount === 0
+        : this.intervalsCompleted % userPropertyStore.workIntervalCount === 0
           ? TIMER_MODE.LONG_BREAK
           : TIMER_MODE.SHORT_BREAK
 
     this.remaining =
       this.timerMode === TIMER_MODE.WORK
-        ? settingStore.workDuration * 60
+        ? userPropertyStore.workDuration * 60
         : this.timerMode === TIMER_MODE.SHORT_BREAK
-          ? settingStore.shortBreakDuration * 60
-          : settingStore.longBreakDuration * 60
+          ? userPropertyStore.shortBreakDuration * 60
+          : userPropertyStore.longBreakDuration * 60
 
-    if (settingStore.continuousMode && prevTimerMode !== TIMER_MODE.NONE) {
+    if (userPropertyStore.continuousMode && prevTimerMode !== TIMER_MODE.NONE) {
       this.resume()
     }
   }
 
   @action
   reset = () => {
-    const { settingStore } = this.rootStore
+    const { userPropertyStore } = this.rootStore
 
     this.pause()
-    this.remaining = settingStore.workDuration * 60
+    this.remaining = userPropertyStore.workDuration * 60
     this.timerMode = TIMER_MODE.WORK
     this.intervalsCompleted = 0
   }

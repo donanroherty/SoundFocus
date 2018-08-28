@@ -5,13 +5,15 @@ import { inject, observer } from 'mobx-react'
 import shortId from 'shortid'
 
 const IntervalCounter = props => {
-  const content = new Array(props.settingStore.workIntervalCount).fill(undefined).map((val, i) => {
-    const color = i < props.timerStore.intervalsCompleted + 1 ? 'darkgray' : 'lightgray'
-    const icon = i < props.timerStore.intervalsCompleted ? 'md-add' : 'md-remove'
-    return (
-      <Icon key={shortId.generate()} name={icon} size={25} color={color} style={styles.marker} />
-    )
-  })
+  const content = new Array(props.userPropertyStore.workIntervalCount)
+    .fill(undefined)
+    .map((val, i) => {
+      const color = i < props.timerStore.intervalsCompleted + 1 ? 'darkgray' : 'lightgray'
+      const icon = i < props.timerStore.intervalsCompleted ? 'md-add' : 'md-remove'
+      return (
+        <Icon key={shortId.generate()} name={icon} size={25} color={color} style={styles.marker} />
+      )
+    })
 
   return <View style={styles.wrapper}>{content}</View>
 }
@@ -25,4 +27,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default inject('settingStore')(inject('timerStore')(observer(IntervalCounter)))
+export default inject('userPropertyStore')(inject('timerStore')(observer(IntervalCounter)))

@@ -1,4 +1,4 @@
-export default class StorageHandler {
+export default class LocalStorageHandler {
   constructor() {
     this.trackedStores = []
   }

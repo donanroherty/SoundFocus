@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Switch } from 'react-native'
 import Theme from 'theme'
-import PropertyModal from 'components/PropertyModal'
+import UserPropertyModal from 'components/UserPropertyModal'
 
 const defaultProps = {
   shortName: 'mySetting',
@@ -14,7 +14,7 @@ const defaultProps = {
   setPropertyValue: () => {}
 }
 
-class SettingListItem extends Component {
+class UserPropertyListItem extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -42,7 +42,7 @@ class SettingListItem extends Component {
     return (
       <View style={styles.wrapper}>
         {this.state.showModal && (
-          <PropertyModal
+          <UserPropertyModal
             closeModal={this.closeModal}
             value={this.props.value}
             setPropertyValue={this.props.setPropertyValue}
@@ -92,6 +92,6 @@ const styles = StyleSheet.create({
   }
 })
 
-SettingListItem.defaultProps = defaultProps
+UserPropertyListItem.defaultProps = defaultProps
 
-export default SettingListItem
+export default UserPropertyListItem

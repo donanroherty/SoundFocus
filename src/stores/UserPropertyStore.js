@@ -1,8 +1,8 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action, toJS } from 'mobx'
 
-export default class SettingsStore {
+export default class UserPropertyStore {
   constructor(rootStore) {
-    this.rootStore = rootStore
+    console.log(toJS(this))
   }
 
   @observable
