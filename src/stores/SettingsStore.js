@@ -1,6 +1,6 @@
 import { observable, action, computed } from 'mobx'
 
-class SettingsStore {
+export default class SettingsStore {
   constructor(rootStore) {
     this.rootStore = rootStore
     this.settingDefinitions = settingDefinitions
@@ -82,6 +82,11 @@ class SettingsStore {
     this.closeSettingModal()
   }
 
+  /**
+   * Utility functions used by settings list and setting modal.
+   * Enables us to initialize setting components using only the setting name
+   */
+
   getUserPropertySetter = propertyName => {
     switch (propertyName) {
       case 'workDuration':
@@ -121,6 +126,7 @@ class SettingsStore {
   }
 }
 
+// Defines each user setting and it's type, value range, etc.
 const settingDefinitions = {
   workDuration: {
     name: 'Work Duration',
@@ -158,5 +164,3 @@ const settingDefinitions = {
     max: 0
   }
 }
-
-export default SettingsStore

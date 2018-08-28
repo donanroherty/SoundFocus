@@ -1,51 +1,74 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Switch } from 'react-native'
 import Theme from 'theme'
-import { inject, observer } from 'mobx-react'
+import PropertyModal from 'components/PropertyModal'
 
 const defaultProps = {
-  settingID: ''
+  shortName: 'mySetting',
+  name: 'My Setting',
+  type: 'integer',
+  unit: '',
+  min: 0,
+  max: 0,
+  value: 0,
+  setPropertyValue: () => {}
 }
 
-const SettingListItem = props => {
-  const {
-    openSettingModal,
-    getUserPropertySetter,
-    getUserPropertyValue,
-    getSettingDefinition
-  } = props.settingStore
-
-  const handlePress = () => {
-    if (settingDefinition.type === 'boolean') {
-      getUserPropertySetter(props.settingID)()
-    } else {
-      openSettingModal(props.settingID)
+class SettingListItem extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showModal: false
     }
   }
 
-  const settingDefinition = getSettingDefinition(props.settingID)
-  const settingValue = getUserPropertyValue(props.settingID)
+  handlePress = () => {
+    if (this.props.type === 'boolean') {
+      this.props.setPropertyValue()
+    } else {
+      this.openModal()
+    }
+  }
 
-  // Change setting interaction based on setting type
-  const setter =
-    settingDefinition.type === 'boolean' ? (
-      <Switch value={settingValue} onValueChange={handlePress} />
-    ) : (
-      <TouchableOpacity onPress={handlePress}>
-        <Text style={[styles.text, styles.linkText, styles.value]}>
-          {settingValue} {settingDefinition.unit}
-        </Text>
-      </TouchableOpacity>
+  openModal = () => {
+    this.setState({ showModal: true })
+  }
+
+  closeModal = () => {
+    this.setState({ showModal: false })
+  }
+
+  render() {
+    return (
+      <View style={styles.wrapper}>
+        {this.state.showModal && (
+          <PropertyModal
+            closeModal={this.closeModal}
+            value={this.props.value}
+            setPropertyValue={this.props.setPropertyValue}
+          />
+        )}
+
+        <Text style={[styles.label, styles.text]}>{this.props.name}</Text>
+        <View style={styles.divider} />
+
+        {/* Change setting interaction based on setting type */}
+        {/* Booleans use a switch */}
+        {this.props.type === 'boolean' && (
+          <Switch value={this.props.value} onValueChange={this.handlePress} />
+        )}
+
+        {/* All other types use a modal to set value */}
+        {this.props.type !== 'boolean' && (
+          <TouchableOpacity onPress={this.handlePress}>
+            <Text style={[styles.text, styles.linkText, styles.value]}>
+              {this.props.value} {this.props.unit}
+            </Text>
+          </TouchableOpacity>
+        )}
+      </View>
     )
-
-  return (
-    <View style={styles.wrapper}>
-      <Text style={[styles.label, styles.text]}>{settingDefinition.name}</Text>
-      <View style={styles.divider} />
-
-      {setter}
-    </View>
-  )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -71,4 +94,4 @@ const styles = StyleSheet.create({
 
 SettingListItem.defaultProps = defaultProps
 
-export default inject('settingStore')(observer(SettingListItem))
+export default SettingListItem
