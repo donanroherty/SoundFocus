@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import SettingsList from 'components/SettingsList'
-
 import ScreenHeader from 'components/ScreenHeader'
 import { inject, observer } from 'mobx-react'
 
