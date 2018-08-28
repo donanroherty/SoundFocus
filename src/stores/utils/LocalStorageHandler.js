@@ -1,7 +1,11 @@
+import { action, reaction, observable, toJS } from 'mobx'
+import { AsyncStorage } from 'react-native'
+
 export default class LocalStorageHandler {
-  constructor() {
-    this.trackedStores = []
-  }
+  constructor() {}
+
+  @observable
+  trackedStores = []
 
   @action
   trackStore = storeRef => {
@@ -31,7 +35,7 @@ export default class LocalStorageHandler {
   @action
   refreshStore = async store => {
     try {
-      const localStore = await this.getStore(toJS(store))
+      const localStore = await this.getLocalStore(toJS(store))
       // Find matching keys between local and store data, updating store to match
       Object.keys(localStore).forEach(key => {
         if (store[key]) {
@@ -45,7 +49,7 @@ export default class LocalStorageHandler {
 
   // Returns stored data for a MobX store if stored data exists.  Otherwise returns the input store data
   @action
-  getStore = async store => {
+  getLocalStore = async store => {
     try {
       const localStore = (await AsyncStorage.getItem(store.storeName)) || JSON.stringify(store)
       return JSON.parse(localStore)
