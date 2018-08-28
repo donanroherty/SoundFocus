@@ -1,9 +1,9 @@
-import SettingsStore from 'stores/SettingsStore'
+import UserPropertyStore from 'stores/UserPropertyStore'
 import TimerStore from 'stores/TimerStore'
 
 export default class AppStore {
   constructor() {
-    this.settingStore = new SettingsStore(this)
+    this.userPropertyStore = new UserPropertyStore(this)
     this.timerStore = new TimerStore(this)
   }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import Navigator from 'screens/Navigator'
 
 import { Provider } from 'mobx-react'
-import AppStore from 'stores'
+import AppStore from 'stores/AppStore'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -12,7 +12,10 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Provider timerStore={this.appStore.timerStore} settingStore={this.appStore.settingStore}>
+      <Provider
+        timerStore={this.appStore.timerStore}
+        userPropertyStore={this.appStore.userPropertyStore}
+      >
         <Navigator />
       </Provider>
     )
