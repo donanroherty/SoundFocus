@@ -8,8 +8,8 @@ export const TIMER_MODE = Object.freeze({
 })
 
 class TimerStore {
-  constructor(rootStore) {
-    this.rootStore = rootStore
+  constructor(appStore) {
+    this.appStore = appStore
     this.timer = null
 
     this.setupInterval()
@@ -34,7 +34,7 @@ class TimerStore {
 
   @action
   setupInterval = () => {
-    const { userPropertyStore } = this.rootStore
+    const { userPropertyStore } = this.appStore
 
     const prevTimerMode = this.timerMode
 
@@ -59,7 +59,7 @@ class TimerStore {
 
   @action
   reset = () => {
-    const { userPropertyStore } = this.rootStore
+    const { userPropertyStore } = this.appStore
 
     this.pause()
     this.remaining = userPropertyStore.workDuration * 60
