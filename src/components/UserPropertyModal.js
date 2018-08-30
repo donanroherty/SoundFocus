@@ -21,11 +21,10 @@ export default class UserPropertyModal extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log('modal mounted')
-  }
+  componentDidMount() {}
 
   handleInput = val => {
+    //  TODO: Validate user input
     this.setState({ value: val })
   }
 
