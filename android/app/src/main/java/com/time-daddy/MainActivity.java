@@ -1,4 +1,4 @@
-package com.timedaddy;
+package com.time-daddy;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "timedaddy";
+        return "time-daddy";
     }
 }
