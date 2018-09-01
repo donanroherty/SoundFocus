@@ -1,10 +1,16 @@
+/**
+ * @format
+ * @flow
+ */
+
 import React from 'react'
 import Navigator from 'screens/Navigator'
 
 import { Provider } from 'mobx-react'
 import AppStore from 'stores/AppStore'
 
-export default class App extends React.Component {
+type Props = {}
+export default class App extends React.Component<Props> {
   constructor(props) {
     super(props)
     this.appStore = new AppStore()

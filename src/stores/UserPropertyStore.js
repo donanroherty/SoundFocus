@@ -1,7 +1,7 @@
 import { observable, action, toJS } from 'mobx'
 
 export default class UserPropertyStore {
-  constructor(rootStore) {
+  constructor(appStore) {
     this.storeName = 'UserPropertyStore'
   }
 

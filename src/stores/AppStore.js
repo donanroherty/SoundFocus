@@ -8,6 +8,7 @@ export default class AppStore {
     this.userPropertyStore = new UserPropertyStore(this)
     this.timerStore = new TimerStore(this)
 
+    // Create local storage handler to manage persisting data to local storage
     this.localStorageHandler = new LocalStorageHandler()
     this.localStorageHandler.trackStore(this.userPropertyStore)
 
