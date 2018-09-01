@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import AudioTrack from 'components/AudioTrack'
 
-// import whiteNoise from 'audio/noise/white-noise.wav'
-// import pinkNoise from 'audio/noise/pink-noise.wav'
-// import brownNoise from 'audio/noise/brown-noise.wav'
+import whiteNoise from 'audio/white-noise.wav'
+import pinkNoise from 'audio/pink-noise.wav'
+import brownNoise from 'audio/brown-noise.wav'
 
 class AudioTrackList extends Component {
   constructor(props) {
@@ -15,9 +15,9 @@ class AudioTrackList extends Component {
   render() {
     return (
       <View>
-        {/* <AudioTrack name="White Noise" audioAsset="assets/audio/noise/white-noise.wav" /> */}
-        {/* <AudioTrack name="Pink Noise" audioAsset="audio/noise/pink-noise.wav" /> */}
-        {/* <AudioTrack name="Brown Noise" audioAsset="audio/noise/brown-noise.wav" /> */}
+        <AudioTrack name="White Noise" audioAsset={whiteNoise} />
+        <AudioTrack name="Pink Noise" audioAsset={pinkNoise} />
+        <AudioTrack name="Brown Noise" audioAsset={brownNoise} />
       </View>
     )
   }
