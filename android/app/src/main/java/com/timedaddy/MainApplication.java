@@ -1,4 +1,4 @@
-package com.time-daddy;
+package com.timedaddy;
 
 import android.app.Application;
 

@@ -140,6 +140,10 @@
   version "7.0.0-beta.56"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.56.tgz#e5f63cae8b3b716825d64e69ad8b59d71cd2080c"
 
+"@babel/helper-plugin-utils@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0.tgz#bbb3fbee98661c569034237cc03967ba99b4f250"
+
 "@babel/helper-regex@7.0.0-beta.56":
   version "7.0.0-beta.56"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.0.0-beta.56.tgz#88d8a15c853892f603193e5adf10c428cd588fc0"
@@ -233,6 +237,13 @@
     "@babel/helper-replace-supers" "7.0.0-beta.56"
     "@babel/plugin-syntax-class-properties" "7.0.0-beta.56"
 
+"@babel/plugin-proposal-decorators@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.0.0.tgz#33e7e683ca9f8ec3f72104ed11096839d48df502"
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+    "@babel/plugin-syntax-decorators" "^7.0.0"
+
 "@babel/plugin-proposal-nullish-coalescing-operator@7.0.0-beta.56":
   version "7.0.0-beta.56"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-nullish-coalescing-operator/-/plugin-proposal-nullish-coalescing-operator-7.0.0-beta.56.tgz#e350051798665ceec8b9f40f5f7957f4fc0b7847"
@@ -266,6 +277,12 @@
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-class-properties/-/plugin-syntax-class-properties-7.0.0-beta.56.tgz#ab0cfbb1aa681810fb109e73ae125d3682837c33"
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.56"
+
+"@babel/plugin-syntax-decorators@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-decorators/-/plugin-syntax-decorators-7.0.0.tgz#7e151f744e1de3ec3601f6a4c69c8662cef1b27b"
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
 
 "@babel/plugin-syntax-dynamic-import@7.0.0-beta.56":
   version "7.0.0-beta.56"
