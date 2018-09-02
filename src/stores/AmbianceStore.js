@@ -2,10 +2,21 @@ import { observable, action, computed } from 'mobx'
 
 class AudioTrack {
   @observable
-  volume = 1
+  volume = 0.75
 
   @observable
-  muted = false
+  isActive = false
+
+  @action
+  setVolume = newVolume => {
+    console.log('setVolume', newVolume)
+    this.volume = newVolume
+  }
+
+  @action
+  toggleActive = () => {
+    this.isActive = !this.isActive
+  }
 }
 
 export default class AmbianceStore {

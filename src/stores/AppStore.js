@@ -1,12 +1,14 @@
 import { observable } from 'mobx'
 import UserPropertyStore from 'stores/UserPropertyStore'
 import TimerStore from 'stores/TimerStore'
+import AmbianceStore from 'stores/AmbianceStore'
 import LocalStorageHandler from 'stores/utils/LocalStorageHandler'
 
 export default class AppStore {
   constructor() {
     this.userPropertyStore = new UserPropertyStore(this)
     this.timerStore = new TimerStore(this)
+    this.ambianceStore = new AmbianceStore(this)
 
     // Create local storage handler to manage persisting data to local storage
     this.localStorageHandler = new LocalStorageHandler()

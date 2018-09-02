@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    color: Theme.textColor
+    color: Theme.colorText
   },
   label: {},
   value: { paddingRight: 5 },
 
-  linkText: { color: Theme.textColor, textDecorationLine: 'underline' },
+  linkText: { color: Theme.colorText, textDecorationLine: 'underline' },
 
   divider: {
     flexGrow: 1

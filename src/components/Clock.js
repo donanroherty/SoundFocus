@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   baseText: {
     fontFamily: Theme.font.thin,
     fontSize: 15,
-    color: Theme.textColor
+    color: Theme.colorText
   },
   minutes: {
     justifyContent: 'center',
