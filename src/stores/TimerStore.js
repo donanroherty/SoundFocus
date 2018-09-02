@@ -1,4 +1,5 @@
 import { observable, action, computed } from 'mobx'
+import BackgroundTimer from 'react-native-background-timer'
 
 export const TIMER_MODE = Object.freeze({
   NONE: 'NONE',
@@ -29,12 +30,6 @@ class TimerStore {
   @observable
   intervalsCompleted = 0
 
-  // True if the timer is ticking
-  @computed
-  get timerIsActive() {
-    return this.timer !== null
-  }
-
   // Prepares timer to start a new interval
   @action
   setupInterval = () => {
@@ -59,7 +54,7 @@ class TimerStore {
 
     // Start the clock automatically if continous mode is set by user
     if (userPropertyStore.continuousMode && prevTimerMode !== TIMER_MODE.NONE) {
-      this.resume()
+      this.startTimer()
     }
   }
 
@@ -68,32 +63,37 @@ class TimerStore {
   reset = () => {
     const { userPropertyStore } = this.appStore
 
-    this.pause()
+    this.stopTimer()
     this.remaining = userPropertyStore.workDuration * 60
     this.timerMode = TIMER_MODE.WORK
     this.intervalsCompleted = 0
   }
 
-  // Toggle timer state between paused and active
+  // Toggle timer state between stopped and active
   @action
   toggleActive = () => {
     if (this.timerIsActive) {
-      this.pause()
+      this.stopTimer()
     } else {
-      this.resume()
+      this.startTimer()
     }
   }
 
-  // Resume a paused timer
+  @observable
+  timerIsActive = false
+
+  // Resume a stopped timer
   @action
-  resume = () => {
-    this.timer = setInterval(this.tick, 1000)
+  startTimer = () => {
+    this.timerId = BackgroundTimer.setInterval(this.tick, 1000)
+    this.timerIsActive = true
   }
 
-  // Pause the timer
+  // Stop the timer
   @action
-  pause = () => {
-    clearInterval(this.timer)
+  stopTimer = () => {
+    BackgroundTimer.clearInterval(this.timerId)
+    this.timerIsActive = false
   }
 
   // Called every tick of the timer to update the time and change interval when appropriate
@@ -103,7 +103,7 @@ class TimerStore {
       // Decrement remaining seconds and continue timer
       this.remaining--
     } else {
-      this.pause()
+      this.stopTimer()
       if (this.timerMode === TIMER_MODE.WORK) {
         this.intervalsCompleted++
       }
