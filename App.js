@@ -21,6 +21,7 @@ export default class App extends React.Component<Props> {
       <Provider
         timerStore={this.appStore.timerStore}
         userPropertyStore={this.appStore.userPropertyStore}
+        ambianceStore={this.appStore.ambianceStore}
       >
         <Navigator />
       </Provider>

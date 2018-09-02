@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     fontFamily: Theme.font.regular,
     fontSize: 22,
     fontWeight: '100',
-    color: Theme.textColor
+    color: Theme.colorText
   }
 })
 
