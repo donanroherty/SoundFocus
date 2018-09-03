@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import UserPropertyListItem from 'components/UserPropertyListItem'
 import { inject, observer } from 'mobx-react'
+import { notify } from 'utils/Notifications'
 
 const UserPropertyList = props => {
   return (
@@ -59,6 +60,13 @@ const UserPropertyList = props => {
         max={0}
         value={props.userPropertyStore.continuousMode}
         setPropertyValue={props.userPropertyStore.toggleContinuousMode}
+      />
+
+      <UserPropertyListItem
+        shortName="testNotification"
+        name="Test Notification"
+        type="action"
+        action={notify}
       />
     </View>
   )

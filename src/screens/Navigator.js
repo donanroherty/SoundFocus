@@ -30,7 +30,7 @@ const TabBar = createMaterialBottomTabNavigator(
     }
   },
   {
-    initialRouteName: 'Ambiance',
+    initialRouteName: 'Settings',
     shifting: true,
     activeTintColor: '#2699FB',
     inactiveTintColor: '#777777',
