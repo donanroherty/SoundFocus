@@ -7,7 +7,7 @@ export default class UserPropertyStore {
 
   // The duration in minutes of a work interval
   @observable
-  workDuration = 6
+  workDuration = 25
   @action
   setWorkDuration = val => {
     this.workDuration = val
@@ -15,7 +15,7 @@ export default class UserPropertyStore {
 
   // The duration in minutes of a short break interval
   @observable
-  shortBreakDuration = 2
+  shortBreakDuration = 5
   @action
   setShortBreakDuration = val => {
     this.shortBreakDuration = val
@@ -23,7 +23,7 @@ export default class UserPropertyStore {
 
   // The duration in minutes of a long break interval
   @observable
-  longBreakDuration = 10
+  longBreakDuration = 20
   @action
   setLongBreakDuration = val => {
     this.longBreakDuration = val

@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action } from 'mobx'
 import BackgroundTimer from 'react-native-background-timer'
 
 export const TIMER_MODE = Object.freeze({
