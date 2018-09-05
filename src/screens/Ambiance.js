@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import ScreenHeader from 'components/ScreenHeader'
 import AudioTrackList from 'components/AudioTrackList'
 

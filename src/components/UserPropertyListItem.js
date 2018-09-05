@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Switch } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Switch, Button } from 'react-native'
 import Theme from 'theme'
 import UserPropertyModal from 'components/UserPropertyModal'
 
@@ -11,7 +11,8 @@ const defaultProps = {
   min: 0,
   max: 0,
   value: 0,
-  setPropertyValue: () => {}
+  setPropertyValue: () => {},
+  action: () => {}
 }
 
 class UserPropertyListItem extends Component {
@@ -41,6 +42,7 @@ class UserPropertyListItem extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
+        {/* Modal is show conditionally based on user interaction with certain types of property */}
         {this.state.showModal && (
           <UserPropertyModal
             closeModal={this.closeModal}
@@ -49,23 +51,27 @@ class UserPropertyListItem extends Component {
           />
         )}
 
+        {/* Property label */}
         <Text style={[styles.label, styles.text]}>{this.props.name}</Text>
         <View style={styles.divider} />
 
         {/* Change setting interaction based on setting type */}
         {/* Booleans use a switch */}
         {this.props.type === 'boolean' && (
-          <Switch value={this.props.value} onValueChange={this.handlePress} />
+          <Switch value={this.props.value} onValueChange={this.props.setPropertyValue} />
         )}
 
-        {/* All other types use a modal to set value */}
-        {this.props.type !== 'boolean' && (
-          <TouchableOpacity onPress={this.handlePress}>
+        {/* Integer types show a touchable value that opens a modal */}
+        {this.props.type === 'integer' && (
+          <TouchableOpacity onPress={this.openModal}>
             <Text style={[styles.text, styles.linkText, styles.value]}>
               {this.props.value} {this.props.unit}
             </Text>
           </TouchableOpacity>
         )}
+
+        {/* Action types show a button */}
+        {this.props.type === 'action' && <Button title={'Tap'} onPress={this.props.action} />}
       </View>
     )
   }

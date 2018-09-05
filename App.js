@@ -4,8 +4,8 @@
  */
 
 import React from 'react'
+import { View } from 'react-native'
 import Navigator from 'screens/Navigator'
-
 import { Provider } from 'mobx-react'
 import AppStore from 'stores/AppStore'
 
@@ -22,6 +22,7 @@ export default class App extends React.Component<Props> {
         timerStore={this.appStore.timerStore}
         userPropertyStore={this.appStore.userPropertyStore}
         ambianceStore={this.appStore.ambianceStore}
+        notificationStore={this.appStore.notificationStore}
       >
         <Navigator />
       </Provider>
