@@ -107,6 +107,7 @@ class TimerStore {
       if (this.timerMode === TIMER_MODE.WORK) {
         this.intervalsCompleted++
       }
+      this.appStore.notificationStore.notify()
       this.setupInterval()
     }
   }
