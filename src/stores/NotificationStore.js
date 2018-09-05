@@ -1,8 +1,6 @@
 import { observable, action } from 'mobx'
 import PushNotification from 'react-native-push-notification'
 
-import slowspring from '../../android/app/src/main/res/raw/slowspring.mp3'
-
 export default class NotificationStore {
   constructor(appStore) {
     this.appStore = appStore

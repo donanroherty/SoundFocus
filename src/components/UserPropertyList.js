@@ -60,13 +60,6 @@ const UserPropertyList = props => {
         value={props.userPropertyStore.continuousMode}
         setPropertyValue={props.userPropertyStore.toggleContinuousMode}
       />
-
-      <UserPropertyListItem
-        shortName="testNotification"
-        name="Test Notification"
-        type="action"
-        action={props.notificationStore.notify}
-      />
     </View>
   )
 }
@@ -78,4 +71,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default inject('userPropertyStore')(inject('notificationStore')(observer(UserPropertyList)))
+export default inject('userPropertyStore')(observer(UserPropertyList))
