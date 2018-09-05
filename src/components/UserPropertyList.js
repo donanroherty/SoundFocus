@@ -2,7 +2,6 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import UserPropertyListItem from 'components/UserPropertyListItem'
 import { inject, observer } from 'mobx-react'
-import { notify } from 'utils/Notifications'
 
 const UserPropertyList = props => {
   return (
@@ -66,7 +65,7 @@ const UserPropertyList = props => {
         shortName="testNotification"
         name="Test Notification"
         type="action"
-        action={notify}
+        action={props.notificationStore.notify}
       />
     </View>
   )
@@ -79,4 +78,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default inject('userPropertyStore')(observer(UserPropertyList))
+export default inject('userPropertyStore')(inject('notificationStore')(observer(UserPropertyList)))
