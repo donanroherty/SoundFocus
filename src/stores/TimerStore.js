@@ -107,7 +107,16 @@ class TimerStore {
       if (this.timerMode === TIMER_MODE.WORK) {
         this.intervalsCompleted++
       }
-      this.appStore.notificationStore.notify()
+
+      const notifMsg =
+        this.timerMode === TIMER_MODE.WORK
+          ? { title: 'Work complete', message: 'Time for a short break!' }
+          : this.timerMode === TIMER_MODE.SHORT_BREAK
+            ? { title: 'Break finished', message: 'Back to work!' }
+            : { title: 'Work session complete', message: 'Well done, take a long break!' }
+
+      this.appStore.notificationStore.notify(notifMsg)
+
       this.setupInterval()
     }
   }
