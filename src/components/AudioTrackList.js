@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
-import AudioTrack from 'components/AudioTrack'
+import AudioTrackControl from 'components/AudioTrackControl'
 
 import whiteNoise from 'audio/white-noise.wav'
 import pinkNoise from 'audio/pink-noise.wav'
@@ -18,16 +18,23 @@ class AudioTrackList extends Component {
     const { ambianceStore } = this.props
     return (
       <View style={styles.wrapper}>
-        <AudioTrack
+        <AudioTrackControl
           name="White Noise"
           audioAsset={whiteNoise}
           trackStore={ambianceStore.whiteNoise}
+          globalMute={ambianceStore.globalMute}
         />
-        <AudioTrack name="Pink Noise" audioAsset={pinkNoise} trackStore={ambianceStore.pinkNoise} />
-        <AudioTrack
+        <AudioTrackControl
+          name="Pink Noise"
+          audioAsset={pinkNoise}
+          trackStore={ambianceStore.pinkNoise}
+          globalMute={ambianceStore.globalMute}
+        />
+        <AudioTrackControl
           name="Brown Noise"
           audioAsset={brownNoise}
           trackStore={ambianceStore.brownNoise}
+          globalMute={ambianceStore.globalMute}
         />
       </View>
     )
