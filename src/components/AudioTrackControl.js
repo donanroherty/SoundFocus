@@ -4,57 +4,28 @@ import { observer } from 'mobx-react'
 import Video from 'react-native-video'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Slider from 'react-native-slider'
-import Theme from 'theme'
 import theme from '../theme'
 
 const defaultProps = {
   name: 'Track Name',
-  audioAsset: null
+  audioAsset: null,
+  trackStore: null,
+  globalMute: false
 }
 
-class AudioTrack extends Component {
+class AudioTrackControl extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      duration: 0,
-      currentTime: 0
-    }
-
     this.player = null
   }
 
-  handlePlaySound = () => {
-    this.props.trackStore.toggleActive()
-  }
-
-  onLoadStart = () => {
-    console.log('loading')
-  }
-  onLoad = data => {
-    console.log('loaded ', data)
-    this.setState({ duration: data.duration })
-  }
-  onProgress = data => {
-    this.setState({ currentTime: data.currentTime })
-  }
-  onEnd = () => {
-    console.log('onEnd ')
-  }
-  onError = err => {
-    console.log('onError ', err)
-  }
-
   render() {
-    const { volume, isActive, setVolume, toggleActive } = this.props.trackStore
+    const { volume, muted, setVolume, toggleActive } = this.props.trackStore
 
     return (
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.muteToggleContainer} onPress={toggleActive}>
-          <Icon
-            name="ios-musical-note"
-            size={50}
-            color={isActive ? theme.colorText : 'lightgray'}
-          />
+          <Icon name="ios-musical-note" size={50} color={muted ? 'lightgray' : theme.colorText} />
         </TouchableOpacity>
 
         <View style={styles.labelAndVolumeContainer}>
@@ -71,26 +42,6 @@ class AudioTrack extends Component {
             // debugTouchArea={true}
           />
         </View>
-
-        {isActive && (
-          <Video
-            source={this.props.audioAsset}
-            ref={ref => {
-              this.player = ref
-            }}
-            rate={1.0}
-            volume={volume}
-            paused={false}
-            repeat={true}
-            playInBackground={true}
-            playWhenInactive={false}
-            onLoadStart={this.onLoadStart}
-            onLoad={this.onLoad}
-            onProgress={this.onProgress}
-            onEnd={this.onEnd}
-            onError={this.onError}
-          />
-        )}
       </View>
     )
   }
@@ -132,6 +83,6 @@ const styles = StyleSheet.create({
   }
 })
 
-AudioTrack.defaultProps = defaultProps
+AudioTrackControl.defaultProps = defaultProps
 
-export default observer(AudioTrack)
+export default observer(AudioTrackControl)

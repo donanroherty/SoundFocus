@@ -9,11 +9,17 @@ import Navigator from 'screens/Navigator'
 import { Provider } from 'mobx-react'
 import AppStore from 'stores/AppStore'
 
+import AudioPlayerStack from 'components/AudioPlayerStack'
+
 type Props = {}
 export default class App extends React.Component<Props> {
   constructor(props) {
     super(props)
     this.appStore = new AppStore()
+  }
+
+  onError = err => {
+    console.log(err)
   }
 
   render() {
@@ -24,7 +30,11 @@ export default class App extends React.Component<Props> {
         ambianceStore={this.appStore.ambianceStore}
         notificationStore={this.appStore.notificationStore}
       >
-        <Navigator />
+        <>
+          <Navigator />
+
+          <AudioPlayerStack />
+        </>
       </Provider>
     )
   }

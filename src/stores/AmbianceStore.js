@@ -1,26 +1,32 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action } from 'mobx'
 
 class AudioTrack {
   @observable
   volume = 0.75
 
   @observable
-  isActive = false
+  muted = true
 
   @action
   setVolume = newVolume => {
-    console.log('setVolume', newVolume)
     this.volume = newVolume
   }
 
   @action
   toggleActive = () => {
-    this.isActive = !this.isActive
+    this.muted = !this.muted
   }
 }
 
+class TrackManager {}
+
 export default class AmbianceStore {
-  constructor(appStore) {}
+  constructor(appStore) {
+    this.appStore = appStore
+  }
+
+  @observable
+  globalMute = false
 
   @observable
   whiteNoise = new AudioTrack()

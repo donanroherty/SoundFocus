@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import { createBottomTabNavigator } from 'react-navigation'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import Icon from 'react-native-vector-icons/Ionicons'
 
