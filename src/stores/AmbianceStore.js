@@ -18,15 +18,28 @@ class AudioTrack {
   }
 }
 
-class TrackManager {}
-
 export default class AmbianceStore {
   constructor(appStore) {
     this.appStore = appStore
   }
 
   @observable
-  globalMute = false
+  globalMute = true
+
+  @action
+  toggleMute = () => {
+    this.globalMute = !this.globalMute
+  }
+
+  @observable
+  startAmbiance = () => {
+    this.globalMute = false
+  }
+
+  @observable
+  stopAmbiance = () => {
+    this.globalMute = true
+  }
 
   @observable
   whiteNoise = new AudioTrack()

@@ -12,7 +12,9 @@ class TimerStore {
   constructor(appStore) {
     this.appStore = appStore
     this.timer = null
+  }
 
+  init = () => {
     // Set up the first interval
     this.setupInterval()
   }
@@ -87,6 +89,12 @@ class TimerStore {
   startTimer = () => {
     this.timerId = BackgroundTimer.setInterval(this.tick, 1000)
     this.timerIsActive = true
+
+    if (this.timerMode === TIMER_MODE.SHORT_BREAK || this.timerMode === TIMER_MODE.LONG_BREAK) {
+      this.appStore.ambianceStore.stopAmbiance()
+    } else {
+      this.appStore.ambianceStore.startAmbiance()
+    }
   }
 
   // Stop the timer
@@ -94,6 +102,8 @@ class TimerStore {
   stopTimer = () => {
     BackgroundTimer.clearInterval(this.timerId)
     this.timerIsActive = false
+
+    this.appStore.ambianceStore.stopAmbiance()
   }
 
   // Called every tick of the timer to update the time and change interval when appropriate
