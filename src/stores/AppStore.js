@@ -12,6 +12,8 @@ export default class AppStore {
     this.ambianceStore = new AmbianceStore(this)
     this.notificationStore = new NotificationStore(this)
 
+    this.timerStore.init()
+
     // Create local storage handler to manage persisting data to local storage
     this.localStorageHandler = new LocalStorageHandler()
     this.localStorageHandler.trackStore(this.userPropertyStore)
