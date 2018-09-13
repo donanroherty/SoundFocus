@@ -3,27 +3,72 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Clock from 'components/Clock'
 import IntervalCounter from 'components/IntervalCounter'
+import PlayBar from 'components/PlayBar'
 import { inject, observer } from 'mobx-react'
+import { Dimensions } from 'react-native'
+import Theme from 'theme'
+
+const { width } = Dimensions.get('window')
 
 const Timer = props => (
   <View style={styles.wrapper}>
-    <TouchableOpacity onPress={props.timerStore.reset}>
-      <Icon name="md-refresh" size={30} />
-    </TouchableOpacity>
+    <View style={styles.topBlock}>
+      <TouchableOpacity
+        onPress={() => {
+          props.navigation.navigate('Options')
+        }}
+        style={styles.moreButton}
+      >
+        <Icon name="md-more" size={30} color={Theme.colorText} />
+      </TouchableOpacity>
+    </View>
 
-    <TouchableOpacity onPress={props.timerStore.toggleActive}>
-      <Clock size={100} />
-    </TouchableOpacity>
+    <View style={styles.clockContainer}>
+      <TouchableOpacity onPress={props.timerStore.toggleActive}>
+        <Clock size={100} />
+      </TouchableOpacity>
 
-    <IntervalCounter />
+      <IntervalCounter />
+    </View>
+    <View style={styles.playbarContainer}>
+      <PlayBar
+        openOptions={() => {
+          props.navigation.navigate('Options')
+        }}
+      />
+    </View>
   </View>
 )
 
 const styles = StyleSheet.create({
-  wrapper: { flexDirection: 'column', alignItems: 'center' },
-  clock: {
+  wrapper: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: Theme.colorBackground
+  },
+  moreButton: {
+    marginTop: 20,
+    marginRight: 20,
+    width: 40,
+    height: 40,
     flexDirection: 'row',
     justifyContent: 'center'
+  },
+  topBlock: {
+    flex: 1.5,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: '100%'
+  },
+  clockContainer: {
+    flex: 2.8,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  playbarContainer: {
+    flex: 2,
+    alignItems: 'center'
   }
 })
 

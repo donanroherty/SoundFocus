@@ -18,7 +18,8 @@ const Settings = props => {
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'white'
   }
 })
 
