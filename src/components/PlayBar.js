@@ -1,34 +1,64 @@
-import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import Icon from 'react-native-vector-icons/Ionicons'
-import theme from 'theme'
+import Theme from 'theme'
 
 const defaultProps = {
-  iconSize: 35
+  iconSize: 30
 }
 
 const PlayBar = props => {
-  const icon = props.ambianceStore.globalMute ? 'md-volume-off' : 'md-volume-high'
-
-  const handlePressMuteToggle = () => {
-    props.ambianceStore.toggleMute()
-  }
-
   return (
     <View style={styles.wrapper}>
-      <TouchableOpacity onPress={handlePressMuteToggle} style={styles.circle}>
-        <Icon name={icon} size={props.iconSize} color={theme.colorPrimary} />
-      </TouchableOpacity>
+      <View style={styles.row1}>
+        {/* Reset timer */}
+        <TouchableOpacity onPress={props.timerStore.reset}>
+          <Icon name="md-refresh" size={props.iconSize} color={Theme.colorText} />
+        </TouchableOpacity>
+
+        {/* Start timer */}
+        <TouchableOpacity
+          onPress={props.timerStore.toggleActive}
+          style={[styles.circle, styles.button]}
+        >
+          <Icon
+            name={props.timerStore.timerIsActive ? 'md-pause' : 'md-play'}
+            size={props.iconSize}
+            color={Theme.colorPrimary}
+          />
+        </TouchableOpacity>
+
+        {/* Open ambiance screen */}
+        <TouchableOpacity onPress={props.openAmbiance}>
+          <Icon name="md-musical-note" size={props.iconSize} color={Theme.colorText} />
+        </TouchableOpacity>
+      </View>
+      {/* Options button */}
+      <View style={styles.row2}>
+        <TouchableOpacity onPress={props.openSettings}>
+          <Icon name="ios-more" size={props.iconSize} color={Theme.colorText} />
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   wrapper: {
+    flexDirection: 'column'
+  },
+  row1: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: 'center'
+  },
+  row2: {
+    marginTop: 40,
+    alignItems: 'center'
+  },
+  button: {
+    marginLeft: 40,
+    marginRight: 40
   },
   circle: {
     borderWidth: 1,
@@ -37,9 +67,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: defaultProps.iconSize + 20,
     height: defaultProps.iconSize + 20,
-    borderColor: theme.colorPrimary
+    borderColor: Theme.colorPrimary
   }
 })
 PlayBar.defaultProps = defaultProps
 
-export default inject('ambianceStore')(observer(PlayBar))
+export default inject('timerStore')(inject('ambianceStore')(observer(PlayBar)))

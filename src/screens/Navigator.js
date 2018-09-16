@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import { createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 //Screens
@@ -9,12 +10,6 @@ import Settings from 'screens/Settings'
 
 const TabBar = createMaterialBottomTabNavigator(
   {
-    Timer: {
-      screen: Timer,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name="md-timer" size={25} color={tintColor} />
-      }
-    },
     Ambiance: {
       screen: Ambiance,
       navigationOptions: {
@@ -29,7 +24,7 @@ const TabBar = createMaterialBottomTabNavigator(
     }
   },
   {
-    initialRouteName: 'Timer',
+    initialRouteName: 'Ambiance',
     shifting: true,
     activeTintColor: '#2699FB',
     inactiveTintColor: '#777777',
@@ -37,8 +32,32 @@ const TabBar = createMaterialBottomTabNavigator(
   }
 )
 
+const Stack = createStackNavigator(
+  {
+    Home: {
+      screen: Timer
+    },
+    Options: {
+      screen: TabBar
+    },
+    Ambiance: {
+      screen: Ambiance
+    },
+    Settings: {
+      screen: Settings
+    }
+  },
+  {
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerMode: 'none',
+      header: null
+    }
+  }
+)
+
 export default class Nav extends Component {
   render() {
-    return <TabBar />
+    return <Stack />
   }
 }

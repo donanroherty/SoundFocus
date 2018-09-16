@@ -10,7 +10,8 @@
     "bashStart": "bash bashstart.sh",
     "clean": "cd android && ./gradlew.bat clean",
     "cleanrun": "cd android && ./gradlew.bat clean && cd.. && node node_modules/react-native/local-cli/cli.js run-android",
-    "emulator": "emulator -avd Pixel_2_XL_API_28 -partition-size 512 -feature WindowsHypervisorPlatform -dns-server 8.8.8.8",
+    "emulator": "emulator -avd Pixel2XL -partition-size 512 -feature WindowsHypervisorPlatform -dns-server 8.8.8.8",
+    "oreo": "emulator -avd Pixel2Oreo -partition-size 512 -feature WindowsHypervisorPlatform -dns-server 8.8.8.8",
     "tablet": "emulator -avd Tablet -partition-size 512 -feature WindowsHypervisorPlatform -dns-server 8.8.8.8",
     "emulatorcoldboot": "emulator -avd Pixel_2_XL_API_28 -partition-size 512 -feature WindowsHypervisorPlatform -dns-server 8.8.8.8 -no-snapshot-load"
   },

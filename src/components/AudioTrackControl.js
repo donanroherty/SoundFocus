@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'green'
   },
   trackLabel: {
+    fontFamily: theme.font.medium,
     fontSize: 20,
     marginLeft: 15,
     color: theme.colorText
