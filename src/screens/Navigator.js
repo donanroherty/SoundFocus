@@ -39,6 +39,12 @@ const Stack = createStackNavigator(
     },
     Options: {
       screen: TabBar
+    },
+    Ambiance: {
+      screen: Ambiance
+    },
+    Settings: {
+      screen: Settings
     }
   },
   {

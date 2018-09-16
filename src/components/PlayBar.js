@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Theme from 'theme'
@@ -9,33 +9,37 @@ const defaultProps = {
 }
 
 const PlayBar = props => {
-  const soundIcon = props.ambianceStore.globalMute ? 'md-volume-off' : 'md-volume-high'
-  const playIcon = props.timerStore.timerIsActive ? 'md-pause' : 'md-play'
-  const resetIcon = 'md-refresh'
-
   return (
     <View style={styles.wrapper}>
       <View style={styles.row1}>
+        {/* Reset timer */}
         <TouchableOpacity onPress={props.timerStore.reset}>
-          <Icon name={resetIcon} size={props.iconSize} color={Theme.colorPrimary} />
+          <Icon name="md-refresh" size={props.iconSize} color={Theme.colorText} />
         </TouchableOpacity>
 
+        {/* Start timer */}
         <TouchableOpacity
           onPress={props.timerStore.toggleActive}
           style={[styles.circle, styles.button]}
         >
-          <Icon name={playIcon} size={props.iconSize} color={Theme.colorPrimary} />
+          <Icon
+            name={props.timerStore.timerIsActive ? 'md-pause' : 'md-play'}
+            size={props.iconSize}
+            color={Theme.colorPrimary}
+          />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={props.ambianceStore.toggleMute}>
-          <Icon name={soundIcon} size={props.iconSize} color={Theme.colorPrimary} />
+        {/* Open ambiance screen */}
+        <TouchableOpacity onPress={props.openAmbiance}>
+          <Icon name="md-musical-note" size={props.iconSize} color={Theme.colorText} />
         </TouchableOpacity>
       </View>
-      {/* <View style={styles.row2}>
-        <TouchableOpacity onPress={props.openOptions}>
-          <Icon name="ios-more" size={props.iconSize} color={Theme.colorPrimary} />
+      {/* Options button */}
+      <View style={styles.row2}>
+        <TouchableOpacity onPress={props.openSettings}>
+          <Icon name="ios-more" size={props.iconSize} color={Theme.colorText} />
         </TouchableOpacity>
-      </View> */}
+      </View>
     </View>
   )
 }
@@ -43,18 +47,18 @@ const PlayBar = props => {
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column'
-    // alignItems: 'center'
   },
   row1: {
     flexDirection: 'row',
     alignItems: 'center'
   },
   row2: {
-    marginTop: 10,
+    marginTop: 40,
     alignItems: 'center'
   },
   button: {
-    margin: 30
+    marginLeft: 40,
+    marginRight: 40
   },
   circle: {
     borderWidth: 1,

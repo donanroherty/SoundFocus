@@ -12,16 +12,7 @@ const { width } = Dimensions.get('window')
 
 const Timer = props => (
   <View style={styles.wrapper}>
-    <View style={styles.topBlock}>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate('Options')
-        }}
-        style={styles.moreButton}
-      >
-        <Icon name="md-more" size={30} color={Theme.colorText} />
-      </TouchableOpacity>
-    </View>
+    <View style={styles.topBlock} />
 
     <View style={styles.clockContainer}>
       <TouchableOpacity onPress={props.timerStore.toggleActive}>
@@ -32,8 +23,11 @@ const Timer = props => (
     </View>
     <View style={styles.playbarContainer}>
       <PlayBar
-        openOptions={() => {
-          props.navigation.navigate('Options')
+        openSettings={() => {
+          props.navigation.navigate('Settings')
+        }}
+        openAmbiance={() => {
+          props.navigation.navigate('Ambiance')
         }}
       />
     </View>

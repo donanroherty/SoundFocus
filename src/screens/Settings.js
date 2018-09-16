@@ -5,10 +5,14 @@ import ScreenHeader from 'components/ScreenHeader'
 import { inject, observer } from 'mobx-react'
 
 const Settings = props => {
+  const navigateHome = () => {
+    props.navigation.navigate('Home')
+  }
+
   return (
     <View>
       <View style={styles.wrapper}>
-        <ScreenHeader screenName="Settings" />
+        <ScreenHeader screenName="Settings" navigateHome={navigateHome} />
         <UserPropertyList />
       </View>
     </View>

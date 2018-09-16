@@ -1,35 +1,77 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import Clock from 'components/Clock'
 import Theme from 'theme'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const defaultProps = {
   screenName: 'Screen Name'
 }
 
 const ScreenHeader = props => {
+  const soundIcon = props.ambianceStore.globalMute ? 'md-volume-off' : 'md-volume-high'
+
   return (
     <View style={styles.wrapper}>
-      <Clock remaining={props.timerStore.remaining} size={60} />
-      <Text style={styles.title}>{props.screenName}</Text>
+      {/* Back button */}
+      <View style={styles.leftDiv}>
+        <TouchableOpacity onPress={props.navigateHome} style={styles.backButton}>
+          <Icon name="md-arrow-back" size={30} color={Theme.colorText} />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.middleDiv}>
+        {/* Clock */}
+        <TouchableOpacity onPress={props.navigateHome}>
+          <Clock remaining={props.timerStore.remaining} size={70} />
+        </TouchableOpacity>
+
+        {/* Screen title */}
+        <Text style={styles.title}>{props.screenName}</Text>
+      </View>
+
+      {/* Mute button */}
+      <View style={styles.rightDiv}>
+        <TouchableOpacity onPress={props.ambianceStore.toggleMute} style={styles.muteButton}>
+          <Icon name={soundIcon} size={30} color={Theme.colorPrimary} />
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  wrapper: { flexDirection: 'row' },
+  leftDiv: {
+    width: 50
+  },
+  middleDiv: {
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  rightDiv: {
+    width: 50,
+    alignItems: 'flex-end'
+  },
+  backButton: {
+    marginLeft: 20,
+    marginTop: 30
+  },
+  muteButton: {
+    marginRight: 20,
+    marginTop: 30
   },
   title: {
     fontFamily: Theme.font.regular,
     fontSize: 22,
     fontWeight: '100',
-    color: Theme.colorText
+    color: Theme.colorText,
+    marginTop: 10
   }
 })
 
 ScreenHeader.defaultProps = defaultProps
 
-export default inject('timerStore')(observer(ScreenHeader))
+export default inject('timerStore')(inject('ambianceStore')(observer(ScreenHeader)))
