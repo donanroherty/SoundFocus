@@ -2,9 +2,7 @@
  * @format
  * @flow
  */
-
 import React from 'react'
-import { View } from 'react-native'
 import Navigator from 'screens/Navigator'
 import { Provider } from 'mobx-react'
 import AppStore from 'stores/AppStore'
@@ -16,10 +14,6 @@ export default class App extends React.Component<Props> {
   constructor(props) {
     super(props)
     this.appStore = new AppStore()
-  }
-
-  onError = err => {
-    console.log(err)
   }
 
   render() {

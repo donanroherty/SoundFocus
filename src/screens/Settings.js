@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import UserPropertyList from 'components/UserPropertyList'
 import ScreenHeader from 'components/ScreenHeader'
 import { inject, observer } from 'mobx-react'
@@ -10,19 +10,21 @@ const Settings = props => {
   }
 
   return (
-    <View>
-      <View style={styles.wrapper}>
-        <ScreenHeader screenName="Settings" navigateHome={navigateHome} />
-        <UserPropertyList />
-      </View>
+    <View style={styles.wrapper}>
+      <ScreenHeader
+        screenName="Settings"
+        navigateHome={navigateHome}
+        style={styles.userPropertyList}
+      />
+      <UserPropertyList />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexDirection: 'column',
-    alignItems: 'center',
+    flex: 1,
+    padding: 10,
     backgroundColor: 'white'
   }
 })

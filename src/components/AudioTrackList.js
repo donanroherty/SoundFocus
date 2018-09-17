@@ -43,9 +43,7 @@ class AudioTrackList extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    // backgroundColor: 'yellow',
-    margin: 20,
-    padding: 10
+    margin: 20
   }
 })
 

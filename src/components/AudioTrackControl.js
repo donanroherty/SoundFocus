@@ -49,18 +49,15 @@ class AudioTrackControl extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    // backgroundColor: 'red',
     flexDirection: 'row',
-    margin: 10
+    marginBottom: 20
   },
   muteToggleContainer: {
-    // backgroundColor: 'cyan',
     marginRight: 15
   },
   labelAndVolumeContainer: {
     flex: 1,
     flexDirection: 'column'
-    // backgroundColor: 'green'
   },
   trackLabel: {
     fontFamily: theme.font.medium,
@@ -78,8 +75,8 @@ const styles = StyleSheet.create({
     borderRadius: 90
   },
   volumeThumbStyle: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     borderRadius: 90
   }
 })

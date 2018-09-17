@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Switch, Button } from 'react-native'
 import Theme from 'theme'
 import UserPropertyModal from 'components/UserPropertyModal'
+import theme from '../theme'
 
 const defaultProps = {
   shortName: 'mySetting',
@@ -53,12 +54,17 @@ class UserPropertyListItem extends Component {
 
         {/* Property label */}
         <Text style={[styles.label, styles.text]}>{this.props.name}</Text>
-        <View style={styles.divider} />
+        {/* <View style={styles.divider} /> */}
 
         {/* Change setting interaction based on setting type */}
         {/* Booleans use a switch */}
         {this.props.type === 'boolean' && (
-          <Switch value={this.props.value} onValueChange={this.props.setPropertyValue} />
+          <Switch
+            value={this.props.value}
+            onValueChange={this.props.setPropertyValue}
+            trackColor={{ true: theme.colorPrimaryLight }}
+            thumbColor="lightgrey"
+          />
         )}
 
         {/* Integer types show a touchable value that opens a modal */}
@@ -79,19 +85,21 @@ class UserPropertyListItem extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
+    flex: 1,
     flexDirection: 'row',
-    flexWrap: 'nowrap',
     justifyContent: 'space-between',
-    padding: 10
+    marginBottom: 30,
+    paddingLeft: 10,
+    paddingRight: 10
   },
   text: {
-    fontSize: 18,
+    fontFamily: 'theme.font.medium',
+    fontSize: 20,
     color: Theme.colorText
   },
   label: {},
   value: { paddingRight: 5 },
-
-  linkText: { color: Theme.colorText, textDecorationLine: 'underline' },
+  linkText: { color: Theme.colorText },
 
   divider: {
     flexGrow: 1
