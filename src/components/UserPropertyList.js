@@ -61,11 +61,24 @@ const UserPropertyList = props => {
       shortName="continuousMode"
       name="Continous Mode"
       type="boolean"
-      unit="mins"
+      unit=""
       min={0}
       max={0}
       value={props.userPropertyStore.continuousMode}
       setPropertyValue={props.userPropertyStore.toggleContinuousMode}
+    />
+  )
+
+  const keepScreenOnProp = (
+    <UserPropertyListItem
+      shortName="keepScreenOn"
+      name="Keep Screen On"
+      type="boolean"
+      unit=""
+      min={0}
+      max={0}
+      value={props.userPropertyStore.keepScreenOn}
+      setPropertyValue={props.userPropertyStore.toggleKeepScreenOn}
     />
   )
 
@@ -82,7 +95,8 @@ const UserPropertyList = props => {
             shortBreakDurationProp,
             longBreakDurationProp,
             workIntervalCountProp,
-            continuousModeProp
+            continuousModeProp,
+            keepScreenOnProp
           ]
         }
       ]}

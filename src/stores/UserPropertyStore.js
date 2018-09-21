@@ -44,4 +44,11 @@ export default class UserPropertyStore {
   toggleContinuousMode = () => {
     this.continuousMode = !this.continuousMode
   }
+
+  @observable
+  keepScreenOn = false
+  @action
+  toggleKeepScreenOn = () => {
+    this.keepScreenOn = !this.keepScreenOn
+  }
 }
