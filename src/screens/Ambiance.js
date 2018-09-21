@@ -2,7 +2,6 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import ScreenHeader from 'components/ScreenHeader'
 import AudioTrackList from 'components/AudioTrackList'
-
 import Theme from 'theme'
 
 const Ambiance = props => {
@@ -21,7 +20,7 @@ const Ambiance = props => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: Theme.backgroundColor
+    backgroundColor: 'white'
   },
   playbar: {
     alignContent: 'flex-end'
