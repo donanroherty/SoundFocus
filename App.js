@@ -3,12 +3,41 @@
  * @flow
  */
 import React from 'react'
-import Navigator from 'screens/Navigator'
 import { Provider } from 'mobx-react'
+import { createStackNavigator } from 'react-navigation'
 import KeepAwake from 'react-native-keep-awake'
+
+// Screens
+import Timer from 'screens/Timer'
+import Ambiance from 'screens/Ambiance'
+import Settings from 'screens/Settings'
+
+// State store
 import AppStore from 'stores/AppStore'
 
 import AudioPlayerStack from 'components/AudioPlayerStack'
+
+const NavStack = createStackNavigator(
+  {
+    Home: {
+      screen: Timer
+    },
+    Ambiance: {
+      screen: Ambiance
+    },
+    Settings: {
+      screen: Settings
+    }
+  },
+  {
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerMode: 'none',
+      header: null
+    }
+  }
+)
+
 
 type Props = {}
 export default class App extends React.Component<Props> {
@@ -18,7 +47,8 @@ export default class App extends React.Component<Props> {
   }
 
   render() {
-    return (
+ 
+    return (   
       <Provider
         timerStore={this.appStore.timerStore}
         userPropertyStore={this.appStore.userPropertyStore}
@@ -26,7 +56,7 @@ export default class App extends React.Component<Props> {
         notificationStore={this.appStore.notificationStore}
       >
         <>
-          <Navigator />
+          <NavStack />
           <AudioPlayerStack />
           {this.appStore.timerStore.timerIsActive && <KeepAwake />}
         </>
