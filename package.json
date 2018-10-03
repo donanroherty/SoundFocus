@@ -5,7 +5,9 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
-    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
+    "release": "react-native run-android --variant=release",
+    "build": "cd android && ./gradlew.bat assembleRelease && cd..",
+    "buildandrelease": "cd android && ./gradlew.bat assembleRelease && cd.. && react-native run-android --variant=release",
     "test": "jest",
     "bashStart": "bash bashstart.sh",
     "clean": "cd android && ./gradlew.bat clean",
@@ -19,27 +21,30 @@
     "preset": "react-native"
   },
   "dependencies": {
-    "mobx": "^4.4.1",
+    "@babel/runtime": "^7.1.2",
+    "bugsnag-react-native": "^2.10.3",
+    "mobx": "^4.5",
     "mobx-react": "^5.2.8",
     "mobx-remotedev": "^0.2.8",
     "react": "16.5.0",
-    "react-native": "0.57.0",
-    "react-native-background-timer": "^2.0.1",
+    "react-native": "0.57.1",
+    "react-native-background-timer": "2.1.0-alpha.6",
     "react-native-dash": "^0.0.9",
     "react-native-keep-awake": "^3.1.0",
     "react-native-modal": "^6.5.0",
     "react-native-push-notification": "^3.1.1",
     "react-native-slider": "^0.11.0",
     "react-native-vector-icons": "^5.0.0",
-    "react-native-video": "^3.2.0",
-    "react-navigation": "^2.9.3",
+    "react-native-video": "^3.2.1",
+    "react-navigation": "^2.17.0",
     "react-navigation-material-bottom-tabs": "^0.3.0",
     "react-timer-mixin": "^0.13.4",
-    "shortid": "^2.2.12"
+    "shortid": "^2.2.13"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.1.2",
     "babel-jest": "23.6.0",
+    "babel-preset-react-native": "^5",
     "jest": "23.6.0",
     "react-test-renderer": "16.5.0"
   },
