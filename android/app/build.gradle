@@ -72,6 +72,20 @@ import com.android.build.OutputFile
  * ]
  */
 
+import groovy.json.JsonSlurper
+
+def getNpmVersion() {
+    def inputFile = new File("../package.json")
+    def packageJson = new JsonSlurper().parseText(inputFile.text)
+    return packageJson["version"]
+}
+
+/* calculated from git commits to give sequential integers */
+def getGitVersion() {
+    def process = "git rev-list master --first-parent --count".execute()
+    return process.text.toInteger()
+}
+
 project.ext.react = [
     entryFile: "index.js"
 ]
@@ -86,12 +100,15 @@ apply from: "../../node_modules/react-native/react.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = true
+def enableSeparateBuildPerCPUArchitecture = false
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
 def enableProguardInReleaseBuilds = false
+
+def userVer = getNpmVersion()
+def googleVer = getGitVersion()
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -101,11 +118,11 @@ android {
         applicationId "com.timedaddy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
-        // ndk {
-        //     abiFilters "armeabi-v7a", "x86"
-        // }
+        versionCode googleVer
+        versionName userVer
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
     }
     signingConfigs {
         release {
@@ -121,7 +138,7 @@ android {
         abi {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
-            universalApk true  // If true, also generate a universal APK
+            universalApk false  // If true, also generate a universal APK
             include "armeabi-v7a", "x86"
         }
     }
