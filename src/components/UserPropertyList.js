@@ -61,9 +61,6 @@ const UserPropertyList = props => {
       shortName="continuousMode"
       name="Continous Mode"
       type="boolean"
-      unit=""
-      min={0}
-      max={0}
       value={props.userPropertyStore.continuousMode}
       setPropertyValue={props.userPropertyStore.toggleContinuousMode}
     />
@@ -74,11 +71,39 @@ const UserPropertyList = props => {
       shortName="keepScreenOn"
       name="Keep Screen On"
       type="boolean"
-      unit=""
-      min={0}
-      max={0}
       value={props.userPropertyStore.keepScreenOn}
       setPropertyValue={props.userPropertyStore.toggleKeepScreenOn}
+    />
+  )
+
+  const darkModeProp = (
+    <UserPropertyListItem
+      shortName="darkMode"
+      name="Dark Mode"
+      type="picker"
+      pickerOptions={['Off', 'On', 'Timer Only']}
+      value={props.userPropertyStore.darkMode}
+      setPropertyValue={props.userPropertyStore.setDarkMode}
+    />
+  )
+
+  const resetUserPropsProp = (
+    <UserPropertyListItem
+      shortName="resetUserPropsToDefault"
+      name="Reset To Defaults"
+      actionIcon="md-refresh"
+      type="action"
+      setPropertyValue={props.userPropertyStore.resetUserPropsToDefault}
+    />
+  )
+
+  const aboutProp = (
+    <UserPropertyListItem
+      shortName="about"
+      name="About"
+      actionIcon="md-information-circle"
+      type="action"
+      setPropertyValue={props.userPropertyStore.resetUserPropsToDefault}
     />
   )
 
@@ -95,9 +120,16 @@ const UserPropertyList = props => {
             shortBreakDurationProp,
             longBreakDurationProp,
             workIntervalCountProp,
-            continuousModeProp,
-            keepScreenOnProp
+            continuousModeProp
           ]
+        },
+        {
+          title: 'General',
+          data: [keepScreenOnProp, darkModeProp]
+        },
+        {
+          title: 'App',
+          data: [resetUserPropsProp, aboutProp]
         }
       ]}
       keyExtractor={(item, index) => item + index}

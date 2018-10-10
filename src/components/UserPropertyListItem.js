@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Switch, Button } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Switch, Picker } from 'react-native'
 import Theme from 'theme'
 import UserPropertyModal from 'components/UserPropertyModal'
 import theme from '../theme'
+import shortId from 'shortid'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const defaultProps = {
   shortName: 'mySetting',
   name: 'My Setting',
+  actionIcon: 'ios-nuclear',
   type: 'integer',
   unit: '',
   min: 0,
   max: 0,
   value: 0,
+  pickerOptions: [],
+  pickerDefault: '',
   setPropertyValue: () => {},
   action: () => {}
 }
@@ -42,7 +47,7 @@ class UserPropertyListItem extends Component {
 
   render() {
     return (
-      <View style={styles.wrapper}>
+      <View>
         {/* Modal is show conditionally based on user interaction with certain types of property */}
         {this.state.showModal && (
           <UserPropertyModal
@@ -52,32 +57,66 @@ class UserPropertyListItem extends Component {
           />
         )}
 
-        {/* Property label */}
-        <Text style={[styles.label, styles.text]}>{this.props.name}</Text>
-        {/* <View style={styles.divider} /> */}
+        <TouchableOpacity
+          onPress={this.props.type === 'integer' ? this.openModal : () => {}}
+          style={[
+            styles.wrapper,
+            { justifyContent: this.props.type === 'action' ? 'flex-start' : 'space-between' }
+          ]}
+        >
+          {/* Action types show an icon before the label */}
+          {this.props.type === 'action' && (
+            <Icon
+              name={this.props.actionIcon}
+              size={30}
+              color={Theme.colorText}
+              style={{ paddingRight: 15 }}
+            />
+          )}
 
-        {/* Change setting interaction based on setting type */}
-        {/* Booleans use a switch */}
-        {this.props.type === 'boolean' && (
-          <Switch
-            value={this.props.value}
-            onValueChange={this.props.setPropertyValue}
-            trackColor={{ true: theme.colorPrimaryLight }}
-            thumbColor="lightgrey"
-          />
-        )}
+          {/* Property label */}
+          <Text style={styles.text}>{this.props.name}</Text>
+          {/* <View style={styles.divider} /> */}
 
-        {/* Integer types show a touchable value that opens a modal */}
-        {this.props.type === 'integer' && (
-          <TouchableOpacity onPress={this.openModal}>
-            <Text style={[styles.text, styles.linkText, styles.value]}>
-              {this.props.value} {this.props.unit}
-            </Text>
-          </TouchableOpacity>
-        )}
+          {/* Change setting interaction based on setting type */}
+          {/* Booleans use a switch */}
+          {this.props.type === 'boolean' && (
+            <Switch
+              value={this.props.value}
+              onValueChange={this.props.setPropertyValue}
+              trackColor={{ true: theme.colorPrimaryLight }}
+              thumbColor="lightgrey"
+            />
+          )}
 
-        {/* Action types show a button */}
-        {this.props.type === 'action' && <Button title={'Tap'} onPress={this.props.action} />}
+          {/* Integer types show a touchable value that opens a modal */}
+          {this.props.type === 'integer' && (
+            <TouchableOpacity onPress={this.openModal}>
+              <Text style={[styles.text, styles.linkText, styles.value]}>
+                {this.props.value} {this.props.unit}
+              </Text>
+            </TouchableOpacity>
+          )}
+
+          {/* Picker option type */}
+          {this.props.type === 'picker' && (
+            <Picker
+              selectedValue={this.props.value}
+              mode="dropdown"
+              style={styles.picker}
+              onValueChange={(itemValue, itemIndex) => this.props.setPropertyValue(itemValue)}
+              itemStyle={{
+                fontFamily: Theme.font.medium,
+                fontSize: 30,
+                color: Theme.colorText
+              }}
+            >
+              {this.props.pickerOptions.map((option, i) => (
+                <Picker.Item label={option} value={i} key={shortId.generate()} />
+              ))}
+            </Picker>
+          )}
+        </TouchableOpacity>
       </View>
     )
   }
@@ -88,19 +127,22 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 30,
+    marginBottom: 20,
     paddingLeft: 10,
     paddingRight: 10
   },
   text: {
-    fontFamily: 'theme.font.medium',
-    fontSize: 20,
+    fontFamily: Theme.font.regular,
+    fontSize: 18,
     color: Theme.colorText
   },
-  label: {},
-  value: { paddingRight: 5 },
-  linkText: { color: Theme.colorText },
 
+  value: { paddingRight: 5 },
+  linkText: { fontFamily: Theme.font.medium },
+  picker: {
+    height: 'auto',
+    width: 150
+  },
   divider: {
     flexGrow: 1
   }

@@ -11,8 +11,13 @@ const theme = {
   colorPrimary: '#2699FB',
   colorPrimaryLight: '#B0D8FB',
   colorPrimaryLighter: '#E2EFFB',
+
   black: '#000000',
   colorBackground: '#FFFFFF',
+
+  colorTextDarkMode: '#FFFFFF',
+  colorBackgroundDarkMode: '#000000',
+  
   font: Fonts.roboto
 }
 
