@@ -9,12 +9,16 @@ const defaultProps = {
 }
 
 const PlayBar = props => {
+  const { darkMode } = props.userPropertyStore
+  const textColor = Theme.getTextColor(darkMode)
+  const bgColorStyle = { backgroundColor: Theme.getBackgroundColor(darkMode) }
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.row1}>
         {/* Reset timer */}
         <TouchableOpacity onPress={props.timerStore.reset}>
-          <Icon name="md-refresh" size={props.iconSize} color={Theme.colorText} />
+          <Icon name="md-refresh" size={props.iconSize} color={textColor} />
         </TouchableOpacity>
 
         {/* Start timer */}
@@ -31,13 +35,13 @@ const PlayBar = props => {
 
         {/* Open ambiance screen */}
         <TouchableOpacity onPress={props.openAmbiance}>
-          <Icon name="md-musical-note" size={props.iconSize} color={Theme.colorText} />
+          <Icon name="md-musical-note" size={props.iconSize} color={textColor} />
         </TouchableOpacity>
       </View>
       {/* Options button */}
       <View style={styles.row2}>
         <TouchableOpacity onPress={props.openSettings}>
-          <Icon name="ios-more" size={props.iconSize} color={Theme.colorText} />
+          <Icon name="ios-more" size={props.iconSize} color={textColor} />
         </TouchableOpacity>
       </View>
     </View>
@@ -72,4 +76,6 @@ const styles = StyleSheet.create({
 })
 PlayBar.defaultProps = defaultProps
 
-export default inject('timerStore')(inject('ambianceStore')(observer(PlayBar)))
+export default inject('timerStore')(
+  inject('ambianceStore')(inject('userPropertyStore')(observer(PlayBar)))
+)

@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet, SectionList, Text } from 'react-native'
 import UserPropertyListItem from 'components/UserPropertyListItem'
 import { inject, observer } from 'mobx-react'
+import Theme from 'theme'
 
 const UserPropertyList = props => {
   const workDurationProp = (
@@ -80,12 +81,22 @@ const UserPropertyList = props => {
     <UserPropertyListItem
       shortName="darkMode"
       name="Dark Mode"
-      type="picker"
-      pickerOptions={['Off', 'On', 'Timer Only']}
+      type="boolean"
       value={props.userPropertyStore.darkMode}
-      setPropertyValue={props.userPropertyStore.setDarkMode}
+      setPropertyValue={props.userPropertyStore.toggleDarkMode}
     />
   )
+
+  // const darkModeProp = (
+  //   <UserPropertyListItem
+  //     shortName="darkMode"
+  //     name="Dark Mode"
+  //     type="picker"
+  //     pickerOptions={['Off', 'On', 'Timer Only']}
+  //     value={props.userPropertyStore.darkMode}
+  //     setPropertyValue={props.userPropertyStore.setDarkMode}
+  //   />
+  // )
 
   const resetUserPropsProp = (
     <UserPropertyListItem
@@ -107,11 +118,16 @@ const UserPropertyList = props => {
     />
   )
 
+  const { darkMode } = props.userPropertyStore
+  const textColorStyle = { color: Theme.getTextColor(darkMode) }
+
   return (
     <SectionList
       style={styles.sectionList}
       renderItem={({ item, index, section }) => <View key={index}>{item}</View>}
-      renderSectionHeader={({ section: { title } }) => <Text style={styles.title}>{title}</Text>}
+      renderSectionHeader={({ section: { title } }) => (
+        <Text style={[styles.title, textColorStyle]}>{title}</Text>
+      )}
       sections={[
         {
           title: 'Timer',
@@ -140,7 +156,6 @@ const UserPropertyList = props => {
 const styles = StyleSheet.create({
   sectionList: { flex: 1 },
   title: {
-    fontWeight: 'bold',
     marginBottom: 20
   }
 })

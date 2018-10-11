@@ -30,14 +30,13 @@ const NavStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Settings',
+    initialRouteName: 'Home',
     navigationOptions: {
       headerMode: 'none',
       header: null
     }
   }
 )
-
 
 type Props = {}
 export default class App extends React.Component<Props> {
@@ -47,8 +46,7 @@ export default class App extends React.Component<Props> {
   }
 
   render() {
- 
-    return (   
+    return (
       <Provider
         timerStore={this.appStore.timerStore}
         userPropertyStore={this.appStore.userPropertyStore}

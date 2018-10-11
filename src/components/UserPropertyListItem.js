@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Switch, Picker } from 'react-native'
-import Theme from 'theme'
 import UserPropertyModal from 'components/UserPropertyModal'
-import theme from '../theme'
 import shortId from 'shortid'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { inject, observer } from 'mobx-react'
+import Theme from 'theme'
 
 const defaultProps = {
   shortName: 'mySetting',
@@ -46,6 +46,10 @@ class UserPropertyListItem extends Component {
   }
 
   render() {
+    const { darkMode } = this.props.userPropertyStore
+    const textColor = Theme.getTextColor(darkMode)
+    const textColorStyle = { color: Theme.getTextColor(darkMode) }
+
     return (
       <View>
         {/* Modal is show conditionally based on user interaction with certain types of property */}
@@ -69,13 +73,13 @@ class UserPropertyListItem extends Component {
             <Icon
               name={this.props.actionIcon}
               size={30}
-              color={Theme.colorText}
+              color={textColor}
               style={{ paddingRight: 15 }}
             />
           )}
 
           {/* Property label */}
-          <Text style={styles.text}>{this.props.name}</Text>
+          <Text style={[styles.text, textColorStyle]}>{this.props.name}</Text>
           {/* <View style={styles.divider} /> */}
 
           {/* Change setting interaction based on setting type */}
@@ -84,7 +88,7 @@ class UserPropertyListItem extends Component {
             <Switch
               value={this.props.value}
               onValueChange={this.props.setPropertyValue}
-              trackColor={{ true: theme.colorPrimaryLight }}
+              trackColor={{ true: Theme.colorPrimaryLight }}
               thumbColor="lightgrey"
             />
           )}
@@ -92,7 +96,7 @@ class UserPropertyListItem extends Component {
           {/* Integer types show a touchable value that opens a modal */}
           {this.props.type === 'integer' && (
             <TouchableOpacity onPress={this.openModal}>
-              <Text style={[styles.text, styles.linkText, styles.value]}>
+              <Text style={[styles.text, textColorStyle, styles.linkText, styles.value]}>
                 {this.props.value} {this.props.unit}
               </Text>
             </TouchableOpacity>
@@ -133,8 +137,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: Theme.font.regular,
-    fontSize: 18,
-    color: Theme.colorText
+    fontSize: 18
   },
 
   value: { paddingRight: 5 },
@@ -150,4 +153,4 @@ const styles = StyleSheet.create({
 
 UserPropertyListItem.defaultProps = defaultProps
 
-export default UserPropertyListItem
+export default inject('userPropertyStore')(observer(UserPropertyListItem))

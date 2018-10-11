@@ -53,10 +53,10 @@ export default class UserPropertyStore {
   }
 
   @observable
-  darkMode = 2
+  darkMode = true
   @action
-  setDarkMode = newModeIdx => {
-    this.darkMode = newModeIdx
+  toggleDarkMode = () => {
+    this.darkMode = !this.darkMode
   }
 
   @action
