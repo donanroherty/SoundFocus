@@ -1,4 +1,4 @@
-import { observable, action, toJS } from 'mobx'
+import { observable, action } from 'mobx'
 
 export default class UserPropertyStore {
   constructor(appStore) {
@@ -51,4 +51,14 @@ export default class UserPropertyStore {
   toggleKeepScreenOn = () => {
     this.keepScreenOn = !this.keepScreenOn
   }
+
+  @observable
+  darkMode = true
+  @action
+  toggleDarkMode = () => {
+    this.darkMode = !this.darkMode
+  }
+
+  @action
+  resetUserPropsToDefault = () => {}
 }

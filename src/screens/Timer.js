@@ -10,36 +10,40 @@ import Theme from 'theme'
 
 const { width } = Dimensions.get('window')
 
-const Timer = props => (
-  <View style={styles.wrapper}>
-    <View style={styles.topBlock} />
+const Timer = props => {
+  const { darkMode } = props.userPropertyStore
+  const bgColorStyle = { backgroundColor: Theme.getBackgroundColor(darkMode) }
 
-    <View style={styles.clockContainer}>
-      <TouchableOpacity onPress={props.timerStore.toggleActive}>
-        <Clock size={100} />
-      </TouchableOpacity>
+  return (
+    <View style={[styles.wrapper, bgColorStyle]}>
+      <View style={styles.topBlock} />
 
-      <IntervalCounter />
+      <View style={styles.clockContainer}>
+        <TouchableOpacity onPress={props.timerStore.toggleActive}>
+          <Clock size={100} />
+        </TouchableOpacity>
+
+        <IntervalCounter />
+      </View>
+      <View style={styles.playbarContainer}>
+        <PlayBar
+          openSettings={() => {
+            props.navigation.navigate('Settings')
+          }}
+          openAmbiance={() => {
+            props.navigation.navigate('Ambiance')
+          }}
+        />
+      </View>
     </View>
-    <View style={styles.playbarContainer}>
-      <PlayBar
-        openSettings={() => {
-          props.navigation.navigate('Settings')
-        }}
-        openAmbiance={() => {
-          props.navigation.navigate('Ambiance')
-        }}
-      />
-    </View>
-  </View>
-)
+  )
+}
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: Theme.colorBackground
+    alignItems: 'center'
   },
   moreButton: {
     marginTop: 20,
@@ -66,4 +70,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default inject('timerStore')(observer(Timer))
+export default inject('timerStore')(inject('userPropertyStore')(observer(Timer)))

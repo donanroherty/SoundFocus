@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import Video from 'react-native-video'
 

@@ -38,7 +38,6 @@ const NavStack = createStackNavigator(
   }
 )
 
-
 type Props = {}
 export default class App extends React.Component<Props> {
   constructor(props) {
@@ -47,8 +46,7 @@ export default class App extends React.Component<Props> {
   }
 
   render() {
- 
-    return (   
+    return (
       <Provider
         timerStore={this.appStore.timerStore}
         userPropertyStore={this.appStore.userPropertyStore}

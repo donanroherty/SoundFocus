@@ -23,6 +23,10 @@ const Clock = props => {
     }
   }
 
+  const { darkMode } = props.userPropertyStore
+  const textColorStyle = { color: Theme.getTextColor(darkMode) }
+  const fontSizeStyle = { fontSize: props.size }
+
   const { remaining } = props.timerStore
   const time = formatSeconds(remaining)
   const underAMinuteLeft = Math.floor(remaining / 60) <= 0
@@ -30,17 +34,15 @@ const Clock = props => {
   const content = underAMinuteLeft ? (
     // Hide minutes and colon if less than 1 minute remains on the clock
     <View style={styles.clockContainer}>
-      <Text style={[styles.baseText, styles.seconds, { fontSize: props.size }]}>
-        {time.seconds}
-      </Text>
+      <Text style={[styles.baseText, styles.seconds, fontSizeStyle]}>{time.seconds}</Text>
     </View>
   ) : (
     <View style={styles.clockContainer}>
-      <Text style={[styles.baseText, styles.minutes, { fontSize: props.size }]}>
+      <Text style={[styles.baseText, styles.minutes, textColorStyle, fontSizeStyle]}>
         {time.minutes}
       </Text>
-      <Text style={[styles.baseText, styles.colon, { fontSize: props.size }]}>:</Text>
-      <Text style={[styles.baseText, styles.seconds, { fontSize: props.size }]}>
+      <Text style={[styles.baseText, styles.colon, textColorStyle, fontSizeStyle]}>:</Text>
+      <Text style={[styles.baseText, styles.seconds, textColorStyle, fontSizeStyle]}>
         {time.seconds}
       </Text>
     </View>
@@ -56,9 +58,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   baseText: {
-    fontFamily: Theme.font.thin,
-    fontSize: 15,
-    color: Theme.colorText
+    fontFamily: Theme.font.thin
   },
   minutes: {
     justifyContent: 'center',
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default inject('timerStore')(observer(Clock))
+export default inject('timerStore')(inject('userPropertyStore')(observer(Clock)))

@@ -12,12 +12,17 @@ const defaultProps = {
 const ScreenHeader = props => {
   const soundIcon = props.ambianceStore.globalMute ? 'md-volume-off' : 'md-volume-high'
 
+  const { darkMode } = props.userPropertyStore
+  const textColor = Theme.getTextColor(darkMode)
+  const textColorStyle = { color: Theme.getTextColor(darkMode) }
+  const fontSizeStyle = { fontSize: props.size }
+
   return (
     <View style={styles.wrapper}>
       {/* Back button */}
       <View style={styles.leftDiv}>
         <TouchableOpacity onPress={props.navigateHome} style={styles.backButton}>
-          <Icon name="md-arrow-back" size={30} color={Theme.colorText} />
+          <Icon name="md-arrow-back" size={30} color={textColor} />
         </TouchableOpacity>
       </View>
 
@@ -28,13 +33,13 @@ const ScreenHeader = props => {
         </TouchableOpacity>
 
         {/* Screen title */}
-        <Text style={styles.title}>{props.screenName}</Text>
+        <Text style={[styles.title, textColorStyle]}>{props.screenName}</Text>
       </View>
 
       {/* Mute button */}
       <View style={styles.rightDiv}>
         <TouchableOpacity onPress={props.ambianceStore.toggleMute} style={styles.muteButton}>
-          <Icon name={soundIcon} size={30} color={Theme.colorPrimary} />
+          <Icon name={soundIcon} size={30} color={textColor} />
         </TouchableOpacity>
       </View>
     </View>
@@ -74,4 +79,6 @@ const styles = StyleSheet.create({
 
 ScreenHeader.defaultProps = defaultProps
 
-export default inject('timerStore')(inject('ambianceStore')(observer(ScreenHeader)))
+export default inject('timerStore')(
+  inject('ambianceStore')(inject('userPropertyStore')(observer(ScreenHeader)))
+)

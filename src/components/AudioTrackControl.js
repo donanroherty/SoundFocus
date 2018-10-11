@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
-import { observer } from 'mobx-react'
-import Video from 'react-native-video'
+import { inject, observer } from 'mobx-react'
+
 import Icon from 'react-native-vector-icons/Ionicons'
 import Slider from 'react-native-slider'
-import theme from '../theme'
+import Theme from 'theme'
 
 const defaultProps = {
   name: 'Track Name',
@@ -22,14 +22,17 @@ class AudioTrackControl extends Component {
   render() {
     const { volume, muted, setVolume, toggleActive } = this.props.trackStore
 
+    const { darkMode } = this.props.userPropertyStore
+    const textColorStyle = { color: Theme.getTextColor(darkMode) }
+
     return (
       <View style={styles.wrapper}>
         <TouchableOpacity style={styles.muteToggleContainer} onPress={toggleActive}>
-          <Icon name="ios-musical-note" size={50} color={muted ? 'lightgray' : theme.colorText} />
+          <Icon name="ios-musical-note" size={50} color={muted ? 'lightgray' : Theme.colorText} />
         </TouchableOpacity>
 
         <View style={styles.labelAndVolumeContainer}>
-          <Text style={styles.trackLabel}>{this.props.name}</Text>
+          <Text style={[styles.trackLabel, textColorStyle]}>{this.props.name}</Text>
           <Slider
             value={volume}
             onValueChange={setVolume}
@@ -38,7 +41,7 @@ class AudioTrackControl extends Component {
             thumbStyle={styles.volumeThumbStyle}
             minimumTrackTintColor="lightgrey"
             maximumTrackTintColor="#EDEDED"
-            thumbTintColor={theme.colorPrimaryLight}
+            thumbTintColor={Theme.colorPrimaryLight}
             // debugTouchArea={true}
           />
         </View>
@@ -60,10 +63,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   trackLabel: {
-    fontFamily: theme.font.medium,
+    fontFamily: Theme.font.medium,
     fontSize: 20,
     marginLeft: 15,
-    color: theme.colorText
+    color: Theme.colorText
   },
   volumeSlider: {
     // backgroundColor: 'grey',
@@ -83,4 +86,4 @@ const styles = StyleSheet.create({
 
 AudioTrackControl.defaultProps = defaultProps
 
-export default observer(AudioTrackControl)
+export default inject('userPropertyStore')(observer(AudioTrackControl))
