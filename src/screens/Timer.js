@@ -18,12 +18,14 @@ const Timer = props => {
     <View style={[styles.wrapper, bgColorStyle]}>
       <View style={styles.topBlock} />
 
-      <View style={styles.clockContainer}>
-        <TouchableOpacity onPress={props.timerStore.toggleActive}>
+      <View style={styles.timerBlock}>
+        <TouchableOpacity onPress={props.timerStore.toggleActive} style={styles.clockContainer}>
           <Clock size={100} />
         </TouchableOpacity>
 
-        <IntervalCounter />
+        <TouchableOpacity onPress={props.timerStore.reset}>
+          <IntervalCounter />
+        </TouchableOpacity>
       </View>
       <View style={styles.playbarContainer}>
         <PlayBar
@@ -59,11 +61,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     width: '100%'
   },
-  clockContainer: {
+  timerBlock: {
     flex: 2.8,
     flexDirection: 'column',
     alignItems: 'center'
   },
+  clockContainer: { marginBottom: 20 },
   playbarContainer: {
     flex: 2,
     alignItems: 'center'

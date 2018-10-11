@@ -17,7 +17,7 @@ const IntervalCounter = props => {
       const size = i < props.timerStore.intervalsCompleted + 1 ? 15 : 7
 
       return (
-        <View style={[styles.marker,{ width: size, height: size, backgroundColor: textColor }]} key={shortId.generate()} />
+        <View style={[styles.marker,{ width: size, height: size, backgroundColor: textColor, borderWidth: 2, borderColor: textColor }]} key={shortId.generate()} />
       )
     })
 

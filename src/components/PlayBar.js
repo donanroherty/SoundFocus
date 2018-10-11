@@ -17,12 +17,12 @@ const PlayBar = props => {
     <View style={styles.wrapper}>
       <View style={styles.row1}>
         {/* Reset timer */}
-        <TouchableOpacity onPress={props.timerStore.reset}>
+        {/* <TouchableOpacity onPress={props.timerStore.reset}>
           <Icon name="md-refresh" size={props.iconSize} color={textColor} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* Start timer */}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={props.timerStore.toggleActive}
           style={[styles.circle, styles.button]}
         >
@@ -31,19 +31,23 @@ const PlayBar = props => {
             size={props.iconSize}
             color={Theme.colorPrimary}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* Open ambiance screen */}
-        <TouchableOpacity onPress={props.openAmbiance}>
+        <TouchableOpacity onPress={props.openAmbiance} style={{ margin: 60 }}>
           <Icon name="md-musical-note" size={props.iconSize} color={textColor} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={props.openSettings} style={{ margin: 60 }}>
+          <Icon name="md-more" size={props.iconSize} color={textColor} />
         </TouchableOpacity>
       </View>
       {/* Options button */}
-      <View style={styles.row2}>
+      {/* <View style={styles.row2}>
         <TouchableOpacity onPress={props.openSettings}>
           <Icon name="ios-more" size={props.iconSize} color={textColor} />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   )
 }
