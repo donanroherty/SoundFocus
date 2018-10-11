@@ -3,15 +3,21 @@ import { View, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { inject, observer } from 'mobx-react'
 import shortId from 'shortid'
+import Theme from 'theme'
 
 const IntervalCounter = props => {
+  const { darkMode } = props.userPropertyStore
+  const textColor = Theme.getTextColor(darkMode)
+
+
   const content = new Array(props.userPropertyStore.workIntervalCount)
     .fill(undefined)
     .map((val, i) => {
       const color = i < props.timerStore.intervalsCompleted + 1 ? 'darkgray' : 'lightgray'
-      const icon = i < props.timerStore.intervalsCompleted ? 'md-add' : 'md-remove'
+      const size = i < props.timerStore.intervalsCompleted + 1 ? 15 : 7
+
       return (
-        <Icon key={shortId.generate()} name={icon} size={25} color={color} style={styles.marker} />
+        <View style={[styles.marker,{ width: size, height: size, backgroundColor: textColor }]} key={shortId.generate()} />
       )
     })
 
@@ -20,10 +26,16 @@ const IntervalCounter = props => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems:'center',
+  
   },
   marker: {
-    padding: 4
+    width: 15, 
+    height: 15,
+    margin:4,
+    borderRadius: 90
+    // padding: 4
   }
 })
 
