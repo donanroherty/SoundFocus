@@ -87,17 +87,6 @@ const UserPropertyList = props => {
     />
   )
 
-  // const darkModeProp = (
-  //   <UserPropertyListItem
-  //     shortName="darkMode"
-  //     name="Dark Mode"
-  //     type="picker"
-  //     pickerOptions={['Off', 'On', 'Timer Only']}
-  //     value={props.userPropertyStore.darkMode}
-  //     setPropertyValue={props.userPropertyStore.setDarkMode}
-  //   />
-  // )
-
   const resetUserPropsProp = (
     <UserPropertyListItem
       shortName="resetUserPropsToDefault"
@@ -114,7 +103,7 @@ const UserPropertyList = props => {
       name="About"
       actionIcon="md-information-circle"
       type="action"
-      setPropertyValue={props.userPropertyStore.resetUserPropsToDefault}
+      setPropertyValue={props.showAboutModal}
     />
   )
 

@@ -58,6 +58,11 @@ class UserPropertyListItem extends Component {
     }
   }
 
+  handleSubmitModal = val => {
+    this.props.setPropertyValue(this.state.value)
+    this.props.closeModal()
+  }
+
   render() {
     const { darkMode } = this.props.userPropertyStore
     const textColor = Theme.getTextColor(darkMode)
@@ -66,13 +71,15 @@ class UserPropertyListItem extends Component {
     return (
       <View>
         {/* Modal is show conditionally based on user interaction with certain types of property */}
-        {this.state.showModal && (
-          <UserPropertyModal
-            closeModal={this.closeModal}
-            value={this.props.value}
-            setPropertyValue={this.props.setPropertyValue}
-          />
-        )}
+        {this.state.showModal &&
+          (this.props.type === 'integer' && (
+            <UserPropertyModal
+              title={this.props.name}
+              closeModal={this.closeModal}
+              value={this.props.value}
+              setPropertyValue={this.props.setPropertyValue}
+            />
+          ))}
 
         <TouchableOpacity
           onPress={this.onPressProp}
