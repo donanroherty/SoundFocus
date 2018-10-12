@@ -1,8 +1,11 @@
-import { observable, action } from 'mobx'
+import { observable, action, toJS } from 'mobx'
 
 export default class UserPropertyStore {
   constructor(appStore) {
     this.storeName = 'UserPropertyStore'
+
+    // Prop defaults are save at construction before props are set to local stoarage values
+    this.defaultUserProps = toJS(this)
   }
 
   // The duration in minutes of a work interval
@@ -60,5 +63,11 @@ export default class UserPropertyStore {
   }
 
   @action
-  resetUserPropsToDefault = () => {}
+  resetUserPropsToDefault = () => {
+    Object.keys(this.defaultUserProps).forEach(key => {
+      if (this[key]) {
+        this[key] = this.defaultUserProps[key]
+      }
+    })
+  }
 }

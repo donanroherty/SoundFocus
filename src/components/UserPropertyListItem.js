@@ -45,6 +45,19 @@ class UserPropertyListItem extends Component {
     this.setState({ showModal: false })
   }
 
+  onPressProp = () => {
+    switch (this.props.type) {
+      case 'integer':
+        this.openModal()
+        break
+      case 'action':
+        this.props.setPropertyValue()
+        break
+      default:
+        break
+    }
+  }
+
   render() {
     const { darkMode } = this.props.userPropertyStore
     const textColor = Theme.getTextColor(darkMode)
@@ -62,7 +75,7 @@ class UserPropertyListItem extends Component {
         )}
 
         <TouchableOpacity
-          onPress={this.props.type === 'integer' ? this.openModal : () => {}}
+          onPress={this.onPressProp}
           style={[
             styles.wrapper,
             { justifyContent: this.props.type === 'action' ? 'flex-start' : 'space-between' }

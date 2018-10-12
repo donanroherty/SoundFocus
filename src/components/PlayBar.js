@@ -8,6 +8,8 @@ const defaultProps = {
   iconSize: 30
 }
 
+const buttonSize = 30
+
 const PlayBar = props => {
   const { darkMode } = props.userPropertyStore
   const textColor = Theme.getTextColor(darkMode)
@@ -34,12 +36,12 @@ const PlayBar = props => {
         </TouchableOpacity> */}
 
         {/* Open ambiance screen */}
-        <TouchableOpacity onPress={props.openAmbiance} style={{ margin: 60 }}>
-          <Icon name="md-musical-note" size={props.iconSize} color={textColor} />
+        <TouchableOpacity onPress={props.openAmbiance} style={styles.button}>
+          <Icon name="md-musical-note" size={buttonSize} color={textColor} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={props.openSettings} style={{ margin: 60 }}>
-          <Icon name="md-more" size={props.iconSize} color={textColor} />
+        <TouchableOpacity onPress={props.openSettings} style={styles.button}>
+          <Icon name="md-more" size={buttonSize} color={textColor} />
         </TouchableOpacity>
       </View>
       {/* Options button */}
@@ -65,8 +67,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   button: {
+    width: buttonSize + 10, // Add click buffer around icon
+    height: buttonSize + 10,
     marginLeft: 40,
-    marginRight: 40
+    marginRight: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   circle: {
     borderWidth: 1,

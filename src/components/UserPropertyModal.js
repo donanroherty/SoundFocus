@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import Modal from 'react-native-modal'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Theme from 'theme'
