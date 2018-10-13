@@ -56,6 +56,7 @@ class Settings extends Component {
           navigateHome={navigateHome}
           style={styles.userPropertyList}
         />
+
         <UserPropertyList
           showAboutModal={this.showAboutModal}
           showPropertyModal={this.showPropertyModal}

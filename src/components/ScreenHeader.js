@@ -15,7 +15,6 @@ const ScreenHeader = props => {
   const { darkMode } = props.userPropertyStore
   const textColor = Theme.getTextColor(darkMode)
   const textColorStyle = { color: Theme.getTextColor(darkMode) }
-  const fontSizeStyle = { fontSize: props.size }
 
   return (
     <View style={styles.wrapper}>
@@ -47,7 +46,10 @@ const ScreenHeader = props => {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { flexDirection: 'row' },
+  wrapper: {
+    flexDirection: 'row',
+    marginBottom: 30
+  },
   leftDiv: {
     width: 50
   },
