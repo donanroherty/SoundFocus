@@ -1,14 +1,10 @@
 import React from 'react'
 import { Text } from 'react-native'
-import ModalBase from 'components/ModalBase'
+import ModalBase from 'components/Modals/ModalBase'
 
 const AboutModal = props => {
   return (
-    <ModalBase
-      title={'About'}
-      closeModal={props.closeModal}
-      confirmationAction={props.confirmationAction}
-    >
+    <ModalBase title={'About'} {...props}>
       <Text>This is where the about text goes</Text>
     </ModalBase>
   )

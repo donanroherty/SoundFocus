@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Modal from 'react-native-modal'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Theme from 'theme'
 
 const defaultProps = {
+  title: 'My Modal',
+  showModal: false,
   closeModal: () => {},
-  confirmationAction: () => {}
+  action: () => {}
 }
 
 export default class ModalBase extends Component {
@@ -14,10 +16,15 @@ export default class ModalBase extends Component {
     super(props)
   }
 
+  submitModal = () => {
+    this.props.action()
+    this.props.closeModal()
+  }
+
   render() {
     return (
       <Modal
-        isVisible={true}
+        isVisible={this.props.showModal}
         onBackdropPress={this.props.closeModal}
         onBackButtonPress={this.props.closeModal}
         avoidKeyboard={false}
@@ -47,10 +54,7 @@ export default class ModalBase extends Component {
 
           {/* Bottom Row */}
           <View style={styles.bottomRow}>
-            <TouchableOpacity
-              onPress={this.props.confirmationAction}
-              style={styles.okButtonContainer}
-            >
+            <TouchableOpacity onPress={this.submitModal} style={styles.okButtonContainer}>
               <Text style={styles.okButton}>OK</Text>
             </TouchableOpacity>
           </View>
