@@ -95,7 +95,8 @@ const UserPropertyList = props => {
     <UserPropertyListItem
       shortName="resetUserPropsToDefault"
       name="Reset To Defaults"
-      actionIcon="md-refresh"
+      icon="md-refresh"
+      showIcon={true}
       type="action"
       propertyAction={props.userPropertyStore.resetUserPropsToDefault}
     />
@@ -105,7 +106,8 @@ const UserPropertyList = props => {
     <UserPropertyListItem
       shortName="about"
       name="About"
-      actionIcon="md-information-circle"
+      icon="md-information-circle"
+      showIcon={true}
       type="action"
       propertyAction={props.showAboutModal}
     />
