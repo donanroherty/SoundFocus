@@ -10,7 +10,7 @@ const defaultProps = {
   min: 0,
   max: 0,
   value: 0,
-  action: () => {},
+  propertyAction: () => {},
   showModal: false
 }
 
@@ -28,7 +28,7 @@ export default class UserPropertyModal extends Component {
   }
 
   handleSubmit = () => {
-    this.props.action(this.state.value)
+    this.props.propertyAction(this.state.value)
   }
 
   render() {
@@ -37,7 +37,7 @@ export default class UserPropertyModal extends Component {
         title={this.props.title}
         showModal={this.props.showModal}
         closeModal={this.props.closeModal}
-        action={this.handleSubmit}
+        propertyAction={this.handleSubmit}
       >
         <View style={styles.middleRow}>
           <View style={styles.middleRowTopRow}>

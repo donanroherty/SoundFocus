@@ -16,7 +16,7 @@ const defaultProps = {
   value: 0,
   pickerOptions: [],
   pickerDefault: '',
-  action: () => {},
+  propertyAction: () => {},
   showPropertyModal: () => {}
 }
 
@@ -31,14 +31,14 @@ class UserPropertyListItem extends Component {
         this.props.showPropertyModal({
           title: this.props.name,
           value: this.props.value,
-          action: this.props.action
+          propertyAction: this.props.propertyAction
         })
         break
       case 'action':
-        this.props.action()
+        this.props.propertyAction()
         break
       case 'boolean':
-        this.props.action()
+        this.props.propertyAction()
         break
       default:
         break
@@ -78,7 +78,7 @@ class UserPropertyListItem extends Component {
           {this.props.type === 'boolean' && (
             <Switch
               value={this.props.value}
-              onValueChange={this.props.action}
+              onValueChange={this.props.propertyAction}
               trackColor={{ true: Theme.colorPrimaryLight }}
               thumbColor="lightgrey"
             />
@@ -97,7 +97,7 @@ class UserPropertyListItem extends Component {
               selectedValue={this.props.value}
               mode="dropdown"
               style={styles.picker}
-              onValueChange={(itemValue, itemIndex) => this.props.action(itemValue)}
+              onValueChange={(itemValue, itemIndex) => this.props.propertyAction(itemValue)}
               itemStyle={{
                 fontFamily: Theme.font.medium,
                 fontSize: 30,

@@ -8,7 +8,7 @@ const defaultProps = {
   title: 'My Modal',
   showModal: false,
   closeModal: () => {},
-  action: () => {}
+  propertyAction: () => {}
 }
 
 export default class ModalBase extends Component {
@@ -17,7 +17,7 @@ export default class ModalBase extends Component {
   }
 
   submitModal = () => {
-    this.props.action()
+    this.props.propertyAction()
     this.props.closeModal()
   }
 
