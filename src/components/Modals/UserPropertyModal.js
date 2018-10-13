@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput } from 'react-native'
-import ModalBase from 'components/ModalBase'
+import ModalBase from 'components/Modals/ModalBase'
 
 const defaultProps = {
   shortName: 'mySetting',
@@ -10,7 +10,8 @@ const defaultProps = {
   min: 0,
   max: 0,
   value: 0,
-  setPropertyValue: () => {}
+  propertyAction: () => {},
+  showModal: false
 }
 
 export default class UserPropertyModal extends Component {
@@ -21,24 +22,22 @@ export default class UserPropertyModal extends Component {
     }
   }
 
-  componentDidMount() {}
-
   handleInput = val => {
     //  TODO: Validate user input
     this.setState({ value: val })
   }
 
   handleSubmit = () => {
-    this.props.setPropertyValue(this.state.value)
-    this.props.closeModal()
+    this.props.propertyAction(this.state.value)
   }
 
   render() {
     return (
       <ModalBase
         title={this.props.title}
+        showModal={this.props.showModal}
         closeModal={this.props.closeModal}
-        confirmationAction={this.handleSubmit}
+        propertyAction={this.handleSubmit}
       >
         <View style={styles.middleRow}>
           <View style={styles.middleRowTopRow}>

@@ -14,7 +14,8 @@ const UserPropertyList = props => {
       min={1}
       max={180}
       value={props.userPropertyStore.workDuration}
-      setPropertyValue={props.userPropertyStore.setWorkDuration}
+      propertyAction={props.userPropertyStore.setWorkDuration}
+      showPropertyModal={props.showPropertyModal}
     />
   )
 
@@ -27,7 +28,8 @@ const UserPropertyList = props => {
       min={1}
       max={180}
       value={props.userPropertyStore.shortBreakDuration}
-      setPropertyValue={props.userPropertyStore.setShortBreakDuration}
+      propertyAction={props.userPropertyStore.setShortBreakDuration}
+      showPropertyModal={props.showPropertyModal}
     />
   )
 
@@ -40,7 +42,8 @@ const UserPropertyList = props => {
       min={1}
       max={180}
       value={props.userPropertyStore.longBreakDuration}
-      setPropertyValue={props.userPropertyStore.setLongBreakDuration}
+      propertyAction={props.userPropertyStore.setLongBreakDuration}
+      showPropertyModal={props.showPropertyModal}
     />
   )
 
@@ -53,7 +56,8 @@ const UserPropertyList = props => {
       min={1}
       max={180}
       value={props.userPropertyStore.workIntervalCount}
-      setPropertyValue={props.userPropertyStore.setWorkIntervalCount}
+      propertyAction={props.userPropertyStore.setWorkIntervalCount}
+      showPropertyModal={props.showPropertyModal}
     />
   )
 
@@ -63,7 +67,7 @@ const UserPropertyList = props => {
       name="Continous Mode"
       type="boolean"
       value={props.userPropertyStore.continuousMode}
-      setPropertyValue={props.userPropertyStore.toggleContinuousMode}
+      propertyAction={props.userPropertyStore.toggleContinuousMode}
     />
   )
 
@@ -73,7 +77,7 @@ const UserPropertyList = props => {
       name="Keep Screen On"
       type="boolean"
       value={props.userPropertyStore.keepScreenOn}
-      setPropertyValue={props.userPropertyStore.toggleKeepScreenOn}
+      propertyAction={props.userPropertyStore.toggleKeepScreenOn}
     />
   )
 
@@ -83,7 +87,7 @@ const UserPropertyList = props => {
       name="Dark Mode"
       type="boolean"
       value={props.userPropertyStore.darkMode}
-      setPropertyValue={props.userPropertyStore.toggleDarkMode}
+      propertyAction={props.userPropertyStore.toggleDarkMode}
     />
   )
 
@@ -93,7 +97,7 @@ const UserPropertyList = props => {
       name="Reset To Defaults"
       actionIcon="md-refresh"
       type="action"
-      setPropertyValue={props.userPropertyStore.resetUserPropsToDefault}
+      propertyAction={props.userPropertyStore.resetUserPropsToDefault}
     />
   )
 
@@ -103,7 +107,7 @@ const UserPropertyList = props => {
       name="About"
       actionIcon="md-information-circle"
       type="action"
-      setPropertyValue={props.showAboutModal}
+      propertyAction={props.showAboutModal}
     />
   )
 
