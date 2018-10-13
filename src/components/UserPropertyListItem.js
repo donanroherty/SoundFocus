@@ -87,26 +87,26 @@ class UserPropertyListItem extends Component {
                 </Text>
               )}
             </View>
-          </View>
 
-          {/* Picker option type */}
-          {this.props.type === 'picker' && (
-            <Picker
-              selectedValue={this.props.value}
-              mode="dropdown"
-              style={styles.picker}
-              onValueChange={(itemValue, itemIndex) => this.props.propertyAction(itemValue)}
-              itemStyle={{
-                fontFamily: Theme.font.medium,
-                fontSize: 30,
-                color: Theme.colorText
-              }}
-            >
-              {this.props.pickerOptions.map((option, i) => (
-                <Picker.Item label={option} value={i} key={shortId.generate()} />
-              ))}
-            </Picker>
-          )}
+            {/* Picker option type */}
+            {this.props.type === 'picker' && (
+              <Picker
+                selectedValue={this.props.value}
+                mode="dropdown"
+                style={styles.picker}
+                onValueChange={(itemValue, itemIndex) => this.props.propertyAction(itemValue)}
+                itemStyle={{
+                  fontFamily: Theme.font.medium,
+                  fontSize: 30,
+                  color: Theme.colorText
+                }}
+              >
+                {this.props.pickerOptions.map((option, i) => (
+                  <Picker.Item label={option} value={i} key={shortId.generate()} />
+                ))}
+              </Picker>
+            )}
+          </View>
         </TouchableOpacity>
       </View>
     )
