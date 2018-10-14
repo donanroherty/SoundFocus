@@ -6,10 +6,17 @@ import { inject, observer } from 'mobx-react'
 import Theme from 'theme'
 
 const defaultProps = {
+  shortName: 'mySetting',
   name: 'My Setting',
   icon: 'ios-nuclear',
   showIcon: false,
-
+  type: 'integer',
+  unit: '',
+  min: 0,
+  max: 0,
+  value: 0,
+  pickerOptions: [],
+  pickerDefault: '',
   propertyAction: () => console.log('propertyAction not specified'),
   showPropertyModal: () => console.log('showPropertyModal not specified'),
   handleTapProp: () => console.log('handleTapProp not specified')
@@ -28,6 +35,7 @@ class UserPropBase extends Component {
     return (
       <View>
         <TouchableOpacity onPress={this.props.handleTapProp} style={[styles.wrapper]}>
+          {/* Action types show an icon before the label */}
           {this.props.showIcon && (
             <Icon name={this.props.icon} size={30} color={textColor} style={{ paddingRight: 15 }} />
           )}

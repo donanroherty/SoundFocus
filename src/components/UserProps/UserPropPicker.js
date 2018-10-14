@@ -7,6 +7,7 @@ import Theme from 'theme'
 import UserPropBase from 'components/UserProps/UserPropBase'
 
 const defaultProps = {
+  type: 'boolean',
   propertyAction: () => {}
 }
 
