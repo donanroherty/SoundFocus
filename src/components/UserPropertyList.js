@@ -11,7 +11,6 @@ const UserPropertyList = props => {
     <UserPropInteger
       shortName="workDuration"
       name="Work Duration"
-      type="integer"
       unit="mins"
       min={1}
       max={180}
@@ -25,7 +24,6 @@ const UserPropertyList = props => {
     <UserPropInteger
       shortName="shortBreakDuration"
       name="Short Break Duration"
-      type="integer"
       unit="mins"
       min={1}
       max={180}
@@ -39,7 +37,6 @@ const UserPropertyList = props => {
     <UserPropInteger
       shortName="longBreakDuration"
       name="Long Break Duration"
-      type="integer"
       unit="mins"
       min={1}
       max={180}
@@ -53,7 +50,6 @@ const UserPropertyList = props => {
     <UserPropInteger
       shortName="workIntervalCount"
       name="Work Interval Count"
-      type="integer"
       unit="mins"
       min={1}
       max={180}
@@ -67,7 +63,6 @@ const UserPropertyList = props => {
     <UserPropBoolean
       shortName="continuousMode"
       name="Continous Mode"
-      type="boolean"
       value={props.userPropertyStore.continuousMode}
       propertyAction={props.userPropertyStore.toggleContinuousMode}
     />
@@ -77,7 +72,6 @@ const UserPropertyList = props => {
     <UserPropBoolean
       shortName="keepScreenOn"
       name="Keep Screen On"
-      type="boolean"
       value={props.userPropertyStore.keepScreenOn}
       propertyAction={props.userPropertyStore.toggleKeepScreenOn}
     />
@@ -87,7 +81,6 @@ const UserPropertyList = props => {
     <UserPropBoolean
       shortName="darkMode"
       name="Dark Mode"
-      type="boolean"
       value={props.userPropertyStore.darkMode}
       propertyAction={props.userPropertyStore.toggleDarkMode}
     />
@@ -99,7 +92,6 @@ const UserPropertyList = props => {
       name="Reset To Defaults"
       icon="md-refresh"
       showIcon={true}
-      type="action"
       propertyAction={props.userPropertyStore.resetUserPropsToDefault}
     />
   )
@@ -110,7 +102,6 @@ const UserPropertyList = props => {
       name="About"
       icon="md-information-circle"
       showIcon={true}
-      type="action"
       propertyAction={props.showAboutModal}
     />
   )

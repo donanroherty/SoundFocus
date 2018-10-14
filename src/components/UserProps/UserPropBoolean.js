@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Switch, Picker } from 'react-native'
-import shortId from 'shortid'
-import Icon from 'react-native-vector-icons/Ionicons'
+import { View, StyleSheet, Switch } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import Theme from 'theme'
 import UserPropBase from 'components/UserProps/UserPropBase'
 
 const defaultProps = {
-  type: 'boolean',
   propertyAction: () => {}
 }
 
