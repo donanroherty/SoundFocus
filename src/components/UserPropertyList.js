@@ -1,15 +1,16 @@
 import React from 'react'
 import { View, StyleSheet, SectionList, Text } from 'react-native'
-import UserPropertyListItem from 'components/UserPropertyListItem'
+import UserPropBoolean from 'components/UserProps/UserPropBoolean'
+import UserPropInteger from 'components/UserProps/UserPropInteger'
+import UserPropAction from 'components/UserProps/UserPropAction'
 import { inject, observer } from 'mobx-react'
 import Theme from 'theme'
 
 const UserPropertyList = props => {
   const workDurationProp = (
-    <UserPropertyListItem
+    <UserPropInteger
       shortName="workDuration"
       name="Work Duration"
-      type="integer"
       unit="mins"
       min={1}
       max={180}
@@ -20,10 +21,9 @@ const UserPropertyList = props => {
   )
 
   const shortBreakDurationProp = (
-    <UserPropertyListItem
+    <UserPropInteger
       shortName="shortBreakDuration"
       name="Short Break Duration"
-      type="integer"
       unit="mins"
       min={1}
       max={180}
@@ -34,10 +34,9 @@ const UserPropertyList = props => {
   )
 
   const longBreakDurationProp = (
-    <UserPropertyListItem
+    <UserPropInteger
       shortName="longBreakDuration"
       name="Long Break Duration"
-      type="integer"
       unit="mins"
       min={1}
       max={180}
@@ -48,10 +47,9 @@ const UserPropertyList = props => {
   )
 
   const workIntervalCountProp = (
-    <UserPropertyListItem
+    <UserPropInteger
       shortName="workIntervalCount"
       name="Work Interval Count"
-      type="integer"
       unit="mins"
       min={1}
       max={180}
@@ -62,51 +60,48 @@ const UserPropertyList = props => {
   )
 
   const continuousModeProp = (
-    <UserPropertyListItem
+    <UserPropBoolean
       shortName="continuousMode"
       name="Continous Mode"
-      type="boolean"
       value={props.userPropertyStore.continuousMode}
       propertyAction={props.userPropertyStore.toggleContinuousMode}
     />
   )
 
   const keepScreenOnProp = (
-    <UserPropertyListItem
+    <UserPropBoolean
       shortName="keepScreenOn"
       name="Keep Screen On"
-      type="boolean"
       value={props.userPropertyStore.keepScreenOn}
       propertyAction={props.userPropertyStore.toggleKeepScreenOn}
     />
   )
 
   const darkModeProp = (
-    <UserPropertyListItem
+    <UserPropBoolean
       shortName="darkMode"
       name="Dark Mode"
-      type="boolean"
       value={props.userPropertyStore.darkMode}
       propertyAction={props.userPropertyStore.toggleDarkMode}
     />
   )
 
   const resetUserPropsProp = (
-    <UserPropertyListItem
+    <UserPropAction
       shortName="resetUserPropsToDefault"
       name="Reset To Defaults"
-      actionIcon="md-refresh"
-      type="action"
+      icon="md-refresh"
+      showIcon={true}
       propertyAction={props.userPropertyStore.resetUserPropsToDefault}
     />
   )
 
   const aboutProp = (
-    <UserPropertyListItem
+    <UserPropAction
       shortName="about"
       name="About"
-      actionIcon="md-information-circle"
-      type="action"
+      icon="md-information-circle"
+      showIcon={true}
       propertyAction={props.showAboutModal}
     />
   )
