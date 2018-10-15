@@ -7,7 +7,9 @@ import Theme from 'theme'
 import UserPropBase from 'components/UserProps/UserPropBase'
 
 const defaultProps = {
-  propertyAction: () => {}
+  propertyAction: () => {},
+  pickerOptions: [],
+  pickerDefault: ''
 }
 
 class UserPropBoolean extends Component {

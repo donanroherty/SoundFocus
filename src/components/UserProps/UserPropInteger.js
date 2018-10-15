@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Switch, Picker } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import Theme from 'theme'
 import UserPropBase from 'components/UserProps/UserPropBase'
 
 const defaultProps = {
-  propertyAction: () => {}
+  propertyAction: () => {},
+  unit: '',
+  min: 0,
+  max: 0
 }
 
 handleTapProp = () => {

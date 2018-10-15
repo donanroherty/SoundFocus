@@ -10,12 +10,7 @@ const defaultProps = {
   name: 'My Setting',
   icon: 'ios-nuclear',
   showIcon: false,
-  unit: '',
-  min: 0,
-  max: 0,
-  value: 0,
-  pickerOptions: [],
-  pickerDefault: '',
+
   propertyAction: () => console.log('propertyAction not specified'),
   showPropertyModal: () => console.log('showPropertyModal not specified'),
   handleTapProp: () => console.log('handleTapProp not specified')
