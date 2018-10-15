@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import Theme from 'theme'
 import UserPropBase from 'components/UserProps/UserPropBase'
+import IntegerModal from 'components/Modals/IntegerModal'
 
 const defaultProps = {
   propertyAction: () => {},
@@ -14,15 +15,15 @@ const defaultProps = {
 class UserPropInteger extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      propertyModalVisible: false
+    }
   }
 
   handleTapProp = () => {
-    this.props.showPropertyModal({
-      title: this.props.name,
-      value: this.props.value,
-      propertyAction: this.props.propertyAction
-    })
+    this.setState({ propertyModalVisible: true })
   }
+  closeModal = () => this.setState({ propertyModalVisible: false })
 
   render() {
     const { darkMode } = this.props.userPropertyStore
@@ -30,6 +31,14 @@ class UserPropInteger extends Component {
 
     return (
       <UserPropBase {...this.props} handleTapProp={this.handleTapProp}>
+        <IntegerModal
+          showModal={this.state.propertyModalVisible}
+          closeModal={this.closeModal}
+          title={this.props.name}
+          value={this.props.value}
+          propertyAction={this.props.propertyAction}
+        />
+
         <View style={styles.value}>
           <Text style={[styles.text, textColorStyle, styles.linkText, styles.value]}>
             {this.props.value} {this.props.unit}

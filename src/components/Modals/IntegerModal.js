@@ -13,7 +13,7 @@ const defaultProps = {
   showModal: false
 }
 
-export default class UserPropertyModal extends Component {
+export default class IntegerModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   }
 })
 
-UserPropertyModal.defaultProps = defaultProps
+IntegerModal.defaultProps = defaultProps

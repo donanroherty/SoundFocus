@@ -16,7 +16,6 @@ const UserPropertyList = props => {
       max={180}
       value={props.userPropertyStore.workDuration}
       propertyAction={props.userPropertyStore.setWorkDuration}
-      showPropertyModal={props.showPropertyModal}
     />
   )
 
@@ -29,7 +28,6 @@ const UserPropertyList = props => {
       max={180}
       value={props.userPropertyStore.shortBreakDuration}
       propertyAction={props.userPropertyStore.setShortBreakDuration}
-      showPropertyModal={props.showPropertyModal}
     />
   )
 
@@ -42,7 +40,6 @@ const UserPropertyList = props => {
       max={180}
       value={props.userPropertyStore.longBreakDuration}
       propertyAction={props.userPropertyStore.setLongBreakDuration}
-      showPropertyModal={props.showPropertyModal}
     />
   )
 
@@ -55,7 +52,6 @@ const UserPropertyList = props => {
       max={180}
       value={props.userPropertyStore.workIntervalCount}
       propertyAction={props.userPropertyStore.setWorkIntervalCount}
-      showPropertyModal={props.showPropertyModal}
     />
   )
 
