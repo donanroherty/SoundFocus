@@ -11,17 +11,17 @@ const defaultProps = {
   max: 0
 }
 
-handleTapProp = () => {
-  this.props.showPropertyModal({
-    title: this.props.name,
-    value: this.props.value,
-    propertyAction: this.props.propertyAction
-  })
-}
-
 class UserPropInteger extends Component {
   constructor(props) {
     super(props)
+  }
+
+  handleTapProp = () => {
+    this.props.showPropertyModal({
+      title: this.props.name,
+      value: this.props.value,
+      propertyAction: this.props.propertyAction
+    })
   }
 
   render() {
