@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TextInput } from 'react-native'
 import ModalBase from 'components/Modals/ModalBase'
 
 const defaultProps = {
-  shortName: 'mySetting',
   name: 'My Setting',
   unit: '',
   min: 0,

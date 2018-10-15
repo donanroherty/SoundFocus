@@ -9,7 +9,6 @@ import Theme from 'theme'
 const UserPropertyList = props => {
   const workDurationProp = (
     <UserPropInteger
-      shortName="workDuration"
       name="Work Duration"
       unit="mins"
       min={1}
@@ -21,7 +20,6 @@ const UserPropertyList = props => {
 
   const shortBreakDurationProp = (
     <UserPropInteger
-      shortName="shortBreakDuration"
       name="Short Break Duration"
       unit="mins"
       min={1}
@@ -33,7 +31,6 @@ const UserPropertyList = props => {
 
   const longBreakDurationProp = (
     <UserPropInteger
-      shortName="longBreakDuration"
       name="Long Break Duration"
       unit="mins"
       min={1}
@@ -45,7 +42,6 @@ const UserPropertyList = props => {
 
   const workIntervalCountProp = (
     <UserPropInteger
-      shortName="workIntervalCount"
       name="Work Interval Count"
       unit="mins"
       min={1}
@@ -57,7 +53,6 @@ const UserPropertyList = props => {
 
   const continuousModeProp = (
     <UserPropBoolean
-      shortName="continuousMode"
       name="Continous Mode"
       value={props.userPropertyStore.continuousMode}
       propertyAction={props.userPropertyStore.toggleContinuousMode}
@@ -66,7 +61,6 @@ const UserPropertyList = props => {
 
   const keepScreenOnProp = (
     <UserPropBoolean
-      shortName="keepScreenOn"
       name="Keep Screen On"
       value={props.userPropertyStore.keepScreenOn}
       propertyAction={props.userPropertyStore.toggleKeepScreenOn}
@@ -75,7 +69,6 @@ const UserPropertyList = props => {
 
   const darkModeProp = (
     <UserPropBoolean
-      shortName="darkMode"
       name="Dark Mode"
       value={props.userPropertyStore.darkMode}
       propertyAction={props.userPropertyStore.toggleDarkMode}
@@ -84,7 +77,6 @@ const UserPropertyList = props => {
 
   const resetUserPropsProp = (
     <UserPropAction
-      shortName="resetUserPropsToDefault"
       name="Reset To Defaults"
       icon="md-refresh"
       showIcon={true}
@@ -94,7 +86,6 @@ const UserPropertyList = props => {
 
   const aboutProp = (
     <UserPropAction
-      shortName="about"
       name="About"
       icon="md-information-circle"
       showIcon={true}

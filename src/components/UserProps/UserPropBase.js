@@ -6,7 +6,6 @@ import { inject, observer } from 'mobx-react'
 import Theme from 'theme'
 
 const defaultProps = {
-  shortName: 'mySetting',
   name: 'My Setting',
   icon: 'ios-nuclear',
   showIcon: false,
