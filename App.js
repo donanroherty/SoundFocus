@@ -30,7 +30,7 @@ const NavStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Settings',
+    initialRouteName: 'Home',
     navigationOptions: {
       headerMode: 'none',
       header: null
