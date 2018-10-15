@@ -5,7 +5,6 @@ import ModalBase from 'components/Modals/ModalBase'
 const defaultProps = {
   shortName: 'mySetting',
   name: 'My Setting',
-  type: 'integer',
   unit: '',
   min: 0,
   max: 0,

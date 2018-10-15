@@ -10,7 +10,6 @@ const defaultProps = {
   name: 'My Setting',
   icon: 'ios-nuclear',
   showIcon: false,
-  type: 'integer',
   unit: '',
   min: 0,
   max: 0,
