@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Switch } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Switch, Picker } from 'react-native'
+import shortId from 'shortid'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { inject, observer } from 'mobx-react'
 import Theme from 'theme'
 import UserPropBase from 'components/UserProps/UserPropBase'

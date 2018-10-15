@@ -6,6 +6,7 @@ import { inject, observer } from 'mobx-react'
 import Theme from 'theme'
 
 const defaultProps = {
+  shortName: 'mySetting',
   name: 'My Setting',
   icon: 'ios-nuclear',
   showIcon: false,
@@ -28,6 +29,7 @@ class UserPropBase extends Component {
     return (
       <View>
         <TouchableOpacity onPress={this.props.handleTapProp} style={[styles.wrapper]}>
+          {/* Action types show an icon before the label */}
           {this.props.showIcon && (
             <Icon name={this.props.icon} size={30} color={textColor} style={{ paddingRight: 15 }} />
           )}
