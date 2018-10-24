@@ -21,6 +21,7 @@ class AudioTrackList extends Component {
         <View style={styles.trackList}>
           <AudioTrackControl
             name="White Noise"
+            trackColor="white"
             audioAsset={whiteNoise}
             trackStore={ambianceStore.whiteNoise}
             globalMute={ambianceStore.globalMute}
@@ -28,6 +29,7 @@ class AudioTrackList extends Component {
           />
           <AudioTrackControl
             name="Pink Noise"
+            trackColor="pink"
             audioAsset={pinkNoise}
             trackStore={ambianceStore.pinkNoise}
             globalMute={ambianceStore.globalMute}
@@ -35,6 +37,7 @@ class AudioTrackList extends Component {
           />
           <AudioTrackControl
             name="Brown Noise"
+            trackColor="#4E3013"
             audioAsset={brownNoise}
             trackStore={ambianceStore.brownNoise}
             globalMute={ambianceStore.globalMute}

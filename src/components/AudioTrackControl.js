@@ -61,7 +61,7 @@ class AudioTrackControl extends Component {
           <Svg height="71.221" width="271.973" style={styles.svg}>
             <G transform="translate(-29.125 -213.997)">
               <Path
-                stroke="white"
+                stroke={this.props.trackColor}
                 strokeWidth={3}
                 d="M29.1,249.5h74.5c0,0,4.7-4.8,8.2-2.8s2.9,10.3,5.9,10.6s1.2-17.2,4.7-17.2s2.6,25.1,5.6,25.3
 		s2.1-31.2,5.5-31.2s6.7,38.1,10.9,38.5s2.1-47.3,6.3-47.3c4.5-0.1,7.7,57.9,10.2,57.9c4.2-0.1,2.4-67.3,5.9-67.2s5.9,56.6,9.8,56.6
@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     flexDirection: 'column',
-
     borderWidth: 1,
     borderRadius: 15
   },
@@ -125,8 +124,8 @@ const styles = StyleSheet.create({
     borderRadius: 90
   },
   volumeThumbStyle: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     borderRadius: 90,
     borderColor: 'black',
     borderWidth: 1.5
