@@ -10,8 +10,6 @@ const defaultProps = {
 }
 
 const ScreenHeader = props => {
-  const soundIcon = props.ambianceStore.globalMute ? 'md-volume-off' : 'md-volume-high'
-
   const { darkMode } = props.userPropertyStore
   const textColor = Theme.getTextColor(darkMode)
   const textColorStyle = { color: Theme.getTextColor(darkMode) }
@@ -34,13 +32,6 @@ const ScreenHeader = props => {
         {/* Screen title */}
         <Text style={[styles.title, textColorStyle]}>{props.screenName}</Text>
       </View>
-
-      {/* Mute button */}
-      {/* <View style={styles.rightDiv}>
-        <TouchableOpacity onPress={props.ambianceStore.toggleMute} style={styles.muteButton}>
-          <Icon name={soundIcon} size={30} color={textColor} />
-        </TouchableOpacity>
-      </View> */}
     </View>
   )
 }
@@ -64,10 +55,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginLeft: 20,
-    marginTop: 30
-  },
-  muteButton: {
-    marginRight: 20,
     marginTop: 30
   },
   title: {
