@@ -3,6 +3,7 @@ package com.timedaddy;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
 import com.bugsnag.BugsnagReactNative;
 import com.corbt.keepawake.KCKeepAwakePackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SvgPackage(),
             BugsnagReactNative.getPackage(),
             new KCKeepAwakePackage(),
             new ReactNativePushNotificationPackage(),

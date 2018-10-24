@@ -36,11 +36,11 @@ const ScreenHeader = props => {
       </View>
 
       {/* Mute button */}
-      <View style={styles.rightDiv}>
+      {/* <View style={styles.rightDiv}>
         <TouchableOpacity onPress={props.ambianceStore.toggleMute} style={styles.muteButton}>
           <Icon name={soundIcon} size={30} color={textColor} />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   )
 }
