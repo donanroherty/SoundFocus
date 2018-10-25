@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import AudioTrackControl from 'components/AudioTrackControl'
 import Icon from 'react-native-vector-icons/Ionicons'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import FeatherIcon from 'react-native-vector-icons/Feather'
 import whiteNoise from 'audio/white-noise.wav'
 import pinkNoise from 'audio/pink-noise.wav'
 import brownNoise from 'audio/brown-noise.wav'
@@ -46,18 +44,6 @@ class AudioTrackList extends Component {
             lastTrack={true}
           />
         </View>
-        <TouchableOpacity
-          onPress={ambianceStore.toggleMute}
-          style={[styles.circle, styles.muteButton]}
-        >
-          {/* <FeatherIcon name="volume-1" size={35} color={Theme.colorPrimary} /> */}
-          {/* <FontAwesome5 name={'volume-up'} size={35} color={Theme.colorPrimary} /> */}
-          <Icon
-            name={ambianceStore.globalMute ? 'ios-volume-off' : 'ios-volume-high'}
-            size={45}
-            color={Theme.colorPrimary}
-          />
-        </TouchableOpacity>
       </View>
     )
   }
@@ -67,9 +53,8 @@ const styles = StyleSheet.create({
   wrapper: {
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 20,
     // borderColor: 'white',
-    // borderWidth: 1,
+    borderWidth: 1,
     flex: 1
   },
   trackList: {

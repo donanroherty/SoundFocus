@@ -93,7 +93,7 @@ class AudioTrackControl extends Component {
               style={styles.volumeSlider}
               trackStyle={styles.volumeTrackStyle}
               thumbStyle={styles.volumeThumbStyle}
-              minimumTrackTintColor={Theme.colorPrimary}
+              minimumTrackTintColor={this.props.trackColor}
               maximumTrackTintColor="#EDEDED"
               thumbTintColor={Theme.colorPrimaryLight}
               // debugTouchArea={true}
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     flexDirection: 'column',
-    borderWidth: 1,
+    // borderWidth: 1,
     borderRadius: 15,
     justifyContent: 'center'
   },
@@ -134,16 +134,18 @@ const styles = StyleSheet.create({
   },
   volumeSlider: {
     flex: 1,
+    width: 275,
+    alignSelf: 'center',
     marginBottom: 10
   },
   volumeTrackStyle: {
-    height: 10,
-    margin: 10,
+    height: 3,
+    margin: 3,
     borderRadius: 90
   },
   volumeThumbStyle: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: 90,
     borderColor: 'black',
     borderWidth: 1.5
