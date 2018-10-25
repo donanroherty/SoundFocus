@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import AudioTrackControl from 'components/AudioTrackControl'
 import Icon from 'react-native-vector-icons/Ionicons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import FeatherIcon from 'react-native-vector-icons/Feather'
 import whiteNoise from 'audio/white-noise.wav'
 import pinkNoise from 'audio/pink-noise.wav'
 import brownNoise from 'audio/brown-noise.wav'
@@ -48,8 +50,10 @@ class AudioTrackList extends Component {
           onPress={ambianceStore.toggleMute}
           style={[styles.circle, styles.muteButton]}
         >
+          {/* <FeatherIcon name="volume-1" size={35} color={Theme.colorPrimary} /> */}
+          {/* <FontAwesome5 name={'volume-up'} size={35} color={Theme.colorPrimary} /> */}
           <Icon
-            name={ambianceStore.globalMute ? 'md-volume-off' : 'md-volume-high'}
+            name={ambianceStore.globalMute ? 'ios-volume-off' : 'ios-volume-high'}
             size={45}
             color={Theme.colorPrimary}
           />

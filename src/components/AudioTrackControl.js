@@ -56,32 +56,49 @@ class AudioTrackControl extends Component {
         </TouchableOpacity> */}
 
         <View style={[styles.card, { borderColor: textColor }]}>
-          {/* <Text style={[styles.trackLabel, textColorStyle]}>{this.props.name}</Text> */}
+          <TouchableOpacity style={styles.muteToggleContainer} onPress={toggleActive}>
+            <Svg height="70" width="275" style={styles.svg}>
+              <G>
+                {/* <Rect width="275" height="70" /> */}
+                <G id="noise-wave" transform="translate(-29 -216)">
+                  {muted ? (
+                    <Path
+                      id="noise-wave-low"
+                      stroke={this.props.trackColor}
+                      strokeWidth={3}
+                      d="M29.1,250.6h75.3c2.7-0.5,5.5-0.6,8.3-0.5c3.6,0.3,3,1.8,5.9,1.9s1.2-3.1,4.8-3.1
+				s2.6,4.4,5.7,4.5s2.1-5.5,5.6-5.5s6.8,6.8,11,6.8s2.1-8.4,6.4-8.4c4.5,0,7.8,10.3,10.3,10.3c4.3,0,2.5-11.9,5.9-11.9s6,10,9.9,10
+				s2.1-8.4,5.6-8.4s6.8,7,12.2,7.1s4.8-5.5,7.1-5.5s2.1,4,6.2,4.1s8-2.6,11.3-2.7s3.3,2,7.4,2s4.8-0.7,4.8-0.7h71.4"
+                    />
+                  ) : (
+                    <Path
+                      id="noise-wave-2"
+                      stroke={this.props.trackColor}
+                      strokeWidth={3}
+                      d="M29.1,250.8h75.3c0,0,4.8-5,8.3-2.9s3,10.7,5.9,11s1.2-17.9,4.8-17.9s2.6,26.1,5.7,26.3
+				s2.1-32.5,5.6-32.5s6.8,39.7,11,40.1s2.1-49.3,6.4-49.3c4.5-0.1,7.8,60.3,10.3,60.3c4.3-0.1,2.5-70.1,5.9-70s6,59,9.9,59
+				s2.1-49.5,5.6-49.3s6.8,41.4,12.2,41.6s4.8-32.3,7.1-32.5s2.1,23.6,6.2,24.1s8-15.4,11.3-15.7s3.3,11.6,7.4,11.6
+				c2.4,0,4.4-1.7,4.8-4h71.4"
+                    />
+                  )}
+                </G>
+              </G>
+            </Svg>
+          </TouchableOpacity>
 
-          <Svg height="71.221" width="271.973" style={styles.svg}>
-            <G transform="translate(-29.125 -213.997)">
-              <Path
-                stroke={this.props.trackColor}
-                strokeWidth={3}
-                d="M29.1,249.5h74.5c0,0,4.7-4.8,8.2-2.8s2.9,10.3,5.9,10.6s1.2-17.2,4.7-17.2s2.6,25.1,5.6,25.3
-		s2.1-31.2,5.5-31.2s6.7,38.1,10.9,38.5s2.1-47.3,6.3-47.3c4.5-0.1,7.7,57.9,10.2,57.9c4.2-0.1,2.4-67.3,5.9-67.2s5.9,56.6,9.8,56.6
-		s2.1-47.5,5.5-47.3s6.7,39.8,12,40s4.8-31,7-31.2s2.1,22.7,6.2,23.1s7.9-14.8,11.2-15.1s3.2,11.2,7.3,11.2c2.3,0.1,4.3-1.6,4.7-3.8
-		h70.7"
-              />
-            </G>
-          </Svg>
-
-          <Slider
-            value={volume}
-            onValueChange={setVolume}
-            style={styles.volumeSlider}
-            trackStyle={styles.volumeTrackStyle}
-            thumbStyle={styles.volumeThumbStyle}
-            minimumTrackTintColor="lightgrey"
-            maximumTrackTintColor="#EDEDED"
-            thumbTintColor={Theme.colorPrimaryLight}
-            // debugTouchArea={true}
-          />
+          {!muted && (
+            <Slider
+              value={volume}
+              onValueChange={setVolume}
+              style={styles.volumeSlider}
+              trackStyle={styles.volumeTrackStyle}
+              thumbStyle={styles.volumeThumbStyle}
+              minimumTrackTintColor={Theme.colorPrimary}
+              maximumTrackTintColor="#EDEDED"
+              thumbTintColor={Theme.colorPrimaryLight}
+              // debugTouchArea={true}
+            />
+          )}
         </View>
       </View>
     )
@@ -99,7 +116,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     borderWidth: 1,
-    borderRadius: 15
+    borderRadius: 15,
+    justifyContent: 'center'
   },
   svg: {
     flex: 1,
@@ -119,8 +137,8 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   volumeTrackStyle: {
-    height: 30,
-    margin: 30,
+    height: 10,
+    margin: 10,
     borderRadius: 90
   },
   volumeThumbStyle: {

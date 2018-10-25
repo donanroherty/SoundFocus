@@ -32,6 +32,8 @@ const ScreenHeader = props => {
         {/* Screen title */}
         <Text style={[styles.title, textColorStyle]}>{props.screenName}</Text>
       </View>
+
+      <View style={styles.rightDiv} />
     </View>
   )
 }
@@ -50,8 +52,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   rightDiv: {
-    width: 50,
-    alignItems: 'flex-end'
+    width: 50
   },
   backButton: {
     marginLeft: 20,
