@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 import UserPropertyStore from 'stores/UserPropertyStore'
 import TimerStore from 'stores/TimerStore'
 import AmbianceStore from 'stores/AmbianceStore'
@@ -12,8 +12,6 @@ export default class AppStore {
     this.ambianceStore = new AmbianceStore(this)
     this.notificationStore = new NotificationStore(this)
 
-    this.timerStore.init()
-
     // Create local storage handler to manage persisting data to local storage
     this.localStorageHandler = new LocalStorageHandler()
     this.localStorageHandler.trackStore(this.userPropertyStore)
@@ -22,13 +20,16 @@ export default class AppStore {
     this.localStorageHandler
       .refreshStore(this.userPropertyStore)
       .then(() => {
-        this.userDataLoaded = true
+        this.onUserDataLoaded()
       })
       .catch(e => {
         console.log(e)
       })
   }
 
-  @observable
-  userDataLoaded = false
+  @action
+  onUserDataLoaded = () => {
+    // Setup the first interval once user data is loaded
+    this.timerStore.init()
+  }
 }
