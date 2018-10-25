@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   circle: {
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 180,
     alignItems: 'center',
     justifyContent: 'flex-end',
