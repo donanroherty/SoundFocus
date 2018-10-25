@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Clock from 'components/Clock'
 import IntervalCounter from 'components/IntervalCounter'
-import PlayBar from 'components/PlayBar'
 import { inject, observer } from 'mobx-react'
 import { Dimensions } from 'react-native'
 import Theme from 'theme'
@@ -24,6 +23,7 @@ class Timer extends Component {
 
   render() {
     const { darkMode } = this.props.userPropertyStore
+    const textColor = Theme.getTextColor(darkMode)
     const bgColorStyle = { backgroundColor: Theme.getBackgroundColor(darkMode) }
 
     const resetModalContent = (
@@ -55,23 +55,19 @@ class Timer extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.playbarContainer}>
-          <PlayBar
-            openSettings={() => {
-              this.props.navigation.navigate('Settings')
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.navigate('Options')
             }}
-            openAmbiance={() => {
-              this.props.navigation.navigate('Ambiance')
-            }}
-          />
+            style={styles.button}
+          >
+            <Icon name="md-settings" size={30} color={textColor} />
+          </TouchableOpacity>
         </View>
       </View>
     )
   }
 }
-
-// const Timer = props => {
-
-// }
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -102,6 +98,12 @@ const styles = StyleSheet.create({
   playbarContainer: {
     flex: 2,
     alignItems: 'center'
+  },
+  button: {
+    width: 40, // Add click buffer around icon
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 

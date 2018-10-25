@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   wrapper: {
     marginLeft: 20,
     marginRight: 20,
-    // borderColor: 'white',
+    marginTop: 20,
     borderWidth: 1,
     flex: 1
   },

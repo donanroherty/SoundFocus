@@ -12,10 +12,10 @@ const defaultProps = {
 const ScreenHeader = props => {
   const { darkMode } = props.userPropertyStore
   const textColor = Theme.getTextColor(darkMode)
-  const textColorStyle = { color: Theme.getTextColor(darkMode) }
+  const bgColor = Theme.getBackgroundColor(darkMode)
 
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, { backgroundColor: bgColor }]}>
       {/* Back button */}
       <View style={styles.leftDiv}>
         <TouchableOpacity onPress={props.navigateHome} style={styles.backButton}>
@@ -28,9 +28,6 @@ const ScreenHeader = props => {
         <TouchableOpacity onPress={props.navigateHome}>
           <Clock remaining={props.timerStore.remaining} size={70} />
         </TouchableOpacity>
-
-        {/* Screen title */}
-        <Text style={[styles.title, textColorStyle]}>{props.screenName}</Text>
       </View>
 
       <View style={styles.rightDiv} />
@@ -40,8 +37,7 @@ const ScreenHeader = props => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexDirection: 'row',
-    marginBottom: 30
+    flexDirection: 'row'
   },
   leftDiv: {
     width: 50

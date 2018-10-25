@@ -37,12 +37,6 @@ class Settings extends Component {
           closeModal={this.hideAboutModal}
         />
 
-        <ScreenHeader
-          screenName="Settings"
-          navigateHome={navigateHome}
-          style={styles.userPropertyList}
-        />
-
         <UserPropertyList showAboutModal={this.showAboutModal} />
       </View>
     )

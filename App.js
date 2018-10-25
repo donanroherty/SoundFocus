@@ -1,27 +1,23 @@
-/**
- * @format
- * @flow
- */
 import React from 'react'
+import { View } from 'react-native'
 import { Provider } from 'mobx-react'
-import { createStackNavigator } from 'react-navigation'
+import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation'
 import KeepAwake from 'react-native-keep-awake'
 
 // Screens
 import Timer from 'screens/Timer'
 import Ambiance from 'screens/Ambiance'
 import Settings from 'screens/Settings'
-
 // State store
 import AppStore from 'stores/AppStore'
-
 import AudioPlayerStack from 'components/AudioPlayerStack'
 
-const NavStack = createStackNavigator(
+import ScreenHeader from 'components/ScreenHeader'
+
+import Theme from 'theme'
+
+const NavBar = createMaterialTopTabNavigator(
   {
-    Home: {
-      screen: Timer
-    },
     Ambiance: {
       screen: Ambiance
     },
@@ -30,7 +26,54 @@ const NavStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Ambiance',
+    tabBarOptions: {
+      style: {
+        backgroundColor: 'black'
+      },
+      activeTintColor: Theme.colorPrimary,
+      indicatorStyle: {
+        backgroundColor: 'transparent'
+      }
+    }
+  }
+)
+
+class Options extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.tabBarOptions = {
+      style: {
+        backgroundColor: 'black'
+      }
+    }
+  }
+
+  render() {
+    const navigateHome = () => {
+      this.props.navigation.navigate('Home')
+    }
+
+    return (
+      <>
+        <ScreenHeader screenName="Ambiance" navigateHome={navigateHome} />
+        <NavBar />
+      </>
+    )
+  }
+}
+
+const NavStack = createStackNavigator(
+  {
+    Home: {
+      screen: Timer
+    },
+    Options: {
+      screen: Options
+    }
+  },
+  {
+    initialRouteName: 'Home',
     navigationOptions: {
       headerMode: 'none',
       header: null
@@ -38,8 +81,7 @@ const NavStack = createStackNavigator(
   }
 )
 
-type Props = {}
-export default class App extends React.Component<Props> {
+export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.appStore = new AppStore()
@@ -55,6 +97,7 @@ export default class App extends React.Component<Props> {
       >
         <>
           <NavStack />
+
           <AudioPlayerStack />
           {this.appStore.timerStore.timerIsActive && <KeepAwake />}
         </>
