@@ -41,7 +41,8 @@ class IntegerModal extends Component {
         showModal={this.props.showModal}
         closeModal={this.props.closeModal}
         propertyAction={this.handleSubmit}
-        keyboardOffset={true}
+        keyboardOffset
+        requireConfirmation
       >
         <View style={styles.middleRow}>
           <View style={styles.middleRowTopRow}>

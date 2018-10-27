@@ -22,11 +22,7 @@ class Settings extends Component {
 
     return (
       <View style={[styles.wrapper, bgColor]}>
-        <AboutModal
-          title="About"
-          showModal={this.state.aboutModalVisible}
-          closeModal={this.hideAboutModal}
-        />
+        <AboutModal showModal={this.state.aboutModalVisible} closeModal={this.hideAboutModal} />
 
         <UserPropertyList showAboutModal={this.showAboutModal} />
       </View>

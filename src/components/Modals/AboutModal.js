@@ -15,7 +15,7 @@ const AboutModal = props => {
         {'\n'}
         {'\n'}
         This app is a learning project and my first foray into mobile development. If you find it
-        useful, a 5 star rating would be highly appreciated. Also feedback is always welcome.
+        useful, a 5 star rating would be highly appreciated. Also, feedback is always welcome.
         {'\n'}
         {'\n'}
         Regards,

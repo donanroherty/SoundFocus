@@ -50,9 +50,12 @@ class ModalBase extends Component {
 
           {/* Bottom Row */}
           <View style={styles.bottomRow}>
-            <TouchableOpacity onPress={this.props.closeModal} style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>Cancel</Text>
-            </TouchableOpacity>
+            {this.props.requireConfirmation && (
+              <TouchableOpacity onPress={this.props.closeModal} style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>Cancel</Text>
+              </TouchableOpacity>
+            )}
+
             <TouchableOpacity onPress={this.submitModal} style={styles.buttonContainer}>
               <Text style={styles.buttonText}>OK</Text>
             </TouchableOpacity>

@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   muteButton: {
-    marginBottom: 50,
+    marginBottom: 80,
     marginTop: 25,
     alignSelf: 'center',
     justifyContent: 'center'

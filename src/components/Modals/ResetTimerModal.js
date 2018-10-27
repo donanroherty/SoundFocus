@@ -9,7 +9,7 @@ const ResetTimerModal = props => {
   const textColor = Theme.getTextColor(darkMode)
 
   return (
-    <ModalBase {...props} title="Reset Timer">
+    <ModalBase {...props} title="Reset Timer" requireConfirmation>
       <Text style={[styles.text, { color: textColor }]}>
         This will reset the timer and work intervals
         {'\n'}
