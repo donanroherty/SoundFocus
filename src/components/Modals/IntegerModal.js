@@ -5,7 +5,7 @@ import { inject, observer } from 'mobx-react'
 import Theme from 'theme'
 
 const defaultProps = {
-  name: 'My Setting',
+  title: 'My Setting',
   unit: '',
   min: 0,
   max: 0,
@@ -18,22 +18,35 @@ class IntegerModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: ''
+      value: '' + this.props.value,
+      inputIsValid: true
     }
   }
 
+  isInputValid = val => {
+    const value = parseInt(val)
+    return val === '' || (value >= this.props.min && value <= this.props.max)
+  }
+
   handleInput = val => {
-    //  TODO: Validate user input
-    this.setState({ value: val })
+    this.setState({
+      value: val,
+      inputIsValid: this.isInputValid(val)
+    })
   }
 
   handleSubmit = () => {
-    this.props.propertyAction(this.state.value)
+    if (this.state.inputIsValid) {
+      const inputVal = this.state.value === '' ? this.props.value : parseInt(this.state.value)
+      this.props.propertyAction(inputVal)
+    }
   }
 
   render() {
     const { darkMode } = this.props.userPropertyStore
     const textColor = Theme.getTextColor(darkMode)
+
+    console.log(this.state.value, this.state.inputIsValid)
 
     return (
       <ModalBase
@@ -41,6 +54,7 @@ class IntegerModal extends Component {
         showModal={this.props.showModal}
         closeModal={this.props.closeModal}
         propertyAction={this.handleSubmit}
+        preventSubmit={this.state.inputIsValid === false}
         keyboardOffset
         requireConfirmation
       >
@@ -63,6 +77,12 @@ class IntegerModal extends Component {
           <View style={styles.middleRowBottomRow}>
             <Text style={{ color: textColor }}>_________________________</Text>
           </View>
+
+          {!this.state.inputIsValid && (
+            <Text style={styles.validationText}>
+              Enter a valid number between {this.props.min} and {this.props.max}
+            </Text>
+          )}
         </View>
       </ModalBase>
     )
@@ -86,6 +106,11 @@ const styles = StyleSheet.create({
   },
   inputField: {
     fontSize: 22
+  },
+  validationText: {
+    marginTop: 5,
+    color: 'red',
+    fontSize: 16
   }
 })
 

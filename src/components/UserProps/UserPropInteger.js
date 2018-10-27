@@ -34,9 +34,7 @@ class UserPropInteger extends Component {
         <IntegerModal
           showModal={this.state.propertyModalVisible}
           closeModal={this.closeModal}
-          title={this.props.name}
-          value={this.props.value}
-          propertyAction={this.props.propertyAction}
+          {...this.props}
         />
 
         <View style={styles.value}>

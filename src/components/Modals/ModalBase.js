@@ -8,6 +8,7 @@ const defaultProps = {
   title: 'My Modal',
   showModal: false,
   keyboardOffset: false,
+  preventSubmit: false,
   closeModal: () => {},
   propertyAction: () => {}
 }
@@ -18,6 +19,8 @@ class ModalBase extends Component {
   }
 
   submitModal = () => {
+    if (this.props.preventSubmit) return
+
     this.props.propertyAction()
     this.props.closeModal()
   }
@@ -25,7 +28,6 @@ class ModalBase extends Component {
   render() {
     const { darkMode } = this.props.userPropertyStore
     const textColor = Theme.getTextColor(darkMode)
-    const bgColor = Theme.getBackgroundColor(darkMode)
 
     return (
       <Modal
