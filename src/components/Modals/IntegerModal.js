@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import ModalBase from 'components/Modals/ModalBase'
+import { inject, observer } from 'mobx-react'
+import Theme from 'theme'
 
 const defaultProps = {
   name: 'My Setting',
@@ -12,7 +14,7 @@ const defaultProps = {
   showModal: false
 }
 
-export default class IntegerModal extends Component {
+class IntegerModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,30 +32,35 @@ export default class IntegerModal extends Component {
   }
 
   render() {
+    const { darkMode } = this.props.userPropertyStore
+    const textColor = Theme.getTextColor(darkMode)
+
     return (
       <ModalBase
         title={this.props.title}
         showModal={this.props.showModal}
         closeModal={this.props.closeModal}
         propertyAction={this.handleSubmit}
+        keyboardOffset={true}
       >
         <View style={styles.middleRow}>
           <View style={styles.middleRowTopRow}>
             <TextInput
               keyboardType="numeric"
               placeholder={`${this.props.value}`}
+              placeholderTextColor={darkMode ? 'lightgrey' : 'darkgrey'}
               maxLength={3}
               selectTextOnFocus={true}
               autoFocus={true}
               value={this.state.value}
               onChangeText={this.handleInput}
               clearTextOnFocus={true}
-              style={styles.inputField}
+              style={[styles.inputField, { color: textColor }]}
             />
           </View>
 
           <View style={styles.middleRowBottomRow}>
-            <Text>_________________________</Text>
+            <Text style={{ color: textColor }}>_________________________</Text>
           </View>
         </View>
       </ModalBase>
@@ -63,22 +70,24 @@ export default class IntegerModal extends Component {
 
 const styles = StyleSheet.create({
   middleRow: {
-    // flex: 1,
-    flexGrow: 1,
-    flexDirection: 'column',
     flexDirection: 'column',
     width: '100%',
     justifyContent: 'center'
-    // backgroundColor: 'grey'
   },
-
-  middleRowTopRow: { flexDirection: 'row', justifyContent: 'center' },
-
-  middleRowBottomRow: { flexDirection: 'row', justifyContent: 'center', marginTop: -20 },
-
+  middleRowTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  middleRowBottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: -20
+  },
   inputField: {
     fontSize: 22
   }
 })
 
 IntegerModal.defaultProps = defaultProps
+
+export default inject('userPropertyStore')(observer(IntegerModal))

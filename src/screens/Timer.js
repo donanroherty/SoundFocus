@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Clock from 'components/Clock'
 import IntervalCounter from 'components/IntervalCounter'
 import { inject, observer } from 'mobx-react'
 import { Dimensions } from 'react-native'
 import Theme from 'theme'
-import InfoModal from 'components/Modals/InfoModal'
-
-const { width } = Dimensions.get('window')
+import ResetTimerModal from 'components/Modals/ResetTimerModal'
 
 class Timer extends Component {
   constructor(props) {
@@ -26,15 +24,9 @@ class Timer extends Component {
     const textColor = Theme.getTextColor(darkMode)
     const bgColorStyle = { backgroundColor: Theme.getBackgroundColor(darkMode) }
 
-    const resetModalContent = (
-      <Text>This will reset the current timer and completed work intervals. Are you sure?</Text>
-    )
-
     return (
       <View style={[styles.wrapper, bgColorStyle]}>
-        <InfoModal
-          title="Reset Timer"
-          content={resetModalContent}
+        <ResetTimerModal
           showModal={this.state.resetModalVisible}
           closeModal={this.hideResetModal}
           propertyAction={this.props.timerStore.reset}

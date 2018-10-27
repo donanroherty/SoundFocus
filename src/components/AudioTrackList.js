@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import AudioTrackControl from 'components/AudioTrackControl'
-import Icon from 'react-native-vector-icons/Ionicons'
 import whiteNoise from 'audio/white-noise.wav'
 import pinkNoise from 'audio/pink-noise.wav'
 import brownNoise from 'audio/brown-noise.wav'
