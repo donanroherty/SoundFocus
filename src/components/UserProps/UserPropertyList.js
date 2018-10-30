@@ -116,7 +116,10 @@ const UserPropertyList = props => {
         },
         {
           title: 'General',
-          data: [keepScreenOnProp, darkModeProp]
+          data: [
+            keepScreenOnProp
+            // darkModeProp
+          ]
         },
         {
           title: 'App',
