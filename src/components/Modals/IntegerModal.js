@@ -23,6 +23,12 @@ class IntegerModal extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.showModal === false && this.props.showModal === true) {
+      this.setState({ value: String(this.props.value) })
+    }
+  }
+
   isInputValid = val => {
     const value = parseInt(val)
     return val === '' || (value >= this.props.min && value <= this.props.max)
@@ -45,8 +51,6 @@ class IntegerModal extends Component {
   render() {
     const { darkMode } = this.props.userPropertyStore
     const textColor = Theme.getTextColor(darkMode)
-
-    console.log(this.state.value, this.state.inputIsValid)
 
     return (
       <ModalBase

@@ -43,7 +43,6 @@ const UserPropertyList = props => {
   const workIntervalCountProp = (
     <UserPropInteger
       name="Work Interval Count"
-      unit="mins"
       min={1}
       max={180}
       value={props.userPropertyStore.workIntervalCount}
