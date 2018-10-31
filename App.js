@@ -26,13 +26,14 @@ const NavBar = createMaterialTopTabNavigator(
     }
   },
   {
+    initialRouteName: 'Ambiance',
     tabBarOptions: {
       style: {
         backgroundColor: 'black'
       },
       activeTintColor: Theme.colorPrimary,
       indicatorStyle: {
-        backgroundColor: 'transparent'
+        backgroundColor: Theme.colorPrimary
       }
     }
   }
