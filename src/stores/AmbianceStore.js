@@ -21,12 +21,10 @@ class AudioTrack {
 export default class AmbianceStore {
   constructor(appStore) {
     this.appStore = appStore
-
-    this.brownNoise.toggleActive()
   }
 
   @observable
-  globalMute = true
+  globalMute = false
 
   @action
   toggleMute = () => {
