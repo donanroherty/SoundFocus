@@ -52,7 +52,9 @@ class Clock extends Component {
     const content = underAMinuteLeft ? (
       // Hide minutes and colon if less than 1 minute remains on the clock
       <View style={styles.clockContainer}>
-        <Text style={[styles.baseText, styles.seconds, fontSizeStyle]}>{time.seconds}</Text>
+        <Text style={[styles.baseText, styles.seconds, textColorStyle, fontSizeStyle]}>
+          {time.seconds}
+        </Text>
       </View>
     ) : (
       <View style={styles.clockContainer}>
