@@ -69,11 +69,11 @@ class IntegerModal extends Component {
               placeholder={`${this.props.value}`}
               placeholderTextColor={darkMode ? 'lightgrey' : 'darkgrey'}
               maxLength={3}
-              selectTextOnFocus={true}
-              autoFocus={true}
               value={this.state.value}
               onChangeText={this.handleInput}
-              clearTextOnFocus={true}
+              clearTextOnFocus
+              selectTextOnFocus
+              autoFocus
               style={[styles.inputField, { color: textColor }]}
             />
           </View>
