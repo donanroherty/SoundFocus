@@ -100,6 +100,7 @@ export default class App extends React.Component {
           <NavStack />
 
           <AudioPlayerStack />
+
           {this.appStore.timerStore.timerIsActive && <KeepAwake />}
         </>
       </Provider>

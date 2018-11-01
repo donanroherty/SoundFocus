@@ -41,11 +41,9 @@ class Clock extends Component {
     const flashAnim = {
       0: {
         opacity: 1
-        // scale: 1,
       },
       1: {
         opacity: 0.2
-        // scale: 0,
       }
     }
 

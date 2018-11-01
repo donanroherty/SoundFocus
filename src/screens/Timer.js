@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Clock from 'components/Clock'
 import IntervalCounter from 'components/IntervalCounter'
@@ -96,6 +96,9 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  breakText: {
+    color: 'white'
   }
 })
 
