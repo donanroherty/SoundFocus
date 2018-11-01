@@ -1,9 +1,9 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { Provider } from 'mobx-react'
 import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation'
 import KeepAwake from 'react-native-keep-awake'
-
+import { inject, observer } from 'mobx-react'
 // Screens
 import Timer from 'screens/Timer'
 import Ambiance from 'screens/Ambiance'
@@ -51,9 +51,7 @@ class Options extends React.Component {
   }
 
   render() {
-    const navigateHome = () => {
-      this.props.navigation.navigate('Home')
-    }
+    const navigateHome = () => this.props.navigation.navigate('Home')
 
     return (
       <>
@@ -82,13 +80,14 @@ const NavStack = createStackNavigator(
   }
 )
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props)
     this.appStore = new AppStore()
   }
 
   render() {
+    console.log(this.appStore.timerStore.timerIsActive)
     return (
       <Provider
         timerStore={this.appStore.timerStore}
@@ -107,3 +106,5 @@ export default class App extends React.Component {
     )
   }
 }
+
+export default observer(App)
