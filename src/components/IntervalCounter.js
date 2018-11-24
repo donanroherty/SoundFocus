@@ -17,10 +17,13 @@ const IntervalCounter = props => {
 
       const onBreak = props.timerStore.timerMode !== 'WORK'
 
+      const completedThisSession =
+        props.timerStore.intervalsCompleted % props.userPropertyStore.workIntervalCount
+
       const markerState =
-        i < props.timerStore.intervalsCompleted
+        i < completedThisSession || (i === 0 && onBreak)
           ? 'complete'
-          : i < props.timerStore.intervalsCompleted + 1 && !onBreak && !awaitingIntervalStart
+          : i < completedThisSession + 1 && !onBreak && !awaitingIntervalStart
             ? 'active'
             : 'pending'
 
